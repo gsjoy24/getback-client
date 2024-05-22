@@ -4,7 +4,6 @@ import navLinks from '@/constants/navLinks';
 import { Box, Button, Container, IconButton, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
-
 import { useState } from 'react';
 import { HiMiniBars3CenterLeft } from 'react-icons/hi2';
 import UserDrawer from './UserDrawer';
