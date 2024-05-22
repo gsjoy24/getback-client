@@ -1,10 +1,10 @@
 import Providers from '@/lib/Providers/Providers';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import type { Metadata } from 'next';
-import { Poppins } from 'next/font/google';
+import { Josefin_Sans } from 'next/font/google';
 import './globals.css';
 
-const poppins = Poppins({ weight: ['400', '700', '800', '900'], subsets: ['latin'] });
+const josefinSans = Josefin_Sans({ weight: ['400', '700'], subsets: ['latin'] });
 
 export const metadata: Metadata = {
 	title: 'Lost & Found',
@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<Providers>
 			<html lang='en'>
-				<body className={poppins.className}>
+				<body className={josefinSans.className}>
 					<AppRouterCacheProvider>{children}</AppRouterCacheProvider>
 				</body>
 			</html>
