@@ -25,6 +25,7 @@ const UserDrawer = ({ open, setOpen, user }: TUserDrawerProps) => {
 		>
 			{/* logo */}
 			<Image src={BlackLogo} alt='logo' width={80} height={80} className='mx-auto py-3 mt-10' />
+
 			{/* close icon */}
 			<IconButton
 				onClick={() => setOpen(false)}
@@ -42,33 +43,34 @@ const UserDrawer = ({ open, setOpen, user }: TUserDrawerProps) => {
 			<Divider />
 
 			<Stack spacing={4} p={4}>
-				{navLinks.map((link, index) => (
-					<Typography
-						key={index}
-						color='#000'
-						component={Link}
-						href={link.href}
-						sx={{
-							display: 'flex',
-							flexDirection: 'column',
-							justifyContent: 'center',
-							alignItems: 'center',
-							'& span': {
-								width: '0%',
-								height: 2,
-								mt: 1,
-								backgroundColor: 'primary.main',
-								transition: 'width 0.2s ease'
-							},
-							'&:hover span': {
-								width: '50%'
-							}
-						}}
-					>
-						{link.title}
-						<span></span>
-					</Typography>
-				))}
+				{navLinks &&
+					navLinks?.map((link, index) => (
+						<Typography
+							key={index}
+							color='#000'
+							component={Link}
+							href={link.href}
+							sx={{
+								display: 'flex',
+								flexDirection: 'column',
+								justifyContent: 'center',
+								alignItems: 'center',
+								'& span': {
+									width: '0%',
+									height: 2,
+									mt: 1,
+									backgroundColor: 'primary.main',
+									transition: 'width 0.2s ease'
+								},
+								'&:hover span': {
+									width: '50%'
+								}
+							}}
+						>
+							{link.title}
+							<span></span>
+						</Typography>
+					))}
 				{user?.email ? (
 					<Button variant='contained' color='primary' sx={{ borderRadius: 0 }}>
 						Logout
