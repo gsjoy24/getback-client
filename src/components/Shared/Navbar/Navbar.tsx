@@ -1,16 +1,19 @@
 'use client';
 import BlackLogo from '@/assets/logo/L&F-B.png';
 import navLinks from '@/constants/navLinks';
-import { Box, Button, Container, IconButton, Stack, Typography } from '@mui/material';
+import { Box, Button, Container, IconButton, Stack } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { HiMiniBars3CenterLeft } from 'react-icons/hi2';
+import NavItem from './NavItem';
 import UserDrawer from './UserDrawer';
 
 const Navbar = () => {
 	const [open, setOpen] = useState<boolean>(false);
-	const user = { email: 'hb' };
+	const user = {
+		email: 'hb'
+	};
 
 	return (
 		<Box
@@ -39,39 +42,14 @@ const Navbar = () => {
 							gap: 4
 						}}
 					>
-						{navLinks &&
-							navLinks?.map((link, index) => (
-								<Typography
-									key={index}
-									color='#000'
-									component={Link}
-									href={link.href}
-									sx={{
-										display: 'flex',
-										flexDirection: 'column',
-										justifyContent: 'center',
-										alignItems: 'center',
-										'& span': {
-											width: '0%',
-											height: 2,
-											backgroundColor: 'primary.main',
-											transition: 'width 0.2s ease'
-										},
-										'&:hover span': {
-											width: '100%'
-										}
-									}}
-								>
-									{link.title}
-									<span></span>
-								</Typography>
-							))}
+						{navLinks && navLinks?.map((link, index) => <NavItem key={index} link={link} />)}
 						{user?.email ? (
-							<Button variant='contained' color='primary' sx={{ borderRadius: 0 }}>
-								Logout
-							</Button>
+							<>
+								<NavItem link={{ title: 'My Profile', href: '/my-profile' }} />
+								<Button sx={{ borderRadius: 0 }}>Logout</Button>
+							</>
 						) : (
-							<Button variant='contained' color='primary' sx={{ borderRadius: 0 }}>
+							<Button component={Link} href='/login' sx={{ borderRadius: 0 }}>
 								Login
 							</Button>
 						)}
