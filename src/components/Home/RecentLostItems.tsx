@@ -10,8 +10,6 @@ const RecentLostItems = async () => {
 		}
 	});
 	const { data: items } = await fetchItems.json();
-	console.log(items[0]);
-
 	return (
 		<Container>
 			<Stack

@@ -50,6 +50,7 @@ const UserDrawer = ({ open, setOpen, user }: TUserDrawerProps) => {
 							color='#000'
 							component={Link}
 							href={link.href}
+							onClick={() => setOpen(false)}
 							sx={{
 								display: 'flex',
 								flexDirection: 'column',
@@ -72,11 +73,11 @@ const UserDrawer = ({ open, setOpen, user }: TUserDrawerProps) => {
 						</Typography>
 					))}
 				{user?.email ? (
-					<Button variant='contained' color='primary' sx={{ borderRadius: 0 }}>
+					<Button onClick={() => setOpen(false)} variant='contained' color='primary' sx={{ borderRadius: 0 }}>
 						Logout
 					</Button>
 				) : (
-					<Button variant='contained' color='primary' sx={{ borderRadius: 0 }}>
+					<Button onClick={() => setOpen(false)} variant='contained' color='primary' sx={{ borderRadius: 0 }}>
 						Login
 					</Button>
 				)}
