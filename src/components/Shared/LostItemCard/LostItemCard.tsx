@@ -1,12 +1,13 @@
 'use client';
 import formatDateToString from '@/helpers/formatDateToString';
 import { Box } from '@mui/material';
-import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import Link from 'next/link';
 import { FaCalendarAlt } from 'react-icons/fa';
+import { IoIosArrowRoundForward } from 'react-icons/io';
 import { IoLocationSharp } from 'react-icons/io5';
 import SimpleImageSlider from 'react-simple-image-slider';
 
@@ -18,7 +19,7 @@ const LostItemCard = ({ item }: any) => {
 		<Card
 			sx={{
 				maxWidth: 330,
-				height: 520,
+				height: 410,
 				position: 'relative',
 				'& image': {
 					overflow: 'hidden'
@@ -30,7 +31,9 @@ const LostItemCard = ({ item }: any) => {
 				<Typography gutterBottom variant='h5' component='div'>
 					{itemName}
 				</Typography>
-				<Typography variant='body2'>{description}</Typography>
+				<Typography variant='body2'>
+					{description.length > 60 ? description.slice(0, 60) + '...' : description}
+				</Typography>
 				<Box className='flex gap-2 items-center mt-2'>
 					<Box sx={{ minWidth: 20 }}>
 						<IoLocationSharp size={18} />
@@ -43,20 +46,34 @@ const LostItemCard = ({ item }: any) => {
 					</Box>
 					<Typography variant='body2'>{date}</Typography>
 				</Box>
-				<Box className='flex gap-2 items-center mt-2'>
-					<Box sx={{ minWidth: 20 }}>
-						<FaCalendarAlt size={14} />
-					</Box>
-					<Typography variant='body2'>{date}</Typography>
-				</Box>
 			</CardContent>
 			<CardActions
 				sx={{
 					position: 'absolute',
-					bottom: 0
+					bottom: 0,
+					left: 0,
+					width: '100%',
+					backgroundColor: 'primary.main',
+					transition: 'all 0.3s',
+					'&:hover': {
+						backgroundColor: 'primary.dark'
+					}
 				}}
 			>
-				<Button size='small'>Share</Button>
+				<Typography
+					component={Link}
+					href={`/lost/${item.id}`}
+					sx={{
+						width: '100%',
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'center',
+						gap: 1,
+						color: 'white'
+					}}
+				>
+					<span>See details</span> <IoIosArrowRoundForward size={20} />
+				</Typography>
 			</CardActions>
 		</Card>
 	);

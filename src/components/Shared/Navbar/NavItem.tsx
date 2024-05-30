@@ -4,7 +4,7 @@ import Link from 'next/link';
 interface TNavItemProps {
 	link: {
 		href: string;
-		title: string;
+		title?: string;
 	};
 }
 
@@ -30,7 +30,7 @@ const NavItem = ({ link }: TNavItemProps) => {
 				}
 			}}
 		>
-			{link.title}
+			{link?.title || 'Explore More'}
 			<span></span>
 		</Typography>
 	);
