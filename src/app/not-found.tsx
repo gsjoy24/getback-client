@@ -4,13 +4,15 @@ import Link from 'next/link';
 const NotFound = () => {
 	return (
 		<Box
+			px={2}
 			sx={{
 				display: 'flex',
 				flexDirection: 'column',
 				alignItems: 'center',
 				justifyContent: 'center',
 				height: '100vh',
-				gap: 2
+				gap: 2,
+				textAlign: 'center'
 			}}
 		>
 			<Typography variant='h2'>404</Typography>
