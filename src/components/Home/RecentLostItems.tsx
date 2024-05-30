@@ -1,5 +1,6 @@
 import config from '@/lib/config';
-import { Container, Stack, Typography } from '@mui/material';
+import { TLostItem } from '@/types/lostItem';
+import { Box, Container, Skeleton, Stack, Typography } from '@mui/material';
 import LostItemCard from '../Shared/LostItemCard/LostItemCard';
 
 const RecentLostItems = async () => {
@@ -8,7 +9,8 @@ const RecentLostItems = async () => {
 			revalidate: 30
 		}
 	});
-	const items = await fetchItems.json();
+	const { data: items } = await fetchItems.json();
+	console.log(items[0]);
 
 	return (
 		<Container>
@@ -39,7 +41,17 @@ const RecentLostItems = async () => {
 					}
 				}}
 			>
-				{items && items.data?.map((item: any) => <LostItemCard key={item.id} item={item} />)}
+				{items
+					? items.map((item: TLostItem) => <LostItemCard key={item.id} item={item} />)
+					: Array.from({ length: 3 }).map((_, index) => (
+							<Box key={index}>
+								<Skeleton animation='wave' variant='rectangular' width={330} height={118} />
+								<Skeleton animation='wave' width={230} height={40} />
+								<Skeleton animation='wave' width={230} height={20} />
+								<Skeleton animation='wave' width={200} height={20} />
+								<Skeleton animation='wave' width={230} height={40} />
+							</Box>
+					  ))}
 			</Stack>
 		</Container>
 	);
