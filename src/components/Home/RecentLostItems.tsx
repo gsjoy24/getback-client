@@ -1,5 +1,5 @@
 import config from '@/lib/config';
-import { Container, Stack } from '@mui/material';
+import { Container, Stack, Typography } from '@mui/material';
 import LostItemCard from '../Shared/LostItemCard/LostItemCard';
 
 const RecentLostItems = async () => {
@@ -14,9 +14,24 @@ const RecentLostItems = async () => {
 		<Container>
 			<Stack
 				justifyContent='center'
-				alignItems='center'
 				gap={2}
+				sx={{
+					textAlign: 'center',
+					pb: 4,
+					px: 1
+				}}
+			>
+				<Typography variant='h4'>Recent Lost Items</Typography>
+				<Typography variant='body2'>
+					Dive into a collection of recently lost items awaiting reconnection with their owners.
+				</Typography>
+			</Stack>
+			<Stack
+				justifyContent='center'
+				alignItems='center'
+				gap={5}
 				flexWrap='wrap'
+				pb={5}
 				sx={{
 					flexDirection: {
 						xs: 'column',
