@@ -7,17 +7,20 @@ import LoginValidationSchema from '@/schemas/loginSchema';
 import userLogin from '@/services/actions/userLogin';
 import { storeUserInfo } from '@/services/auth.services';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Button, Grid, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 import { toast } from 'sonner';
 
 const LoginPage = () => {
+	const [loading, setLoading] = useState<boolean>(false);
 	const router = useRouter();
 
 	const handleSubmit = async (data: FieldValues) => {
 		try {
+			setLoading(true);
 			const res = await userLogin(data);
 			if (res.success) {
 				toast.success(res.message);
@@ -28,6 +31,8 @@ const LoginPage = () => {
 			}
 		} catch (error: any) {
 			toast.error(error?.message);
+		} finally {
+			setLoading(false);
 		}
 	};
 	return (
@@ -77,8 +82,15 @@ const LoginPage = () => {
 						<LFInput name='email' label='Email' sx={{ mb: 2 }} />
 
 						<LFInput name='password' label='Password' type='password' />
-						<Button type='submit' fullWidth sx={{ mt: 2 }}>
-							Login
+						<Button type='submit' fullWidth sx={{ mt: 2 }} disabled={loading}>
+							{loading ? (
+								<>
+									<CircularProgress size={20} />
+									<span className='ml-2'>Logging in...</span>
+								</>
+							) : (
+								'Login'
+							)}
 						</Button>
 					</LFForm>
 				</Box>

@@ -1,6 +1,7 @@
 import BlackLogo from '@/assets/logo/L&F-B.png';
 import navLinks from '@/constants/navLinks';
-import { Button, Divider, Drawer, IconButton, Stack, Typography } from '@mui/material';
+import { Divider, Drawer, IconButton, Stack, Typography } from '@mui/material';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import { RiCloseLargeFill } from 'react-icons/ri';
@@ -8,10 +9,10 @@ import { RiCloseLargeFill } from 'react-icons/ri';
 type TUserDrawerProps = {
 	open: boolean;
 	setOpen: (open: boolean) => void;
-	user: any;
 };
 
-const UserDrawer = ({ open, setOpen, user }: TUserDrawerProps) => {
+const UserDrawer = ({ open, setOpen }: TUserDrawerProps) => {
+	const AuthButton = dynamic(() => import('./AuthButton'), { ssr: false });
 	return (
 		<Drawer
 			open={open}
@@ -72,22 +73,7 @@ const UserDrawer = ({ open, setOpen, user }: TUserDrawerProps) => {
 							<span></span>
 						</Typography>
 					))}
-				{user?.email ? (
-					<Button onClick={() => setOpen(false)} variant='contained' color='primary' sx={{ borderRadius: 0 }}>
-						Logout
-					</Button>
-				) : (
-					<Button
-						onClick={() => setOpen(false)}
-						component={Link}
-						href='/login'
-						variant='contained'
-						color='primary'
-						sx={{ borderRadius: 0 }}
-					>
-						Login
-					</Button>
-				)}
+				<AuthButton setOpen={setOpen} />
 			</Stack>
 		</Drawer>
 	);

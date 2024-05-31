@@ -6,14 +6,16 @@ interface TNavItemProps {
 		href: string;
 		title?: string;
 	};
+	setOpen?: (open: boolean) => void;
 }
 
-const NavItem = ({ link }: TNavItemProps) => {
+const NavItem = ({ link, setOpen }: TNavItemProps) => {
 	return (
 		<Typography
 			color='#000'
 			component={Link}
 			href={link.href}
+			onClick={() => setOpen && setOpen(false)}
 			sx={{
 				display: 'flex',
 				flexDirection: 'column',

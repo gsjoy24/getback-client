@@ -1,8 +1,10 @@
 'use client';
 import BlackLogo from '@/assets/logo/L&F-B.png';
 import navLinks from '@/constants/navLinks';
+import { getUserInfo, logout } from '@/services/auth.services';
 import { TUser } from '@/types/user';
 import { Box, Button, Container, IconButton, Stack } from '@mui/material';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -12,9 +14,7 @@ import UserDrawer from './UserDrawer';
 
 const Navbar = () => {
 	const [open, setOpen] = useState<boolean>(false);
-	const user: TUser = {
-		// emaisl: 'hb'
-	};
+	const AuthButton = dynamic(() => import('./AuthButton'), { ssr: false });
 
 	return (
 		<Box
@@ -43,21 +43,12 @@ const Navbar = () => {
 							gap: 4
 						}}
 					>
-						{navLinks && navLinks?.map((link, index) => <NavItem key={index} link={link} />)}
-						{user?.email ? (
-							<>
-								<NavItem link={{ title: 'My Profile', href: '/my-profile' }} />
-								<Button sx={{ borderRadius: 0 }}>Logout</Button>
-							</>
-						) : (
-							<Button component={Link} href='/login' sx={{ borderRadius: 0 }}>
-								Login
-							</Button>
-						)}
+						{navLinks && navLinks?.map((link, index) => <NavItem key={index} link={link} setOpen={setOpen} />)}
+						<AuthButton />
 					</Box>
 
 					{/* nav links for small screen */}
-					<UserDrawer open={open} setOpen={setOpen} user={user} />
+					<UserDrawer open={open} setOpen={setOpen} />
 
 					<IconButton
 						onClick={() => setOpen(true)}
