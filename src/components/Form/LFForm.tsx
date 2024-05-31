@@ -2,6 +2,7 @@ import { FieldValues, FormProvider, SubmitHandler, useForm } from 'react-hook-fo
 type TFormConfig = {
 	resolver?: any;
 };
+
 type TLFFormProps = { children: React.ReactNode; onSubmit: SubmitHandler<FieldValues> } & TFormConfig;
 
 const LFForm = ({ children, onSubmit, resolver }: TLFFormProps) => {
