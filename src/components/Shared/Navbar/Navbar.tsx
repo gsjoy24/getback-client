@@ -1,6 +1,7 @@
 'use client';
 import BlackLogo from '@/assets/logo/L&F-B.png';
 import navLinks from '@/constants/navLinks';
+import { TUser } from '@/types/user';
 import { Box, Button, Container, IconButton, Stack } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,8 +12,8 @@ import UserDrawer from './UserDrawer';
 
 const Navbar = () => {
 	const [open, setOpen] = useState<boolean>(false);
-	const user = {
-		email: 'hb'
+	const user: TUser = {
+		// emaisl: 'hb'
 	};
 
 	return (
@@ -37,7 +38,7 @@ const Navbar = () => {
 						sx={{
 							display: {
 								xs: 'none',
-								sm: 'flex'
+								md: 'flex'
 							},
 							gap: 4
 						}}
@@ -64,7 +65,7 @@ const Navbar = () => {
 						sx={{
 							display: {
 								xs: 'block',
-								sm: 'none'
+								md: 'none'
 							}
 						}}
 					>

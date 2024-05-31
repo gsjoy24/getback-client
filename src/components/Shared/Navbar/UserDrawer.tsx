@@ -18,7 +18,7 @@ const UserDrawer = ({ open, setOpen, user }: TUserDrawerProps) => {
 			anchor='right'
 			sx={{
 				'& .MuiDrawer-paper': {
-					width: 300
+					width: '80%'
 				},
 				position: 'relative'
 			}}
@@ -77,7 +77,14 @@ const UserDrawer = ({ open, setOpen, user }: TUserDrawerProps) => {
 						Logout
 					</Button>
 				) : (
-					<Button onClick={() => setOpen(false)} variant='contained' color='primary' sx={{ borderRadius: 0 }}>
+					<Button
+						onClick={() => setOpen(false)}
+						component={Link}
+						href='/login'
+						variant='contained'
+						color='primary'
+						sx={{ borderRadius: 0 }}
+					>
 						Login
 					</Button>
 				)}
