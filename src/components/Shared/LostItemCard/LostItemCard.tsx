@@ -28,11 +28,11 @@ const LostItemCard = ({ item }: any) => {
 		>
 			<SimpleImageSlider width={330} height={200} images={images} showNavs={true} navSize={25} showBullets={false} />
 			<CardContent>
-				<Typography gutterBottom variant='h5' component='div'>
+				<Typography gutterBottom variant='h5'>
 					{itemName}
 				</Typography>
-				<Typography variant='body2'>
-					{description.length > 60 ? description.slice(0, 60) + '...' : description}
+				<Typography variant='body2' className='line-clamp-2'>
+					{description}
 				</Typography>
 				<Box className='flex gap-2 items-center mt-2'>
 					<Box sx={{ minWidth: 20 }}>

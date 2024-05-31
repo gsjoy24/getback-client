@@ -1,3 +1,5 @@
+import Footer from '@/components/Shared/Footer/Footer';
+import Navbar from '@/components/Shared/Navbar/Navbar';
 import Providers from '@/lib/Providers/Providers';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import type { Metadata } from 'next';
@@ -20,7 +22,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<Providers>
 			<html lang='en'>
 				<body className={roboto.className}>
-					<AppRouterCacheProvider>{children}</AppRouterCacheProvider>
+					<AppRouterCacheProvider>
+						<Navbar />
+						{children}
+						<Footer />
+					</AppRouterCacheProvider>
 				</body>
 			</html>
 		</Providers>
