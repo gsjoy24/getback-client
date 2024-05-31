@@ -26,11 +26,21 @@ const Footer = () => {
 						<Stack direction='column' gap={1}>
 							{navLinks.map((link) => (
 								<span key={link.title}>
-									<Link key={link.title} href={link.href} className='hover:underline underline-offset-4'>
+									<Link href={link.href} className='hover:underline underline-offset-4'>
 										{link.title}
 									</Link>
 								</span>
 							))}
+							<span>
+								<Link href='/privacy-policy' className='hover:underline underline-offset-4'>
+									Privacy Policy
+								</Link>
+							</span>
+							<span>
+								<Link href='/terms-of-use' className='hover:underline underline-offset-4'>
+									Terms of Use
+								</Link>
+							</span>
 						</Stack>
 					</Grid>
 					<Grid item xs={12} sm={4}>

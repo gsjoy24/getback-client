@@ -1,6 +1,13 @@
 import team from '@/assets/team.jpg';
-import { Box, Card, CardContent, Container, Grid, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
+import { Metadata } from 'next';
 import Image from 'next/image';
+
+export const metadata: Metadata = {
+	title: 'About Us - Lost & Found',
+	description:
+		'Learn more about Lost & Found! Discover our story, our mission, and our vision. Find out how we transform moments of loss into stories of reunion and hope. Join us on our journey!'
+};
 
 const AboutPage = () => {
 	return (

@@ -1,6 +1,13 @@
 import contact from '@/assets/contact.jpg';
 import { Button, Container, Grid, Paper, TextField, Typography } from '@mui/material';
+import { Metadata } from 'next';
 import Image from 'next/image';
+
+export const metadata: Metadata = {
+	title: 'Contact Us - Lost & Found',
+	description:
+		'Have a question or feedback? Get in touch with us! Fill out the form below and we will get back to you as soon as possible. We are here to help you!'
+};
 
 const ContactPage = () => {
 	return (
