@@ -4,13 +4,31 @@ import loginImage from '@/assets/login.jpg';
 import LFForm from '@/components/Form/LFForm';
 import LFInput from '@/components/Form/lFInput';
 import LoginValidationSchema from '@/schemas/loginSchema';
+import userLogin from '@/services/actions/userLogin';
+import { storeUserInfo } from '@/services/auth.services';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Grid, Typography } from '@mui/material';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { FieldValues } from 'react-hook-form';
+import { toast } from 'sonner';
 
 const LoginPage = () => {
-	const handleSubmit = (data: any) => {
-		console.log(data);
+	const router = useRouter();
+
+	const handleSubmit = async (data: FieldValues) => {
+		try {
+			const res = await userLogin(data);
+			if (res.success) {
+				toast.success(res.message);
+				storeUserInfo(res?.data?.token);
+				router.push('/');
+			} else {
+				toast.error(res.message);
+			}
+		} catch (error: any) {
+			toast.error(error?.message);
+		}
 	};
 	return (
 		<Grid container sx={{ minHeight: '97vh' }}>
