@@ -41,7 +41,7 @@ const HeroSection = () => {
 				>
 					Lost Something? Found Something? We&#39;re Here to Help.
 				</Typography>
-				<Typography sx={{ fontWeight: 'light', color: '#fff' }}>
+				<Typography variant='body2' sx={{ fontWeight: 'light', color: '#fff' }}>
 					Whether you&#39;ve misplaced something or found someone else&#39;s belongings, our platform makes it easy to
 					report and reclaim lost items. Connect with others and help bring lost items back to their rightful owners.
 				</Typography>

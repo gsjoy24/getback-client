@@ -2,6 +2,7 @@ import config from '@/lib/config';
 import { TLostItem } from '@/types/lostItem';
 import { Box, Container, Skeleton, Stack, Typography } from '@mui/material';
 import LostItemCard from '../Shared/LostItemCard/LostItemCard';
+import SectionTitle from '../Shared/SectionTitle';
 
 const RecentLostItems = async () => {
 	const fetchItems = await fetch(`${config.serverURL}/lost-items?limit=6`, {
@@ -12,20 +13,10 @@ const RecentLostItems = async () => {
 	const { data: items } = await fetchItems.json();
 	return (
 		<Container>
-			<Stack
-				justifyContent='center'
-				gap={2}
-				sx={{
-					textAlign: 'center',
-					pb: 4,
-					px: 1
-				}}
-			>
-				<Typography variant='h4'>Recent Lost Items</Typography>
-				<Typography variant='body2'>
-					Dive into a collection of recently lost items awaiting reconnection with their owners.
-				</Typography>
-			</Stack>
+			<SectionTitle
+				title='Recent Lost Items'
+				desc='Dive into a collection of recently lost items awaiting reconnection with their owners.'
+			/>
 			<Stack
 				justifyContent='center'
 				alignItems='center'
