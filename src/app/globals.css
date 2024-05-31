@@ -1,3 +1,49 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.pattern {
+	width: 100%;
+	height: 100%;
+	--color: rgba(114, 114, 114, 0.129);
+	background-image: -webkit-gradient(
+			linear,
+			left bottom,
+			left top,
+			color-stop(24%, transparent),
+			color-stop(25%, var(--color)),
+			color-stop(26%, var(--color)),
+			color-stop(27%, transparent),
+			color-stop(74%, transparent),
+			color-stop(75%, var(--color)),
+			color-stop(76%, var(--color)),
+			color-stop(77%, transparent),
+			to(transparent)
+		),
+		-webkit-gradient(linear, left top, right top, color-stop(24%, transparent), color-stop(25%, var(--color)), color-stop(26%, var(--color)), color-stop(27%, transparent), color-stop(74%, transparent), color-stop(75%, var(--color)), color-stop(76%, var(--color)), color-stop(77%, transparent), to(transparent));
+	background-image: linear-gradient(
+			0deg,
+			transparent 24%,
+			var(--color) 25%,
+			var(--color) 26%,
+			transparent 27%,
+			transparent 74%,
+			var(--color) 75%,
+			var(--color) 76%,
+			transparent 77%,
+			transparent
+		),
+		linear-gradient(
+			90deg,
+			transparent 24%,
+			var(--color) 25%,
+			var(--color) 26%,
+			transparent 27%,
+			transparent 74%,
+			var(--color) 75%,
+			var(--color) 76%,
+			transparent 77%,
+			transparent
+		);
+	background-size: 55px 55px;
+}

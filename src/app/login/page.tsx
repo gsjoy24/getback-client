@@ -31,11 +31,12 @@ const LoginPage = () => {
 		}
 	};
 	return (
-		<Grid container sx={{ minHeight: '97vh' }}>
+		<Grid container sx={{ minHeight: '97vh', position: 'relative' }}>
+			<div className='pattern absolute top-0 right-0 -z-10'></div>
 			<Grid
 				item
 				xs={12}
-				md={5}
+				md={4}
 				sx={{
 					height: {
 						xs: '20px',
@@ -43,13 +44,13 @@ const LoginPage = () => {
 					}
 				}}
 			>
-				<Image src={loginImage} width={300} height={700} alt='Login' className='h-full w-auto hidden md:block' />
+				<Image src={loginImage} width={300} height={700} alt='Login' className='h-full w-full hidden md:block' />
 				<Image src={loginXsImage} width={360} height={180} alt='Login' className='h-[220px] w-full md:hidden' />
 			</Grid>
 			<Grid
 				item
 				xs={12}
-				md={6}
+				md={8}
 				sx={{
 					display: 'flex',
 					justifyContent: 'center',

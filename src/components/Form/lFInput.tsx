@@ -20,7 +20,7 @@ const LFInput = ({ label, type = 'text', name, sx, required }: LFInputProps) => 
 			render={({ field, fieldState: { error } }) => (
 				<TextField
 					{...field}
-					sx={{ ...sx }}
+					sx={{ ...sx, bgcolor: 'white' }}
 					label={label}
 					placeholder={label}
 					type={type}

@@ -4,7 +4,7 @@ import { Box, Button, Stack, TextField, Typography } from '@mui/material';
 const StayUpdated = () => {
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
-		console.log(e.target?.email.value);
+		// console.log(e.target?.email.value);
 	};
 	return (
 		<Stack
@@ -18,9 +18,11 @@ const StayUpdated = () => {
 				flexDirection: {
 					xs: 'column',
 					sm: 'row'
-				}
+				},
+				position: 'relative'
 			}}
 		>
+			<div className='pattern absolute top-0 right-0'></div>
 			<Box sx={{ textAlign: 'center' }}>
 				<Typography variant='h4' component='h2' gutterBottom>
 					Stay Updated
