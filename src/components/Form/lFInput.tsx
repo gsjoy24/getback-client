@@ -1,4 +1,4 @@
-import { Box, SxProps, TextField } from '@mui/material';
+import { SxProps, TextField, Typography } from '@mui/material';
 import { Controller, useFormContext } from 'react-hook-form';
 import { CiWarning } from 'react-icons/ci';
 
@@ -31,17 +31,9 @@ const LFInput = ({ label, type = 'text', name, sx, required }: LFInputProps) => 
 					error={!!error?.message}
 					helperText={
 						error?.message && (
-							<Box
-								sx={{
-									display: 'flex',
-									alignItems: 'center',
-									gap: 1,
-									position: 'relative',
-									right: 10
-								}}
-							>
+							<span className='flex items-center gap-1 relative right-3'>
 								<CiWarning size={16} /> {error?.message}
-							</Box>
+							</span>
 						)
 					}
 				/>

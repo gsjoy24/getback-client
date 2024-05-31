@@ -4,6 +4,7 @@ import loginImage from '@/assets/login.jpg';
 import LFForm from '@/components/Form/LFForm';
 import LFInput from '@/components/Form/lFInput';
 import LoginValidationSchema from '@/schemas/loginSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Grid, Typography } from '@mui/material';
 import Image from 'next/image';
 
@@ -53,7 +54,7 @@ const LoginPage = () => {
 					<Typography sx={{ mb: 5 }}>Login to your account, let&#39;s get started</Typography>
 
 					{/* form */}
-					<LFForm onSubmit={handleSubmit} resolver={LoginValidationSchema}>
+					<LFForm onSubmit={handleSubmit} resolver={zodResolver(LoginValidationSchema)}>
 						<LFInput name='email' label='Email' sx={{ mb: 2 }} />
 
 						<LFInput name='password' label='Password' type='password' />
