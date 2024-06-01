@@ -7,9 +7,10 @@ type LFInputProps = {
 	type?: string;
 	name: string;
 	sx?: SxProps;
+	multiline?: boolean;
 };
 
-const LFInput = ({ label, type = 'text', name, sx }: LFInputProps) => {
+const LFInput = ({ label, type = 'text', name, sx, multiline = false }: LFInputProps) => {
 	const { control } = useFormContext();
 
 	return (
@@ -19,9 +20,10 @@ const LFInput = ({ label, type = 'text', name, sx }: LFInputProps) => {
 			render={({ field, fieldState: { error } }) => (
 				<TextField
 					{...field}
-					sx={{ ...sx, bgcolor: 'white' }}
+					sx={{ ...sx, bgcolor: 'white', width: '100%', borderRadius: '5px' }}
 					label={label}
 					placeholder={label}
+					multiline={multiline}
 					type={type}
 					variant='outlined'
 					value={field.value || ''}

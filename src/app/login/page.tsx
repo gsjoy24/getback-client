@@ -9,6 +9,7 @@ import { storeUserInfo } from '@/services/auth.services';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Grid, Typography } from '@mui/material';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
@@ -112,6 +113,12 @@ const LoginPage = () => {
 							)}
 						</Button>
 					</LFForm>
+					<Typography sx={{ mt: 2 }}>
+						Don&#39;t have an account?{' '}
+						<Typography sx={{ color: 'primary.main', cursor: 'pointer' }} component={Link} href='/signup'>
+							Sign up
+						</Typography>
+					</Typography>
 				</Box>
 			</Grid>
 		</Grid>
