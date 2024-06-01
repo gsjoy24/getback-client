@@ -15,9 +15,8 @@ const LFForm = ({ children, onSubmit, resolver }: TLFFormProps) => {
 	const methods = useForm(formConfig);
 	const { handleSubmit, reset } = methods;
 	const submit: SubmitHandler<FieldValues> = (data) => {
-		// onSubmit(data);
+		onSubmit(data);
 		reset();
-		toast.success('Form submitted successfully');
 	};
 	return (
 		<FormProvider {...methods}>

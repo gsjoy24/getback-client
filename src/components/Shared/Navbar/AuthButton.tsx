@@ -22,6 +22,7 @@ const AuthButton = ({ setOpen }: TAuthButtonProps) => {
 			{userData && userData?.email ? (
 				<>
 					<NavItem link={{ title: 'My Profile', href: '/my-profile' }} setOpen={setOpen} />
+					<NavItem link={{ title: 'Dashboard', href: '/dashboard' }} setOpen={setOpen} />
 					<Button onClick={handleLogout} sx={{ borderRadius: 0 }}>
 						Logout
 					</Button>

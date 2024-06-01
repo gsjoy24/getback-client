@@ -36,7 +36,7 @@ const AboutSection = () => {
 						rightful owners. Join us today and be part of a community dedicated to bringing lost items back home.
 					</Typography>
 					<Button component={Link} href='/about-us' color='primary' sx={{ mt: 2 }}>
-						Learn More
+						Our Journey
 					</Button>
 				</Box>
 

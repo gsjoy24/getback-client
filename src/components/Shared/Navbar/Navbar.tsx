@@ -14,7 +14,7 @@ import UserDrawer from './UserDrawer';
 
 const Navbar = () => {
 	const [open, setOpen] = useState<boolean>(false);
-	const AuthButton = dynamic(() => import('./AuthButton'), { ssr: false });
+	const NavMenu = dynamic(() => import('./NavMenu'), { ssr: false });
 
 	return (
 		<Box
@@ -44,7 +44,8 @@ const Navbar = () => {
 						}}
 					>
 						{navLinks && navLinks?.map((link, index) => <NavItem key={index} link={link} setOpen={setOpen} />)}
-						<AuthButton />
+
+						<NavMenu />
 					</Box>
 
 					{/* nav links for small screen */}
