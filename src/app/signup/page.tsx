@@ -21,23 +21,27 @@ import { toast } from 'sonner';
 const SignPage = () => {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [showPass, setShowPass] = useState<boolean>(false);
+	const [showConPass, setShowConPass] = useState<boolean>(false);
 	const [resetForm, setResetForm] = useState<boolean>(false);
 	const [profileImage, setProfileImage] = useState<any>(null);
 	const [imageError, setImageError] = useState<string>('');
 	const router = useRouter();
 
 	const handleSubmit = async (data: FieldValues) => {
+		setImageError('');
+
 		if (!profileImage) {
 			setImageError('Profile image is required!');
 			return;
 		}
 
+		const { confirm_password, ...restData } = data;
+
 		const modifiedData = {
-			...data,
+			...restData,
 			profile: {
 				...data.profile,
-				age: parseInt(data.profile.age),
-				image: profileImage?.secure_url
+				profileImage
 			}
 		};
 		setProfileImage(null);
@@ -114,6 +118,7 @@ const SignPage = () => {
 								gap: 2
 							}}
 						>
+							<LFInput label='Full Name' name='name' />
 							<Stack
 								gap={2}
 								sx={{
@@ -124,8 +129,8 @@ const SignPage = () => {
 									}
 								}}
 							>
-								<LFInput label='Full Name' name='name' />
 								<LFInput label='User Name' name='username' />
+								<LFInput label='Email' name='email' type='email' />
 							</Stack>
 							<Stack
 								gap={2}
@@ -137,11 +142,19 @@ const SignPage = () => {
 									}
 								}}
 							>
-								<LFInput label='Email' name='email' type='email' />
 								<div className='w-full relative'>
 									<LFInput label='Password' name='password' type={showPass ? 'text' : 'password'} />
 									<div className='absolute right-3 top-3 cursor-pointer' onClick={() => setShowPass((prev) => !prev)}>
 										{showPass ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+									</div>
+								</div>
+								<div className='w-full relative'>
+									<LFInput label='Confirm Password' name='confirm_password' type={showConPass ? 'text' : 'password'} />
+									<div
+										className='absolute right-3 top-3 cursor-pointer'
+										onClick={() => setShowConPass((prev) => !prev)}
+									>
+										{showConPass ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
 									</div>
 								</div>
 							</Stack>
