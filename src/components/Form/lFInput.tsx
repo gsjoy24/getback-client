@@ -23,6 +23,7 @@ const LFInput = ({ label, type = 'text', name, sx, multiline = false }: LFInputP
 					sx={{ ...sx, bgcolor: 'white', width: '100%', borderRadius: '5px' }}
 					label={label}
 					placeholder={label}
+					minRows={6}
 					multiline={multiline}
 					type={type}
 					variant='outlined'

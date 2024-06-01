@@ -1,14 +1,14 @@
 'use client';
-import loginXsImage from '@/assets/login-xs.jpg';
 import signImage from '@/assets/signup.jpg';
 import LFForm from '@/components/Form/LFForm';
 import LFInput from '@/components/Form/lFInput';
-import LoginValidationSchema from '@/schemas/loginSchema';
+import SignupImageUploaderUI from '@/components/SignupImageUploaderUI/SignupImageUploaderUI';
 import signupUser from '@/services/actions/signup';
 import userLogin from '@/services/actions/userLogin';
 import { storeUserInfo } from '@/services/auth.services';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Grid, Stack, Typography } from '@mui/material';
+import { CldUploadWidget } from 'next-cloudinary';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -20,14 +20,21 @@ import { toast } from 'sonner';
 const SignPage = () => {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [showPass, setShowPass] = useState<boolean>(false);
+	const [profileImage, setProfileImage] = useState<any>(null);
+	const [imageError, setImageError] = useState<string>('');
 	const router = useRouter();
 
 	const handleSubmit = async (data: FieldValues) => {
+		if (!profileImage) {
+			setImageError('Please upload a profile image');
+			return;
+		}
 		const modifiedData = {
 			...data,
 			profile: {
 				...data.profile,
-				age: parseInt(data.profile.age)
+				age: parseInt(data.profile.age),
+				image: profileImage?.secure_url
 			}
 		};
 		try {
@@ -147,9 +154,45 @@ const SignPage = () => {
 								<LFInput label='Phone Number' name='phone' />
 								<LFInput label='Age' name='profile.age' type='number' />
 							</Stack>
-
-							<LFInput label='Image' name='profile.image' />
-							<LFInput label='Bio' name='profile.bio' multiline={true} />
+							<Stack
+								gap={2}
+								sx={{
+									width: '100%',
+									flexDirection: {
+										xs: 'column',
+										sm: 'row'
+									}
+								}}
+							>
+								<LFInput
+									label='Bio'
+									name='profile.bio'
+									multiline={true}
+									sx={{
+										minRows: 3
+									}}
+								/>
+								<div className='w-full '>
+									<CldUploadWidget
+										options={{ sources: ['local', 'url'] }}
+										signatureEndpoint='/api/sign-cloudinary-params'
+										onSuccess={(result, { widget }) => {
+											setProfileImage(result?.info);
+											widget.close();
+										}}
+									>
+										{({ open }) => {
+											return (
+												<SignupImageUploaderUI
+													imageLink={profileImage?.secure_url}
+													openHandler={() => open()}
+													imageError={imageError}
+												/>
+											);
+										}}
+									</CldUploadWidget>
+								</div>
+							</Stack>
 						</Box>
 
 						<Button type='submit' fullWidth sx={{ mt: 2 }} disabled={loading}>
