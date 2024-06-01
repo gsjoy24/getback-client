@@ -18,6 +18,7 @@ import { toast } from 'sonner';
 
 const LoginPage = () => {
 	const [showPass, setShowPass] = useState<boolean>(false);
+	const [resetForm, setResetForm] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(false);
 	const router = useRouter();
 
@@ -26,6 +27,7 @@ const LoginPage = () => {
 			setLoading(true);
 			const res = await userLogin(data);
 			if (res.success) {
+				setResetForm(true);
 				toast.success(res.message);
 				storeUserInfo(res?.data?.token);
 				router.push('/');
@@ -81,7 +83,7 @@ const LoginPage = () => {
 					<Typography sx={{ mb: 5 }}>Login to your account, let&#39;s get started</Typography>
 
 					{/* form */}
-					<LFForm onSubmit={handleSubmit} resolver={zodResolver(LoginValidationSchema)}>
+					<LFForm onSubmit={handleSubmit} resolver={zodResolver(LoginValidationSchema)} resetForm={resetForm}>
 						<LFInput name='email' label='Email' sx={{ mb: 2 }} />
 						<div className='w-full relative'>
 							<LFInput label='Password' name='password' type={showPass ? 'text' : 'password'} />

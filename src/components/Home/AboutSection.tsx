@@ -35,7 +35,7 @@ const AboutSection = () => {
 						mission is to connect finders with owners, making it easier for lost belongings to be reunited with their
 						rightful owners. Join us today and be part of a community dedicated to bringing lost items back home.
 					</Typography>
-					<Button component={Link} href='/about-us' color='primary' sx={{ mt: 2 }}>
+					<Button component={Link} href='/about' color='primary' sx={{ mt: 2 }}>
 						Our Journey
 					</Button>
 				</Box>

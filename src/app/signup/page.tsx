@@ -3,6 +3,7 @@ import signImage from '@/assets/signup.jpg';
 import LFForm from '@/components/Form/LFForm';
 import LFInput from '@/components/Form/lFInput';
 import SignupImageUploaderUI from '@/components/SignupImageUploaderUI/SignupImageUploaderUI';
+import signupSchema from '@/schemas/signupSchema';
 import signupUser from '@/services/actions/signup';
 import userLogin from '@/services/actions/userLogin';
 import { storeUserInfo } from '@/services/auth.services';
@@ -20,15 +21,17 @@ import { toast } from 'sonner';
 const SignPage = () => {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [showPass, setShowPass] = useState<boolean>(false);
+	const [resetForm, setResetForm] = useState<boolean>(false);
 	const [profileImage, setProfileImage] = useState<any>(null);
 	const [imageError, setImageError] = useState<string>('');
 	const router = useRouter();
 
 	const handleSubmit = async (data: FieldValues) => {
 		if (!profileImage) {
-			setImageError('Please upload a profile image');
+			setImageError('Profile image is required!');
 			return;
 		}
+
 		const modifiedData = {
 			...data,
 			profile: {
@@ -37,11 +40,13 @@ const SignPage = () => {
 				image: profileImage?.secure_url
 			}
 		};
+		setProfileImage(null);
 		try {
 			setLoading(true);
 			const res = await signupUser(modifiedData);
 
 			if (res.success) {
+				setResetForm(true);
 				toast.success(res.message);
 				const loginRes = await userLogin({ email: data.email, password: data.password });
 				if (loginRes.success) {
@@ -100,7 +105,7 @@ const SignPage = () => {
 					<Typography sx={{ mb: 5 }}>Find what you&#39;ve lost, help others find what they&#39;ve lost.</Typography>
 
 					{/* form */}
-					<LFForm onSubmit={handleSubmit}>
+					<LFForm onSubmit={handleSubmit} resolver={zodResolver(signupSchema)} resetForm={resetForm}>
 						<Box
 							sx={{
 								display: 'flex',
@@ -151,7 +156,7 @@ const SignPage = () => {
 									}
 								}}
 							>
-								<LFInput label='Phone Number' name='phone' />
+								<LFInput label='Phone Number' name='phone' type='tel' />
 								<LFInput label='Age' name='profile.age' type='number' />
 							</Stack>
 							<Stack

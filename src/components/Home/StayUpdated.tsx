@@ -6,16 +6,19 @@ import { Box, Button, Stack, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 import { toast } from 'sonner';
+import { z } from 'zod';
 import LFForm from '../Form/LFForm';
 import LFInput from '../Form/lFInput';
 
 const StayUpdated = () => {
+	const [resetForm, setResetForm] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(false);
 	const handleSubmit = async (data: FieldValues) => {
 		try {
 			setLoading(true);
 			const res = await subscribeToNewsLetter(data);
 			if (res.success) {
+				setResetForm(true);
 				toast.success(res.message);
 			} else {
 				toast.error(res.message);
@@ -52,7 +55,7 @@ const StayUpdated = () => {
 				</Typography>
 			</Box>
 
-			<LFForm onSubmit={handleSubmit} resolver={zodResolver(subscribeSchema)}>
+			<LFForm onSubmit={handleSubmit} resolver={zodResolver(subscribeSchema)} resetForm={resetForm}>
 				<LFInput name='email' label='Enter your email' type='email' />
 				<Button fullWidth type='submit' sx={{ mt: 1 }}>
 					{loading ? (

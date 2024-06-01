@@ -1,12 +1,15 @@
 import { FieldValues, FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { toast } from 'sonner';
 type TFormConfig = {
 	resolver?: any;
 };
 
-type TLFFormProps = { children: React.ReactNode; onSubmit: SubmitHandler<FieldValues> } & TFormConfig;
+type TLFFormProps = {
+	children: React.ReactNode;
+	onSubmit: SubmitHandler<FieldValues>;
+	resetForm?: boolean;
+} & TFormConfig;
 
-const LFForm = ({ children, onSubmit, resolver }: TLFFormProps) => {
+const LFForm = ({ children, onSubmit, resolver, resetForm }: TLFFormProps) => {
 	const formConfig: TFormConfig = {};
 
 	if (resolver) {
@@ -16,7 +19,7 @@ const LFForm = ({ children, onSubmit, resolver }: TLFFormProps) => {
 	const { handleSubmit, reset } = methods;
 	const submit: SubmitHandler<FieldValues> = (data) => {
 		onSubmit(data);
-		reset();
+		resetForm && reset();
 	};
 	return (
 		<FormProvider {...methods}>
