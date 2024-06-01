@@ -20,7 +20,7 @@ const Footer = () => {
 						</Typography>
 					</Grid>
 					<Grid item xs={12} sm={4}>
-						<Typography variant='h6' gutterBottom>
+						<Typography variant='h5' gutterBottom>
 							Quick Links
 						</Typography>
 						<Stack direction='column' gap={1}>
@@ -44,7 +44,7 @@ const Footer = () => {
 						</Stack>
 					</Grid>
 					<Grid item xs={12} sm={4}>
-						<Typography variant='h6' gutterBottom>
+						<Typography variant='h5' gutterBottom>
 							Contact Us
 						</Typography>
 						<Typography variant='body2'>Email: support@lostandfound.com</Typography>

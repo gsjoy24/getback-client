@@ -7,10 +7,9 @@ type LFInputProps = {
 	type?: string;
 	name: string;
 	sx?: SxProps;
-	required?: boolean;
 };
 
-const LFInput = ({ label, type = 'text', name, sx, required }: LFInputProps) => {
+const LFInput = ({ label, type = 'text', name, sx }: LFInputProps) => {
 	const { control } = useFormContext();
 
 	return (
@@ -25,9 +24,9 @@ const LFInput = ({ label, type = 'text', name, sx, required }: LFInputProps) => 
 					placeholder={label}
 					type={type}
 					variant='outlined'
+					value={field.value || ''}
 					size='small'
 					fullWidth
-					required={required || false}
 					error={!!error?.message}
 					helperText={
 						error?.message && (
