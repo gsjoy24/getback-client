@@ -13,9 +13,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { toast } from 'sonner';
 
 const LoginPage = () => {
+	const [showPass, setShowPass] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(false);
 	const router = useRouter();
 
@@ -81,8 +83,12 @@ const LoginPage = () => {
 					{/* form */}
 					<LFForm onSubmit={handleSubmit} resolver={zodResolver(LoginValidationSchema)}>
 						<LFInput name='email' label='Email' sx={{ mb: 2 }} />
-
-						<LFInput name='password' label='Password' type='password' />
+						<div className='w-full relative'>
+							<LFInput label='Password' name='password' type={showPass ? 'text' : 'password'} />
+							<div className='absolute right-3 top-3 cursor-pointer' onClick={() => setShowPass((prev) => !prev)}>
+								{showPass ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+							</div>
+						</div>
 						<Button type='submit' fullWidth sx={{ mt: 2 }} disabled={loading}>
 							{loading ? (
 								<>

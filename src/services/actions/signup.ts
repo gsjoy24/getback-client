@@ -1,10 +1,14 @@
 'use server';
 import config from '@/lib/config';
+import { FieldValues } from 'react-hook-form';
 
-const registerPatient = async (data: FormData) => {
+const signupUser = async (data: FieldValues) => {
 	const res = await fetch(`${config.serverURL}/register`, {
 		method: 'POST',
-		body: data,
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(data),
 		cache: 'no-store'
 	});
 
@@ -13,4 +17,4 @@ const registerPatient = async (data: FormData) => {
 	return resData;
 };
 
-export default registerPatient;
+export default signupUser;

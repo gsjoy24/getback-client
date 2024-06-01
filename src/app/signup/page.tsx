@@ -4,6 +4,7 @@ import signImage from '@/assets/signup.jpg';
 import LFForm from '@/components/Form/LFForm';
 import LFInput from '@/components/Form/lFInput';
 import LoginValidationSchema from '@/schemas/loginSchema';
+import signupUser from '@/services/actions/signup';
 import userLogin from '@/services/actions/userLogin';
 import { storeUserInfo } from '@/services/auth.services';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -22,21 +23,34 @@ const SignPage = () => {
 	const router = useRouter();
 
 	const handleSubmit = async (data: FieldValues) => {
-		// try {
-		// 	setLoading(true);
-		// 	const res = await userLogin(data);
-		// 	if (res.success) {
-		// 		toast.success(res.message);
-		// 		storeUserInfo(res?.data?.token);
-		// 		router.push('/');
-		// 	} else {
-		// 		toast.error(res.message);
-		// 	}
-		// } catch (error: any) {
-		// 	toast.error(error?.message);
-		// } finally {
-		// 	setLoading(false);
-		// }
+		const modifiedData = {
+			...data,
+			profile: {
+				...data.profile,
+				age: parseInt(data.profile.age)
+			}
+		};
+		try {
+			setLoading(true);
+			const res = await signupUser(modifiedData);
+
+			if (res.success) {
+				toast.success(res.message);
+				const loginRes = await userLogin({ email: data.email, password: data.password });
+				if (loginRes.success) {
+					storeUserInfo(loginRes?.data?.token);
+					router.push('/');
+				} else {
+					toast.error(loginRes.message);
+				}
+			} else {
+				toast.error(res.message);
+			}
+		} catch (error: any) {
+			toast.error(error?.message);
+		} finally {
+			setLoading(false);
+		}
 	};
 
 	return (
@@ -79,7 +93,7 @@ const SignPage = () => {
 					<Typography sx={{ mb: 5 }}>Find what you&#39;ve lost, help others find what they&#39;ve lost.</Typography>
 
 					{/* form */}
-					<LFForm onSubmit={handleSubmit} resolver={zodResolver(LoginValidationSchema)}>
+					<LFForm onSubmit={handleSubmit}>
 						<Box
 							sx={{
 								display: 'flex',
@@ -131,11 +145,11 @@ const SignPage = () => {
 								}}
 							>
 								<LFInput label='Phone Number' name='phone' />
-								<LFInput label='Age' name='age' />
+								<LFInput label='Age' name='profile.age' type='number' />
 							</Stack>
 
-							<LFInput label='Image' name='image' />
-							<LFInput label='Bio' name='bio' multiline={true} />
+							<LFInput label='Image' name='profile.image' />
+							<LFInput label='Bio' name='profile.bio' multiline={true} />
 						</Box>
 
 						<Button type='submit' fullWidth sx={{ mt: 2 }} disabled={loading}>
