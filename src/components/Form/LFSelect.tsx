@@ -4,11 +4,12 @@ import { CiWarning } from 'react-icons/ci';
 
 type LFSelectProps = {
 	label?: string;
+	options: { value: string | number; label: string }[];
 	name: string;
 	sx?: SxProps;
 };
 
-const LFSelect = ({ label, name, sx }: LFSelectProps) => {
+const LFSelect = ({ label, options, name, sx }: LFSelectProps) => {
 	const { control } = useFormContext();
 
 	return (
@@ -16,8 +17,8 @@ const LFSelect = ({ label, name, sx }: LFSelectProps) => {
 			control={control}
 			name={name}
 			render={({ field, fieldState: { error } }) => (
-				<FormControl sx={{ width: '100%' }}>
-					<InputLabel id='demo-select-small-label'>Age</InputLabel>
+				<FormControl sx={{ width: '100%' }} disabled={!options}>
+					<InputLabel id='demo-select-small-label'>Category</InputLabel>
 					<Select
 						labelId='demo-simple-select-label'
 						id='demo-simple-select'
@@ -30,9 +31,11 @@ const LFSelect = ({ label, name, sx }: LFSelectProps) => {
 						value={field.value || ''}
 						error={!!error?.message}
 					>
-						<MenuItem value={10}>Ten</MenuItem>
-						<MenuItem value={20}>Twenty</MenuItem>
-						<MenuItem value={30}>Thirty</MenuItem>
+						{options?.map((option) => (
+							<MenuItem key={option.value} value={option.value}>
+								{option.label}
+							</MenuItem>
+						))}
 					</Select>
 					{error?.message && (
 						<FormHelperText>
