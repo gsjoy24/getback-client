@@ -1,9 +1,7 @@
 'use client';
 import BlackLogo from '@/assets/logo/L&F-B.png';
 import navLinks from '@/constants/navLinks';
-import { getUserInfo, logout } from '@/services/auth.services';
-import { TUser } from '@/types/user';
-import { Box, Button, Container, IconButton, Stack } from '@mui/material';
+import { Box, Container, IconButton, Stack } from '@mui/material';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -19,7 +17,8 @@ const Navbar = () => {
 	return (
 		<Box
 			sx={{
-				backgroundColor: '#fff',
+				backgroundColor: '#ffffffd8',
+				backdropFilter: 'blur(5px)',
 				position: 'sticky',
 				top: 0,
 				zIndex: 1000,
@@ -29,7 +28,7 @@ const Navbar = () => {
 		>
 			<Container>
 				<Stack justifyContent={'space-between'} alignItems={'center'} direction={'row'} py={1}>
-					<Box>
+					<Box component={Link} href='/'>
 						<Image src={BlackLogo} alt='logo' width={80} height={80} />
 					</Box>
 

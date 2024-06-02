@@ -48,7 +48,7 @@ const HeroSection = () => {
 
 				<Stack mt={2} sx={{ flexDirection: { xs: 'column', sm: 'row' }, gap: 2 }} justifyContent='center'>
 					<Button component={Link} href='/report-lost-item' sx={{ px: '40px' }} color='primary' size='large'>
-						Report Lost Item
+						Report a Lost Item
 					</Button>
 					<Button
 						component={Link}
@@ -58,7 +58,7 @@ const HeroSection = () => {
 						color='primary'
 						size='large'
 					>
-						Claim Found Item
+						Report a Found Item
 					</Button>
 				</Stack>
 			</Box>

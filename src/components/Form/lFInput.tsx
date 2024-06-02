@@ -24,9 +24,9 @@ const LFInput = ({ label, type = 'text', name, sx, multiline = false }: LFInputP
 					label={label}
 					placeholder={label}
 					minRows={6}
+					variant='filled'
 					multiline={multiline}
 					type={type}
-					variant='outlined'
 					value={field.value || ''}
 					size='small'
 					fullWidth
