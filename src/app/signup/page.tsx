@@ -192,7 +192,7 @@ const SignPage = () => {
 										minRows: 3
 									}}
 								/>
-								<div className='w-full '>
+								<div className='w-full'>
 									<CldUploadWidget
 										options={{ sources: ['local', 'url'] }}
 										signatureEndpoint='/api/sign-cloudinary-params'

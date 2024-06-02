@@ -12,7 +12,6 @@ const SignupImageUploaderUI = ({ imageLink, openHandler, imageError }: TProps) =
 		<Box
 			sx={{
 				textAlign: 'center',
-				border: `${imageError ? '1px dashed red' : '1px dashed #1586FD'}`,
 				borderRadius: '12px',
 				height: '100%',
 				position: 'relative',
@@ -25,25 +24,26 @@ const SignupImageUploaderUI = ({ imageLink, openHandler, imageError }: TProps) =
 					alt='profile'
 					width={100}
 					height={100}
-					className='absolute top-0 w-full h-full  rounded-[12px]'
+					className='absolute top-0 w-full h-full  rounded-[12px] shadow-xl border-2 border-gray-300'
 				/>
 			) : (
 				<div
 					onClick={openHandler}
-					className='flex justify-center items-center h-full flex-col gap-2 cursor-pointer pt-5 md:pt-0'
+					className={`flex justify-center items-center h-full flex-col gap-2 cursor-pointer pt-5 md:pt-0 w-full border-2 border-dashed border-gray-300 rounded-2xl min-h-[140px] ${
+						imageError ? 'border-red-500 text-red-600 animate-pulse' : 'border-gray-300'
+					}`}
 				>
 					<ImageIcon
 						sx={{
-							fontSize: '3rem',
-							color: `${imageError ? 'red' : '#1586FD'}`
+							fontSize: 40
 						}}
 					/>
-					<Typography
-						sx={{
-							color: `${imageError ? 'red' : '#1586FD'}`
-						}}
-					>
-						Upload a profile picture
+					<Typography>Upload a profile picture</Typography>
+					<Typography fontSize={10} lineHeight={0.5}>
+						Max 5 images are allowed
+					</Typography>
+					<Typography fontSize={10} lineHeight={0.5}>
+						Horizontal images are RECOMMENDED
 					</Typography>
 				</div>
 			)}

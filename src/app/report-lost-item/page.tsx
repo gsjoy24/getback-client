@@ -96,7 +96,7 @@ const ReportLostItem = () => {
 							mb: 3
 						}}
 					>
-						<LFInput label='Description' name='description' multiline rows={3} />
+						<LFInput label='Description' name='description' multiline rows={5} />
 						<MultiImageUploader setImgInfos={setImgInfos} imageError={imageError} />
 					</Stack>
 
