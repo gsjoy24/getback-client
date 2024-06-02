@@ -3,21 +3,18 @@ import ImageIcon from '@mui/icons-material/Image';
 import { Typography } from '@mui/material';
 import { CldUploadWidget } from 'next-cloudinary';
 import { Dispatch, SetStateAction } from 'react';
+
 type TProps = {
-	imageLinks: string[] | null;
-	setImageLinks: (links: string[]) => void;
 	imageError: boolean;
-	setImageError: Dispatch<SetStateAction<boolean>>;
+	setImgInfos: Dispatch<SetStateAction<any[]>>;
 };
-const MultiImageUploader = ({ imageLinks, setImageLinks, imageError, setImageError }: TProps) => {
+const MultiImageUploader = ({ imageError, setImgInfos }: TProps) => {
 	return (
 		<CldUploadWidget
 			options={{ sources: ['local', 'url'], multiple: true, maxFiles: 5 }}
 			signatureEndpoint='/api/sign-cloudinary-params'
 			onSuccess={(result, { widget }) => {
-				// setProfileImage(result?.info);
-				console.log(result?.info?.secure_url);
-
+				setImgInfos((prev) => [...prev, result?.info]);
 				widget.close();
 			}}
 		>

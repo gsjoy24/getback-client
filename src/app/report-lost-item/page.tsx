@@ -8,10 +8,9 @@ import PageTitle from '@/components/Shared/PageTitle';
 import { useGetCategoriesQuery } from '@/redux/api/categoryApi';
 import { TCategory } from '@/types/category';
 import { Box, Button, Stack } from '@mui/material';
-import { DatePicker } from '@mui/x-date-pickers';
 import { Dayjs } from 'dayjs';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const ReportLostItem = () => {
 	const { data: categories } = useGetCategoriesQuery(null);
@@ -23,6 +22,14 @@ const ReportLostItem = () => {
 	const [dateError, setDateError] = useState<string | null>(null);
 	const [imageError, setImageError] = useState<boolean>(false);
 	const [imageLinks, setImageLinks] = useState<string[] | null>(null);
+	const [imgInfos, setImgInfos] = useState<any[]>([]);
+
+	useEffect(() => {
+		if (imgInfos.length > 0) {
+			const links = imgInfos.map((img) => img.secure_url);
+			setImageLinks(links);
+		}
+	}, [imgInfos]);
 
 	const handleSubmit = (data: any) => {
 		setDateError(null);
@@ -90,12 +97,7 @@ const ReportLostItem = () => {
 						}}
 					>
 						<LFInput label='Description' name='description' multiline rows={3} />
-						<MultiImageUploader
-							imageLinks={imageLinks}
-							setImageLinks={setImageLinks}
-							setImageError={setImageError}
-							imageError={imageError}
-						/>
+						<MultiImageUploader setImgInfos={setImgInfos} imageError={imageError} />
 					</Stack>
 
 					{/* uploaded images will be here */}

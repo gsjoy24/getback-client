@@ -50,7 +50,6 @@ const SignPage = () => {
 		try {
 			setLoading(true);
 			const res = await signupUser(modifiedData);
-			console.log({ res, modifiedData });
 
 			if (res.success) {
 				setResetForm(true);
