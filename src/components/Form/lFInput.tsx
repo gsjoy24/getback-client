@@ -8,9 +8,10 @@ type LFInputProps = {
 	name: string;
 	sx?: SxProps;
 	multiline?: boolean;
+	rows?: number;
 };
 
-const LFInput = ({ label, type = 'text', name, sx, multiline = false }: LFInputProps) => {
+const LFInput = ({ label, type = 'text', name, sx, multiline = false, rows }: LFInputProps) => {
 	const { control } = useFormContext();
 
 	return (
@@ -23,7 +24,7 @@ const LFInput = ({ label, type = 'text', name, sx, multiline = false }: LFInputP
 					sx={{ ...sx, bgcolor: 'white', width: '100%', borderRadius: '5px' }}
 					label={label}
 					placeholder={label}
-					minRows={6}
+					minRows={rows || 6}
 					variant='standard'
 					multiline={multiline}
 					type={type}

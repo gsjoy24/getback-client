@@ -67,13 +67,17 @@ const ReportLostItem = () => {
 							flexDirection: {
 								xs: 'column',
 								sm: 'row'
-							}
+							},
+							mb: 3
 						}}
 					>
-						<LFInput label='Location of lost' name='location' />
-
+						<LFInput label='Location' name='location' />
 						<LFDatePicker label='Date Lost' setDate={setDate} dateError={dateError} setDateError={setDateError} />
 					</Stack>
+					<LFInput label='Description' name='description' multiline rows={3} />
+
+					{/* picture uploader */}
+
 					<Button
 						type='submit'
 						fullWidth

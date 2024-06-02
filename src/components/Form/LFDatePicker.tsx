@@ -9,7 +9,7 @@ type TLFDatePickerProps = {
 	dateError?: string | null;
 	setDateError: Dispatch<SetStateAction<string | null>>;
 };
-// make it clearable
+
 const LFDatePicker = ({ setDate, label, dateError, setDateError }: TLFDatePickerProps) => {
 	return (
 		<DateTimePicker
