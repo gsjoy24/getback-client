@@ -72,7 +72,7 @@ const ReportLostItem = () => {
 					>
 						<LFInput label='Location of lost' name='location' />
 
-						<LFDatePicker label='Date Lost' setDate={setDate} />
+						<LFDatePicker label='Date Lost' setDate={setDate} dateError={dateError} setDateError={setDateError} />
 					</Stack>
 					<Button
 						type='submit'
