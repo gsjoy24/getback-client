@@ -8,10 +8,10 @@ type LFSelectProps = {
 	options: { value: string | number; label: string }[];
 	name: string;
 	sx?: SxProps;
-	setParams: Dispatch<SetStateAction<TQueryParams[]>>;
+	setFilterParam: Dispatch<SetStateAction<TQueryParams>>;
 };
 
-const LFFilterSelect = ({ label, options, name, sx, setParams }: LFSelectProps) => {
+const LFFilterSelect = ({ label, options, name, sx, setFilterParam }: LFSelectProps) => {
 	const { control } = useFormContext();
 
 	return (
@@ -32,9 +32,12 @@ const LFFilterSelect = ({ label, options, name, sx, setParams }: LFSelectProps) 
 						value={field.value || ''}
 						onChange={(e) => {
 							field.onChange(e);
-							setParams && setParams((prev: any) => [...prev, { name: 'categoryId', value: e.target.value }]);
+							setFilterParam({ name: 'categoryId', value: e.target.value });
 						}}
 					>
+						<MenuItem value=''>
+							<em>None</em>
+						</MenuItem>
 						{options?.map((option) => (
 							<MenuItem key={option.value} value={option.value}>
 								{option.label}

@@ -15,18 +15,18 @@ import { useState } from 'react';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
 
 const LostItems = () => {
-	const [params, setParams] = useState([] as TQueryParams[]);
-	const [filter, setFilter] = useState(null);
+	const [filterParam, setFilterParam] = useState({} as TQueryParams);
+	const [searchTerm, setSearchTerm] = useState({} as TQueryParams);
 	const { data: categoryData } = useGetCategoriesQuery(null);
 	const categoryOptions = categoryData?.data?.map((category: any) => ({
 		label: category.name,
 		value: category.id
 	}));
 
-	const { data: items, isFetching } = useGetLostItemsQuery(params);
+	const { data: items, isFetching } = useGetLostItemsQuery([filterParam, searchTerm]);
 
 	const handleSubmit = (data: any) => {
-		data.searchTerm && setParams([...params, { name: 'searchTerm', value: data.searchTerm }]);
+		setSearchTerm({ name: 'searchTerm', value: data.searchTerm });
 	};
 
 	return (
@@ -58,23 +58,12 @@ const LostItems = () => {
 								<HiMagnifyingGlass />
 							</IconButton>
 						</div>
-						{/* <LFSelect
-							name='categoryId'
-							label='Filter By Category'
-							options={categoryOptions}
-							sx={{
-								width: {
-									xs: '100%',
-									sm: 250
-								}
-							}}
-						/> */}
+
 						<LFFilterSelect
-							name='categoryId'
 							label='Filter By Category'
 							options={categoryOptions}
-							// setFilter={setFilter}
-							setParams={setParams}
+							name='categoryId'
+							setFilterParam={setFilterParam}
 						/>
 					</Stack>
 				</LFForm>
