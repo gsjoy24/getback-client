@@ -1,22 +1,24 @@
-import { FormControl, FormHelperText, InputLabel, MenuItem, Select, SxProps } from '@mui/material';
+import { TQueryParams } from '@/types';
+import { FormControl, InputLabel, MenuItem, Select, SxProps } from '@mui/material';
+import { Dispatch, SetStateAction } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import { CiWarning } from 'react-icons/ci';
 
 type LFSelectProps = {
 	label?: string;
 	options: { value: string | number; label: string }[];
 	name: string;
 	sx?: SxProps;
+	setParams: Dispatch<SetStateAction<TQueryParams[]>>;
 };
 
-const LFSelect = ({ label, options, name, sx }: LFSelectProps) => {
+const LFFilterSelect = ({ label, options, name, sx, setParams }: LFSelectProps) => {
 	const { control } = useFormContext();
 
 	return (
 		<Controller
 			control={control}
 			name={name}
-			render={({ field, fieldState: { error } }) => (
+			render={({ field }) => (
 				<FormControl sx={sx ? { ...sx } : { width: '100%' }} disabled={!options}>
 					<InputLabel id='demo-select-small-label'>{label}</InputLabel>
 					<Select
@@ -28,7 +30,10 @@ const LFSelect = ({ label, options, name, sx }: LFSelectProps) => {
 						variant='standard'
 						size='small'
 						value={field.value || ''}
-						error={!!error?.message}
+						onChange={(e) => {
+							field.onChange(e);
+							setParams && setParams((prev: any) => [...prev, { name: 'categoryId', value: e.target.value }]);
+						}}
 					>
 						{options?.map((option) => (
 							<MenuItem key={option.value} value={option.value}>
@@ -36,19 +41,10 @@ const LFSelect = ({ label, options, name, sx }: LFSelectProps) => {
 							</MenuItem>
 						))}
 					</Select>
-					{error?.message && (
-						<FormHelperText>
-							{
-								<span className='flex items-center gap-1 relative right-3 text-red-600'>
-									<CiWarning size={16} /> {error?.message}
-								</span>
-							}
-						</FormHelperText>
-					)}
 				</FormControl>
 			)}
 		/>
 	);
 };
 
-export default LFSelect;
+export default LFFilterSelect;
