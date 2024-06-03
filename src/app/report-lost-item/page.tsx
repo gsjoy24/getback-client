@@ -6,6 +6,7 @@ import LFInput from '@/components/Form/lFInput';
 import MultiImageUploader from '@/components/Shared/MultiImageUploader/MultiImageUploader';
 import PageTitle from '@/components/Shared/PageTitle';
 import { useGetCategoriesQuery } from '@/redux/api/categoryApi';
+import { useCreateLostItemMutation } from '@/redux/api/lostItemApi';
 import lostItemSchema from '@/schemas/lostItemSchema';
 import { TCategory } from '@/types/category';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -16,6 +17,7 @@ import { useState } from 'react';
 
 const ReportLostItem = () => {
 	const { data: categories } = useGetCategoriesQuery(null);
+	console.log(categories);
 	const categoryOptions = categories?.map((category: TCategory) => ({
 		value: category.id,
 		label: category.name
@@ -24,8 +26,11 @@ const ReportLostItem = () => {
 	const [dateError, setDateError] = useState<string | null>(null);
 	const [imageError, setImageError] = useState<boolean>(false);
 	const [imageLinks, setImageLinks] = useState<string[] | null>(null);
+	const [resetForm, setResetForm] = useState<boolean>(false);
 
-	const handleSubmit = (data: any) => {
+	const [createLostItem, { isLoading, error }] = useCreateLostItemMutation();
+
+	const handleSubmit = async (data: any) => {
 		setDateError(null);
 		setImageError(false);
 
@@ -41,6 +46,13 @@ const ReportLostItem = () => {
 
 		data.lostDate = date.toISOString();
 		data.pictures = imageLinks;
+
+		try {
+			const res = await createLostItem(data);
+			console.log(res);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return (
@@ -57,7 +69,7 @@ const ReportLostItem = () => {
 					my: 2
 				}}
 			>
-				<LFForm onSubmit={handleSubmit} resolver={zodResolver(lostItemSchema)}>
+				<LFForm onSubmit={handleSubmit} resolver={zodResolver(lostItemSchema)} resetForm={resetForm}>
 					<Stack
 						gap={2}
 						sx={{
@@ -135,8 +147,9 @@ const ReportLostItem = () => {
 						sx={{
 							mt: 2
 						}}
+						disabled={isLoading}
 					>
-						Submit
+						{isLoading ? 'Submitting...' : 'Submit Report'}
 					</Button>
 				</LFForm>
 			</Box>

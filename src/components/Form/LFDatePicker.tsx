@@ -1,4 +1,4 @@
-import { DateTimePicker } from '@mui/x-date-pickers';
+import { MobileDateTimePicker } from '@mui/x-date-pickers';
 import { Dayjs } from 'dayjs';
 import { Dispatch, SetStateAction } from 'react';
 import { CiWarning } from 'react-icons/ci';
@@ -12,7 +12,7 @@ type TLFDatePickerProps = {
 
 const LFDatePicker = ({ setDate, label, dateError, setDateError }: TLFDatePickerProps) => {
 	return (
-		<DateTimePicker
+		<MobileDateTimePicker
 			label={label || 'Date'}
 			disableFuture
 			onChange={(newValue) => setDate(newValue)}

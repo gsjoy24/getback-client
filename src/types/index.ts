@@ -5,6 +5,7 @@ export type TMeta = {
 };
 
 export type TResponseSuccess = {
+	success?: boolean;
 	data: any;
 	meta?: TMeta;
 };
