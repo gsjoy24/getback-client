@@ -11,9 +11,9 @@ import { IoIosArrowRoundForward } from 'react-icons/io';
 import { IoLocationSharp } from 'react-icons/io5';
 import SimpleImageSlider from 'react-simple-image-slider';
 
-const LostItemCard = ({ item }: any) => {
-	const { itemName, description, pictures, location, lostDate } = item;
-	const date = formatDateToString(lostDate);
+const FoundItemCard = ({ item }: any) => {
+	const { itemName, description, pictures, location, foundDate } = item;
+	const date = formatDateToString(foundDate);
 	const images = pictures.map((picture: any) => ({ url: picture }));
 	return (
 		<Card
@@ -62,7 +62,7 @@ const LostItemCard = ({ item }: any) => {
 			>
 				<Typography
 					component={Link}
-					href={`/lost-items/${item.id}`}
+					href={`/found-items/${item.id}`}
 					sx={{
 						width: '100%',
 						display: 'flex',
@@ -79,4 +79,4 @@ const LostItemCard = ({ item }: any) => {
 	);
 };
 
-export default LostItemCard;
+export default FoundItemCard;

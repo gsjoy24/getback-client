@@ -1,7 +1,6 @@
 'use client';
 import LFFilterSelect from '@/components/Form/LFFilterSelect';
 import LFForm from '@/components/Form/LFForm';
-import LFSelect from '@/components/Form/LFSelect';
 import LFInput from '@/components/Form/lFInput';
 import LFBackdrop from '@/components/Shared/Backdrop/Backdrop';
 import EmptyCard from '@/components/Shared/EmptyCard/EmptyCard';
@@ -12,6 +11,7 @@ import { useGetLostItemsQuery } from '@/redux/api/lostItemApi';
 import { TQueryParams } from '@/types';
 import { Box, IconButton, Pagination, Stack } from '@mui/material';
 import { useState } from 'react';
+import { FieldValues } from 'react-hook-form';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
 
 const LostItems = () => {
@@ -38,8 +38,7 @@ const LostItems = () => {
 	]);
 
 	const totalPage = data?.meta?.total / data?.meta?.limit;
-
-	const handleSubmit = (data: any) => {
+	const handleSubmit = (data: FieldValues) => {
 		setSearchTerm({ name: 'searchTerm', value: data.searchTerm });
 	};
 
@@ -89,7 +88,10 @@ const LostItems = () => {
 				alignItems='center'
 				gap={5}
 				flexWrap='wrap'
-				p={5}
+				p={{
+					xs: 2,
+					sm: 5
+				}}
 				sx={{
 					flexDirection: {
 						xs: 'column',
@@ -105,34 +107,42 @@ const LostItems = () => {
 					<EmptyCard />
 				)}
 			</Stack>
-			<div className='flex justify-center mb-7 md:hidden'>
-				<Pagination
-					count={totalPage}
-					variant='outlined'
-					shape='rounded'
-					onChange={(e, value) => setPage(value)}
-					sx={{
-						margin: 'auto'
-					}}
-					size='small'
-					showFirstButton
-					showLastButton
-				/>
-			</div>
-			<div className='justify-center mb-7 hidden md:flex'>
-				<Pagination
-					count={totalPage}
-					variant='outlined'
-					shape='rounded'
-					onChange={(e, value) => setPage(value)}
-					sx={{
-						margin: 'auto'
-					}}
-					size='large'
-					showFirstButton
-					showLastButton
-				/>
-			</div>
+
+			{/* for mobile */}
+			{data?.data?.length && (
+				<>
+					<div className='flex justify-center mb-7 md:hidden'>
+						<Pagination
+							count={totalPage}
+							variant='outlined'
+							shape='rounded'
+							onChange={(e, value) => setPage(value)}
+							sx={{
+								margin: 'auto'
+							}}
+							size='small'
+							showFirstButton
+							showLastButton
+						/>
+					</div>
+
+					{/* for pc */}
+					<div className='justify-center mb-7 hidden md:flex'>
+						<Pagination
+							count={totalPage}
+							variant='outlined'
+							shape='rounded'
+							onChange={(e, value) => setPage(value)}
+							sx={{
+								margin: 'auto'
+							}}
+							size='large'
+							showFirstButton
+							showLastButton
+						/>
+					</div>
+				</>
+			)}
 		</div>
 	);
 };

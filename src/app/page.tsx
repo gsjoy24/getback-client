@@ -1,5 +1,6 @@
 import AboutSection from '@/components/Home/AboutSection';
 import HeroSection from '@/components/Home/HeroSection';
+import RecentFoundItems from '@/components/Home/RecentFoundItems';
 import RecentLostItems from '@/components/Home/RecentLostItems';
 import Reunion from '@/components/Home/Reunion';
 import StayUpdated from '@/components/Home/StayUpdated';
@@ -17,6 +18,7 @@ const HomePage = () => {
 			<HeroSection />
 			<AboutSection />
 			<RecentLostItems />
+			<RecentFoundItems />
 			<Reunion />
 			<StayUpdated />
 		</>
