@@ -1,7 +1,8 @@
 import config from '@/lib/config';
 import { TLostItem } from '@/types/lostItem';
-import { Box, Container, Skeleton, Stack, Typography } from '@mui/material';
-import LostItemCard from '../Shared/LostItemCard/LostItemCard';
+import { Box, Button, Container, Skeleton, Stack } from '@mui/material';
+import Link from 'next/link';
+import FoundItemCard from '../Shared/FoundItemCard/FoundItemCard';
 import SectionTitle from '../Shared/SectionTitle';
 
 const RecentFoundItems = async () => {
@@ -12,7 +13,11 @@ const RecentFoundItems = async () => {
 	});
 	const { data: items } = await fetchItems.json();
 	return (
-		<Container>
+		<Container
+			sx={{
+				mb: 5
+			}}
+		>
 			<SectionTitle
 				title='Recent Found Items'
 				desc='Our collection of recently found items waiting to be reunited with their owners. Check them out!'
@@ -31,7 +36,7 @@ const RecentFoundItems = async () => {
 				}}
 			>
 				{items
-					? items.map((item: TLostItem) => <LostItemCard key={item.id} item={item} />)
+					? items.map((item: TLostItem) => <FoundItemCard key={item.id} item={item} />)
 					: Array.from({ length: 3 }).map((_, index) => (
 							<Box key={index}>
 								<Skeleton animation='wave' variant='rectangular' width={330} height={118} />
@@ -42,6 +47,11 @@ const RecentFoundItems = async () => {
 							</Box>
 					  ))}
 			</Stack>
+			<div className='grid w-full place-items-center'>
+				<Button variant='outlined' component={Link} href='/found-items' size='large'>
+					View More
+				</Button>
+			</div>
 		</Container>
 	);
 };

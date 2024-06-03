@@ -1,6 +1,7 @@
 import config from '@/lib/config';
 import { TLostItem } from '@/types/lostItem';
-import { Box, Container, Skeleton, Stack, Typography } from '@mui/material';
+import { Box, Button, Container, Skeleton, Stack, Typography } from '@mui/material';
+import Link from 'next/link';
 import LostItemCard from '../Shared/LostItemCard/LostItemCard';
 import SectionTitle from '../Shared/SectionTitle';
 
@@ -12,7 +13,11 @@ const RecentLostItems = async () => {
 	});
 	const { data: items } = await fetchItems.json();
 	return (
-		<Container>
+		<Container
+			sx={{
+				mb: 5
+			}}
+		>
 			<SectionTitle
 				title='Recent Lost Items'
 				desc='Dive into a collection of recently lost items awaiting reconnection with their owners.'
@@ -42,6 +47,11 @@ const RecentLostItems = async () => {
 							</Box>
 					  ))}
 			</Stack>
+			<div className='grid w-full place-items-center'>
+				<Button variant='outlined' component={Link} href='/lost-items' size='large'>
+					View More
+				</Button>
+			</div>
 		</Container>
 	);
 };
