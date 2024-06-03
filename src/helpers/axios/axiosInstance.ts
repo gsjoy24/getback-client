@@ -30,6 +30,7 @@ instance.interceptors.response.use(
 	function (response) {
 		const responseObj: TResponseSuccess = {
 			success: response?.data?.success,
+			message: response?.data?.message,
 			data: response?.data?.data,
 			meta: response?.data?.meta
 		};

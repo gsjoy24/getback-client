@@ -6,6 +6,7 @@ export type TMeta = {
 
 export type TResponseSuccess = {
 	success?: boolean;
+	message?: string;
 	data: any;
 	meta?: TMeta;
 };

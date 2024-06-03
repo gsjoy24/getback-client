@@ -13,22 +13,26 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Stack } from '@mui/material';
 import { Dayjs } from 'dayjs';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { toast } from 'sonner';
 
 const ReportLostItem = () => {
-	const { data: categories } = useGetCategoriesQuery(null);
-	console.log(categories);
-	const categoryOptions = categories?.map((category: TCategory) => ({
+	const { data: categoriesData } = useGetCategoriesQuery(null);
+
+	const categoryOptions = categoriesData?.data?.map((category: TCategory) => ({
 		value: category.id,
 		label: category.name
 	}));
+
 	const [date, setDate] = useState<Dayjs | null>(null);
 	const [dateError, setDateError] = useState<string | null>(null);
 	const [imageError, setImageError] = useState<boolean>(false);
 	const [imageLinks, setImageLinks] = useState<string[] | null>(null);
 	const [resetForm, setResetForm] = useState<boolean>(false);
+	const [createLostItem, { isLoading }] = useCreateLostItemMutation();
 
-	const [createLostItem, { isLoading, error }] = useCreateLostItemMutation();
+	const router = useRouter();
 
 	const handleSubmit = async (data: any) => {
 		setDateError(null);
@@ -49,7 +53,12 @@ const ReportLostItem = () => {
 
 		try {
 			const res = await createLostItem(data);
-			console.log(res);
+			if (res?.data?.success) {
+				setResetForm(true);
+				setImageLinks(null);
+				toast.success(res?.data?.message);
+				router.push('/lost-items');
+			}
 		} catch (error) {
 			console.log(error);
 		}

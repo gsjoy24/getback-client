@@ -29,10 +29,8 @@ const LFDatePicker = ({ setDate, label, dateError, setDateError }: TLFDatePicker
 						</span>
 					),
 					error: !!dateError,
-					onChange: () => {
-						if (dateError) {
-							setDateError(null);
-						}
+					onSelect: () => {
+						setDateError(null);
 					}
 				}
 			}}
