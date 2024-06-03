@@ -10,20 +10,34 @@ import PageTitle from '@/components/Shared/PageTitle';
 import { useGetCategoriesQuery } from '@/redux/api/categoryApi';
 import { useGetLostItemsQuery } from '@/redux/api/lostItemApi';
 import { TQueryParams } from '@/types';
-import { Box, IconButton, Stack } from '@mui/material';
+import { Box, IconButton, Pagination, Stack } from '@mui/material';
 import { useState } from 'react';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
 
 const LostItems = () => {
 	const [filterParam, setFilterParam] = useState({} as TQueryParams);
 	const [searchTerm, setSearchTerm] = useState({} as TQueryParams);
+	const [page, setPage] = useState<number>(1);
 	const { data: categoryData } = useGetCategoriesQuery(null);
 	const categoryOptions = categoryData?.data?.map((category: any) => ({
 		label: category.name,
 		value: category.id
 	}));
 
-	const { data: items, isFetching } = useGetLostItemsQuery([filterParam, searchTerm]);
+	const { data, isFetching } = useGetLostItemsQuery([
+		filterParam,
+		searchTerm,
+		{
+			name: 'limit',
+			value: 6
+		},
+		{
+			name: 'page',
+			value: page
+		}
+	]);
+
+	const totalPage = data?.meta?.total / data?.meta?.limit;
 
 	const handleSubmit = (data: any) => {
 		setSearchTerm({ name: 'searchTerm', value: data.searchTerm });
@@ -85,12 +99,40 @@ const LostItems = () => {
 				}}
 			>
 				{isFetching && <LFBackdrop />}
-				{items?.data?.length ? (
-					items?.data?.map((item: any) => <LostItemCard key={item.id} item={item} />)
+				{data?.data?.length ? (
+					data?.data?.map((item: any) => <LostItemCard key={item.id} item={item} />)
 				) : (
 					<EmptyCard />
 				)}
 			</Stack>
+			<div className='flex justify-center mb-7 md:hidden'>
+				<Pagination
+					count={totalPage}
+					variant='outlined'
+					shape='rounded'
+					onChange={(e, value) => setPage(value)}
+					sx={{
+						margin: 'auto'
+					}}
+					size='small'
+					showFirstButton
+					showLastButton
+				/>
+			</div>
+			<div className='justify-center mb-7 hidden md:flex'>
+				<Pagination
+					count={totalPage}
+					variant='outlined'
+					shape='rounded'
+					onChange={(e, value) => setPage(value)}
+					sx={{
+						margin: 'auto'
+					}}
+					size='large'
+					showFirstButton
+					showLastButton
+				/>
+			</div>
 		</div>
 	);
 };
