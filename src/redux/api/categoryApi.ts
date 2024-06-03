@@ -8,7 +8,7 @@ const categoryApi = baseApi.injectEndpoints({
 				method: 'POST',
 				data
 			}),
-			invalidatesTags: ['Category']
+			invalidatesTags: ['Categories']
 		}),
 
 		getCategories: build.query({
@@ -16,7 +16,7 @@ const categoryApi = baseApi.injectEndpoints({
 				url: '/categories',
 				method: 'GET'
 			}),
-			providesTags: ['Category'] as const
+			providesTags: ['Categories']
 		}),
 
 		deleteCategory: build.mutation({
@@ -24,7 +24,7 @@ const categoryApi = baseApi.injectEndpoints({
 				url: `/categories/${id}`,
 				method: 'DELETE'
 			}),
-			invalidatesTags: ['Category']
+			invalidatesTags: ['Categories']
 		})
 	})
 });

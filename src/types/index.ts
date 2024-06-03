@@ -22,3 +22,8 @@ export type TGenericErrorMessage = {
 	path: string | number;
 	message: string;
 };
+
+export type TQueryParams = {
+	name: string;
+	value: string;
+};

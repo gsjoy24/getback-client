@@ -1,3 +1,4 @@
+import { TQueryParams } from '@/types';
 import { baseApi } from './baseApi';
 
 const lostItemApi = baseApi.injectEndpoints({
@@ -7,7 +8,8 @@ const lostItemApi = baseApi.injectEndpoints({
 				url: '/lost-items',
 				method: 'POST',
 				data
-			})
+			}),
+			invalidatesTags: ['LostItems']
 		}),
 
 		getMyLostItems: build.query({
@@ -18,10 +20,19 @@ const lostItemApi = baseApi.injectEndpoints({
 		}),
 
 		getLostItems: build.query({
-			query: () => ({
-				url: '/lost-items',
-				method: 'GET'
-			})
+			query: (args) => {
+				const params = new URLSearchParams();
+				args?.forEach((param: TQueryParams) => {
+					params.append(param.name, param.value);
+				});
+
+				return {
+					url: '/lost-items',
+					method: 'GET',
+					params
+				};
+			},
+			providesTags: ['LostItems']
 		}),
 
 		getLostItem: build.query({
@@ -36,14 +47,16 @@ const lostItemApi = baseApi.injectEndpoints({
 				url: `/lost-items/${id}`,
 				method: 'PATCH',
 				data
-			})
+			}),
+			invalidatesTags: ({ id }) => [{ type: 'LostItems' }, { type: 'LostItems', id }]
 		}),
 
 		deleteLostItem: build.mutation({
 			query: (id) => ({
 				url: `/lost-items/${id}`,
 				method: 'DELETE'
-			})
+			}),
+			invalidatesTags: ['LostItems']
 		})
 	})
 });

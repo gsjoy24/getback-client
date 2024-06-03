@@ -1,9 +1,7 @@
-const page = () => {
-	return (
-		<div className='h-[100vh]'>
-			<div className='pattern '></div>
-		</div>
-	);
+import LoadingCompo from '../loading';
+
+const DemoPage = () => {
+	return <LoadingCompo />;
 };
 
-export default page;
+export default DemoPage;

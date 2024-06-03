@@ -9,7 +9,7 @@ const LoadingCompo = () => {
 			gap={4}
 			sx={{
 				height: '100vh',
-				backgroundColor: '#111'
+				backgroundColor: '#fff'
 			}}
 		>
 			<Loading />
