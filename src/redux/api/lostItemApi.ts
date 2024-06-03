@@ -10,6 +10,13 @@ const lostItemApi = baseApi.injectEndpoints({
 			})
 		}),
 
+		getMyLostItems: build.query({
+			query: () => ({
+				url: '/my-lost-items',
+				method: 'GET'
+			})
+		}),
+
 		getLostItems: build.query({
 			query: () => ({
 				url: '/lost-items',
@@ -43,6 +50,7 @@ const lostItemApi = baseApi.injectEndpoints({
 
 export const {
 	useCreateLostItemMutation,
+	useGetMyLostItemsQuery,
 	useGetLostItemsQuery,
 	useGetLostItemQuery,
 	useUpdateLostItemMutation,

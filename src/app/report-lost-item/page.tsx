@@ -17,7 +17,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-const ReportLostItem = () => {
+const ReportFoundItem = () => {
 	const { data: categoriesData } = useGetCategoriesQuery(null);
 
 	const categoryOptions = categoriesData?.data?.map((category: TCategory) => ({
@@ -106,7 +106,7 @@ const ReportLostItem = () => {
 						}}
 					>
 						<LFInput label='Location' name='location' />
-						<LFDatePicker label='Date Lost' setDate={setDate} dateError={dateError} setDateError={setDateError} />
+						<LFDatePicker label='Date of found' setDate={setDate} dateError={dateError} setDateError={setDateError} />
 					</Stack>
 					<Stack
 						gap={2}
@@ -120,7 +120,7 @@ const ReportLostItem = () => {
 						}}
 					>
 						<LFInput label='Description' name='description' multiline rows={5} />
-						<MultiImageUploader setImageLinks={setImageLinks} imageError={imageError} />
+						<MultiImageUploader setImageLinks={setImageLinks} imageError={imageError} setImageError={setImageError} />
 					</Stack>
 
 					{/* uploaded images will be here */}
@@ -166,4 +166,4 @@ const ReportLostItem = () => {
 	);
 };
 
-export default ReportLostItem;
+export default ReportFoundItem;

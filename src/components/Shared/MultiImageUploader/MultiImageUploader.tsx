@@ -7,8 +7,9 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 type TProps = {
 	imageError: boolean;
 	setImageLinks: Dispatch<SetStateAction<string[] | null>>;
+	setImageError: Dispatch<SetStateAction<boolean>>;
 };
-const MultiImageUploader = ({ imageError, setImageLinks }: TProps) => {
+const MultiImageUploader = ({ imageError, setImageLinks, setImageError }: TProps) => {
 	const [imgInfos, setImgInfos] = useState<any[]>([]);
 
 	useEffect(() => {
@@ -22,6 +23,7 @@ const MultiImageUploader = ({ imageError, setImageLinks }: TProps) => {
 			options={{ sources: ['local', 'url'], multiple: true, maxFiles: 5 }}
 			signatureEndpoint='/api/sign-cloudinary-params'
 			onSuccess={(result) => {
+				setImageError(false);
 				setImgInfos((prev) => [...prev, result?.info]);
 			}}
 		>
