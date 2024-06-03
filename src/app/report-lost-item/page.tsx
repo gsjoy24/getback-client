@@ -6,11 +6,13 @@ import LFInput from '@/components/Form/lFInput';
 import MultiImageUploader from '@/components/Shared/MultiImageUploader/MultiImageUploader';
 import PageTitle from '@/components/Shared/PageTitle';
 import { useGetCategoriesQuery } from '@/redux/api/categoryApi';
+import lostItemSchema from '@/schemas/lostItemSchema';
 import { TCategory } from '@/types/category';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Stack } from '@mui/material';
 import { Dayjs } from 'dayjs';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const ReportLostItem = () => {
 	const { data: categories } = useGetCategoriesQuery(null);
@@ -22,24 +24,23 @@ const ReportLostItem = () => {
 	const [dateError, setDateError] = useState<string | null>(null);
 	const [imageError, setImageError] = useState<boolean>(false);
 	const [imageLinks, setImageLinks] = useState<string[] | null>(null);
-	const [imgInfos, setImgInfos] = useState<any[]>([]);
-
-	useEffect(() => {
-		if (imgInfos.length > 0) {
-			const links = imgInfos.map((img) => img.secure_url);
-			setImageLinks(links);
-		}
-	}, [imgInfos]);
 
 	const handleSubmit = (data: any) => {
 		setDateError(null);
+		setImageError(false);
+
 		if (!date) {
 			setDateError('Please select a date');
 			return;
 		}
 
+		if (!imageLinks?.length) {
+			setImageError(true);
+			return;
+		}
+
 		data.lostDate = date.toISOString();
-		console.log(data);
+		data.pictures = imageLinks;
 	};
 
 	return (
@@ -52,10 +53,11 @@ const ReportLostItem = () => {
 				sx={{
 					maxWidth: 800,
 					mx: 'auto',
-					p: 2
+					p: 2,
+					my: 2
 				}}
 			>
-				<LFForm onSubmit={handleSubmit}>
+				<LFForm onSubmit={handleSubmit} resolver={zodResolver(lostItemSchema)}>
 					<Stack
 						gap={2}
 						sx={{
@@ -68,7 +70,7 @@ const ReportLostItem = () => {
 						}}
 					>
 						<LFInput label='Item Name' name='itemName' />
-						<LFSelect label='Item Name' name='categoryId' options={categoryOptions} />
+						<LFSelect label='Category' name='categoryId' options={categoryOptions} />
 					</Stack>
 
 					<Stack
@@ -97,7 +99,7 @@ const ReportLostItem = () => {
 						}}
 					>
 						<LFInput label='Description' name='description' multiline rows={5} />
-						<MultiImageUploader setImgInfos={setImgInfos} imageError={imageError} />
+						<MultiImageUploader setImageLinks={setImageLinks} imageError={imageError} />
 					</Stack>
 
 					{/* uploaded images will be here */}

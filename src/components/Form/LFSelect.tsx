@@ -18,7 +18,7 @@ const LFSelect = ({ label, options, name, sx }: LFSelectProps) => {
 			name={name}
 			render={({ field, fieldState: { error } }) => (
 				<FormControl sx={{ width: '100%' }} disabled={!options}>
-					<InputLabel id='demo-select-small-label'>Category</InputLabel>
+					<InputLabel id='demo-select-small-label'>{label}</InputLabel>
 					<Select
 						labelId='demo-simple-select-label'
 						id='demo-simple-select'
@@ -40,7 +40,7 @@ const LFSelect = ({ label, options, name, sx }: LFSelectProps) => {
 					{error?.message && (
 						<FormHelperText>
 							{
-								<span className='flex items-center gap-1 relative right-3'>
+								<span className='flex items-center gap-1 relative right-3 text-red-600'>
 									<CiWarning size={16} /> {error?.message}
 								</span>
 							}

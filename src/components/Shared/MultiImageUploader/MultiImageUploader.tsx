@@ -2,13 +2,21 @@
 import ImageIcon from '@mui/icons-material/Image';
 import { Typography } from '@mui/material';
 import { CldUploadWidget } from 'next-cloudinary';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 type TProps = {
 	imageError: boolean;
-	setImgInfos: Dispatch<SetStateAction<any[]>>;
+	setImageLinks: Dispatch<SetStateAction<string[] | null>>;
 };
-const MultiImageUploader = ({ imageError, setImgInfos }: TProps) => {
+const MultiImageUploader = ({ imageError, setImageLinks }: TProps) => {
+	const [imgInfos, setImgInfos] = useState<any[]>([]);
+
+	useEffect(() => {
+		if (imgInfos.length > 0) {
+			const links = imgInfos.map((img) => img.secure_url);
+			setImageLinks(links);
+		}
+	}, [imgInfos, setImageLinks]);
 	return (
 		<CldUploadWidget
 			options={{ sources: ['local', 'url'], multiple: true, maxFiles: 5 }}
