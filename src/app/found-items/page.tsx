@@ -40,7 +40,6 @@ const FoundItems = () => {
 
 	const totalPage = data?.meta?.total / data?.meta?.limit;
 	const handleSubmit = (data: FieldValues) => {
-		console.log({ filterParam, searchTerm });
 		setPage(1);
 		setSearchTerm({ name: 'searchTerm', value: data.searchTerm });
 	};
@@ -113,7 +112,7 @@ const FoundItems = () => {
 			</Stack>
 
 			{/* for mobile */}
-			{data?.data?.length > 6 && (
+			{data?.data?.length < data?.meta?.total && (
 				<>
 					<div className='flex justify-center mb-7 md:hidden'>
 						<Pagination

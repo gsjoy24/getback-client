@@ -42,7 +42,6 @@ const LostItems = () => {
 		setPage(1);
 		setSearchTerm({ name: 'searchTerm', value: data.searchTerm });
 	};
-
 	return (
 		<div>
 			<PageTitle
@@ -111,7 +110,7 @@ const LostItems = () => {
 			</Stack>
 
 			{/* for mobile */}
-			{data?.data?.length > 6 && (
+			{data?.data?.length < data?.meta?.total && (
 				<>
 					<div className='flex justify-center mb-7 md:hidden'>
 						<Pagination
