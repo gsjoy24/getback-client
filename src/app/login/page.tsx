@@ -75,7 +75,7 @@ const LoginPage = () => {
 			>
 				<Box
 					sx={{
-						mx: 1,
+						mx: 2,
 						maxWidth: '400px',
 						textAlign: 'center',
 						py: 3

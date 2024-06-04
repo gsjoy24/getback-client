@@ -2,6 +2,7 @@
 import signImage from '@/assets/signup.jpg';
 import LFForm from '@/components/Form/LFForm';
 import LFInput from '@/components/Form/lFInput';
+import PageTitle from '@/components/Shared/PageTitle';
 import SignupImageUploaderUI from '@/components/SignupImageUploaderUI/SignupImageUploaderUI';
 import signupSchema from '@/schemas/signupSchema';
 import signupUser from '@/services/actions/signup';
@@ -72,7 +73,16 @@ const SignPage = () => {
 	};
 
 	return (
-		<Grid container sx={{ minHeight: '97vh', position: 'relative' }}>
+		<Grid
+			container
+			sx={{
+				maxHeight: {
+					sm: '800px'
+				},
+				height: '100%',
+				position: 'relative'
+			}}
+		>
 			<div className='pattern absolute top-0 right-0 -z-10'></div>
 			<Grid
 				item
@@ -99,16 +109,11 @@ const SignPage = () => {
 					alignItems: 'center'
 				}}
 			>
-				<Box sx={{ m: 1, maxWidth: '700px', width: '100%', textAlign: 'center' }}>
-					<Typography
-						variant='h1'
-						sx={{
-							fontSize: '3rem'
-						}}
-					>
-						Join the Community
-					</Typography>
-					<Typography sx={{ mb: 5 }}>Find what you&#39;ve lost, help others find what they&#39;ve lost.</Typography>
+				<Box sx={{ mx: 2, py: 2, maxWidth: '700px', width: '100%', textAlign: 'center' }}>
+					<PageTitle
+						title='Join the Community'
+						desc='Find what you&#39;ve lost, help others find what they&#39;ve lost.'
+					/>
 
 					{/* form */}
 					<LFForm onSubmit={handleSubmit} resolver={zodResolver(signupSchema)} resetForm={resetForm}>

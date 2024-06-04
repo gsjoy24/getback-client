@@ -16,8 +16,8 @@ const PageTitle = ({ title, desc }: TPageTitleProps) => {
 			<Typography
 				variant='h1'
 				fontSize={{
-					xs: '1.6rem',
-					sm: '3rem'
+					xs: '3rem',
+					sm: '3.5rem'
 				}}
 			>
 				{title}
