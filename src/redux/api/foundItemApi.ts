@@ -1,3 +1,4 @@
+import { TQueryParams } from '@/types';
 import { baseApi } from './baseApi';
 
 const foundItemApi = baseApi.injectEndpoints({
@@ -7,21 +8,40 @@ const foundItemApi = baseApi.injectEndpoints({
 				url: '/found-items',
 				method: 'POST',
 				data
-			})
+			}),
+			invalidatesTags: ['FoundItems']
 		}),
 
 		getMyFoundItems: build.query({
-			query: () => ({
-				url: '/my-found-items',
-				method: 'GET'
-			})
+			query: (args) => {
+				const params = new URLSearchParams();
+				args?.forEach((param: TQueryParams) => {
+					params.append(param.name, param.value);
+				});
+
+				return {
+					url: '/my-found-items',
+					method: 'GET',
+					params
+				};
+			},
+			providesTags: ['FoundItems']
 		}),
 
 		getFoundItems: build.query({
-			query: () => ({
-				url: '/found-items',
-				method: 'GET'
-			})
+			query: (args) => {
+				const params = new URLSearchParams();
+				args?.forEach((param: TQueryParams) => {
+					params.append(param.name, param.value);
+				});
+
+				return {
+					url: '/found-items',
+					method: 'GET',
+					params
+				};
+			},
+			providesTags: ['FoundItems']
 		}),
 
 		getFoundItem: build.query({

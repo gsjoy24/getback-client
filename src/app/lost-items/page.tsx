@@ -111,7 +111,7 @@ const LostItems = () => {
 			</Stack>
 
 			{/* for mobile */}
-			{data?.data?.length && (
+			{data?.data?.length > 6 && (
 				<>
 					<div className='flex justify-center mb-7 md:hidden'>
 						<Pagination

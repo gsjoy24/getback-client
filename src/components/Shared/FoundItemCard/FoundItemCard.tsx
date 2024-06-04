@@ -19,7 +19,7 @@ const FoundItemCard = ({ item }: any) => {
 		<Card
 			sx={{
 				maxWidth: 330,
-				height: 410,
+				height: 400,
 				position: 'relative',
 				'& image': {
 					overflow: 'hidden'
