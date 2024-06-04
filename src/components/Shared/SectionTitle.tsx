@@ -1,7 +1,7 @@
 import { Stack, Typography } from '@mui/material';
 type TSectionTitleProps = {
 	title: string;
-	desc: string;
+	desc?: string;
 };
 
 const SectionTitle = ({ title, desc }: TSectionTitleProps) => {
@@ -16,7 +16,7 @@ const SectionTitle = ({ title, desc }: TSectionTitleProps) => {
 			}}
 		>
 			<Typography variant='h4'>{title}</Typography>
-			<Typography variant='body2'>{desc}</Typography>
+			{desc && <Typography variant='body2'>{desc}</Typography>}
 		</Stack>
 	);
 };

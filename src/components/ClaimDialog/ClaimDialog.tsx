@@ -1,6 +1,6 @@
 'use client';
 import LoadingCompo from '@/app/loading';
-import { useCreateClaimMutation } from '@/redux/api/claimApi';
+import { useCreateClaimMutation } from '@/redux/api/features/claimApi';
 import claimItemSchema from '@/schemas/claimItemSchema';
 import { isLoggedIn } from '@/services/auth.services';
 import TClaim from '@/types/claim';

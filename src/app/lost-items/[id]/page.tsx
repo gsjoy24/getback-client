@@ -1,7 +1,6 @@
 'use client';
 import LoadingCompo from '@/app/loading';
-import ClaimDialog from '@/components/ClaimDialog/ClaimDialog';
-import { useGetFoundItemQuery } from '@/redux/api/features/foundItemApi';
+import { useGetLostItemQuery } from '@/redux/api/features/lostItemApi';
 import DateToString from '@/utils/DateToString';
 import { Box, Chip, Stack, Typography } from '@mui/material';
 import { useParams } from 'next/navigation';
@@ -9,15 +8,15 @@ import { HiOutlineFolder } from 'react-icons/hi2';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 
-const FoundItemDetails = () => {
+const LostItemDetails = () => {
 	const { id } = useParams<{ id: string }>();
-	const { data, isFetching } = useGetFoundItemQuery(id);
+	const { data, isFetching } = useGetLostItemQuery(id);
 
 	if (isFetching) {
 		return <LoadingCompo />;
 	}
 
-	const { itemName, pictures, description, location, foundDate, user, category } = data?.data;
+	const { itemName, pictures, description, location, lostDate, user, category } = data?.data;
 
 	const images =
 		pictures &&
@@ -60,18 +59,18 @@ const FoundItemDetails = () => {
 				/>
 				<Typography variant='h4'>{itemName}</Typography>
 				<Typography variant='body2' mt={2}>
-					<strong>Found By:</strong> {user?.name} <br />
+					<strong>Lost By:</strong> {user?.name} <br />
+					<strong>Email:</strong> {user?.email} <br />
+					<strong>Phone:</strong> {user?.phone} <br />
 					<strong>Location:</strong> {location} <br />
-					<strong>Found Date:</strong> {DateToString(foundDate)}
+					<strong>Found Date:</strong> {DateToString(lostDate)}
 				</Typography>
 				<Typography variant='body2' mt={2}>
 					{description}
 				</Typography>
-
-				<ClaimDialog item={data?.data} />
 			</Box>
 		</Stack>
 	);
 };
 
-export default FoundItemDetails;
+export default LostItemDetails;

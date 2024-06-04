@@ -7,8 +7,8 @@ import PrivateRoute from '@/components/PrivateRoute/PrivateRoute';
 import MultiImageUploader from '@/components/Shared/MultiImageUploader/MultiImageUploader';
 import PageTitle from '@/components/Shared/PageTitle';
 
-import { useGetCategoriesQuery } from '@/redux/api/categoryApi';
-import { useCreateFoundItemMutation } from '@/redux/api/foundItemApi';
+import { useGetCategoriesQuery } from '@/redux/api/features/categoryApi';
+import { useCreateFoundItemMutation } from '@/redux/api/features/foundItemApi';
 import foundItemSchema from '@/schemas/foundItemSchema';
 import { TCategory } from '@/types/category';
 import { zodResolver } from '@hookform/resolvers/zod';
