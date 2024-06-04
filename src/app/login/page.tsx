@@ -48,37 +48,39 @@ const LoginPage = () => {
 		}
 	};
 	return (
-		<Grid container sx={{ minHeight: '97vh', position: 'relative' }}>
+		<Grid
+			container
+			sx={{
+				maxHeight: {
+					sm: '800px'
+				},
+				height: '100%',
+				position: 'relative'
+			}}
+		>
 			<div className='pattern absolute top-0 right-0 -z-10'></div>
-			<Grid
-				item
-				xs={12}
-				md={4}
-				sx={{
-					height: {
-						xs: '20px',
-						md: 'auto'
-					}
-				}}
-			>
-				<Image src={loginImage} width={300} height={700} alt='Login' className='h-full w-full hidden md:block' />
-				<Image src={loginXsImage} width={360} height={180} alt='Login' className='h-[220px] w-full md:hidden' />
+			<Grid item xs={12} sm={4}>
+				<Image src={loginImage} width={300} height={600} alt='Login' className='h-full w-full hidden sm:block' />
+				<Image src={loginXsImage} width={360} height={180} alt='Login' className='h-[220px] w-full sm:hidden' />
 			</Grid>
 			<Grid
 				item
 				xs={12}
-				md={8}
+				sm={8}
 				sx={{
 					display: 'flex',
 					justifyContent: 'center',
-					alignItems: 'center',
-					height: {
-						xs: '240px',
-						md: 'auto'
-					}
+					alignItems: 'center'
 				}}
 			>
-				<Box sx={{ m: 1, maxWidth: '400px', textAlign: 'center' }}>
+				<Box
+					sx={{
+						mx: 1,
+						maxWidth: '400px',
+						textAlign: 'center',
+						py: 3
+					}}
+				>
 					<Typography
 						variant='h1'
 						sx={{

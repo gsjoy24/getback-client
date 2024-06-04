@@ -21,7 +21,7 @@ const LFInput = ({ label, type = 'text', name, sx, multiline = false, rows }: LF
 			render={({ field, fieldState: { error } }) => (
 				<TextField
 					{...field}
-					sx={{ ...sx, bgcolor: 'white', width: '100%', borderRadius: '5px', mb: 2 }}
+					sx={{ ...sx, width: '100%', borderRadius: '5px', mb: 2 }}
 					label={label}
 					placeholder={label}
 					minRows={rows || 6}
