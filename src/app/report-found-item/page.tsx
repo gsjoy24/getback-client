@@ -8,6 +8,7 @@ import PageTitle from '@/components/Shared/PageTitle';
 import { useGetCategoriesQuery } from '@/redux/api/categoryApi';
 import { useCreateFoundItemMutation } from '@/redux/api/foundItemApi';
 import foundItemSchema from '@/schemas/foundItemSchema';
+import { isLoggedIn } from '@/services/auth.services';
 import { TCategory } from '@/types/category';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Stack } from '@mui/material';
@@ -17,7 +18,14 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 const ReportLostItem = () => {
+	const router = useRouter();
 	const { data: categoriesData } = useGetCategoriesQuery(null);
+
+	const isUserLoggedIn = isLoggedIn();
+	if (isUserLoggedIn === false) {
+		toast.error('You need to login to report a found item!');
+		router.push('/login');
+	}
 
 	const categoryOptions = categoriesData?.data?.map((category: TCategory) => ({
 		value: category.id,
@@ -30,8 +38,6 @@ const ReportLostItem = () => {
 	const [imageLinks, setImageLinks] = useState<string[] | null>(null);
 	const [resetForm, setResetForm] = useState<boolean>(false);
 	const [createFoundItem, { isLoading }] = useCreateFoundItemMutation();
-
-	const router = useRouter();
 
 	const handleSubmit = async (data: any) => {
 		setDateError(null);
@@ -124,12 +130,13 @@ const ReportLostItem = () => {
 
 					{/* uploaded images will be here */}
 					{imageLinks && (
-						<Stack
-							gap={2}
-							flexWrap='wrap'
-							justifyContent='center'
-							alignItems='center'
+						<Box
 							sx={{
+								display: 'flex',
+								justifyContent: 'center',
+								alignItems: 'center',
+								flexWrap: 'wrap',
+								gap: 2,
 								width: '100%',
 								mb: 3
 							}}
@@ -141,10 +148,10 @@ const ReportLostItem = () => {
 									width={100}
 									height={100}
 									alt='lost item'
-									style={{ maxWidth: '180px', width: '100%', height: 'auto' }}
+									style={{ maxWidth: '150px', width: '100%', height: 'auto' }}
 								/>
 							))}
-						</Stack>
+						</Box>
 					)}
 
 					<Button

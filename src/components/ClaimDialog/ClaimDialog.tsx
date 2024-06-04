@@ -1,15 +1,21 @@
 'use client';
+import claimItemSchema from '@/schemas/claimItemSchema';
+import { isLoggedIn } from '@/services/auth.services';
 import TClaim from '@/types/claim';
 import { TFoundItem } from '@/types/foundItem';
-import { Button, Container, Divider, IconButton, Slide, Stack } from '@mui/material';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Box, Button, Container, Divider, IconButton, Slide, Stack } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import { TransitionProps } from '@mui/material/transitions';
 import { Dayjs } from 'dayjs';
+import Image from 'next/image';
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { MdOutlineClose } from 'react-icons/md';
 import LFDatePicker from '../Form/LFDatePicker';
 import LFForm from '../Form/LFForm';
 import LFInput from '../Form/lFInput';
+import MultiImageUploader from '../Shared/MultiImageUploader/MultiImageUploader';
 import PageTitle from '../Shared/PageTitle';
 
 const Transition = React.forwardRef(function Transition(
@@ -22,6 +28,7 @@ const Transition = React.forwardRef(function Transition(
 });
 
 const ClaimDialog = ({ item }: { item: TFoundItem }) => {
+	const isUserLoggedIn = isLoggedIn();
 	const [open, setOpen] = useState(false);
 	const [date, setDate] = useState<Dayjs | null>(null);
 	const [dateError, setDateError] = useState<string | null>(null);
@@ -29,14 +36,35 @@ const ClaimDialog = ({ item }: { item: TFoundItem }) => {
 	const [imageLinks, setImageLinks] = useState<string[] | null>(null);
 	const [resetForm, setResetForm] = useState<boolean>(false);
 	const handleClaim = (data: Partial<TClaim>) => {
+		setDateError(null);
+		setImageError(false);
+
+		if (!date) {
+			setDateError('Please select a date');
+			return;
+		}
+
+		if (!imageLinks?.length) {
+			setImageError(true);
+			return;
+		}
+
+		data.lostDate = date.toISOString();
+		data.pictures = imageLinks;
 		console.log(data);
 	};
 
 	return (
 		<>
-			<Button variant='outlined' onClick={() => setOpen(true)} sx={{ mt: 2, width: '150px' }}>
-				Claim
-			</Button>
+			{isUserLoggedIn ? (
+				<Button onClick={() => setOpen(true)} sx={{ width: '180px', mt: 2 }}>
+					Claim
+				</Button>
+			) : (
+				<Button component={Link} href='/login' sx={{ width: '180px', mt: 2 }}>
+					Login to Claim
+				</Button>
+			)}
 			<Dialog fullScreen open={open} onClose={() => setOpen(false)} TransitionComponent={Transition} sx={{}}>
 				{/* button to close */}
 				<IconButton
@@ -50,14 +78,14 @@ const ClaimDialog = ({ item }: { item: TFoundItem }) => {
 					<MdOutlineClose size={25} />
 				</IconButton>
 
-				<Container>
+				<Container sx={{ py: 3 }}>
 					<PageTitle
 						title={`Claim ${item?.itemName}`}
 						desc='Enter the required details to verify and retrieve your lost belonging. Follow our simple steps to confirm your claim and get your item back.'
 					/>
 					<br />
 					{/* form to claim */}
-					<LFForm onSubmit={handleClaim}>
+					<LFForm onSubmit={handleClaim} resolver={zodResolver(claimItemSchema)} resetForm={resetForm}>
 						<Stack
 							justifyContent='center'
 							alignItems='center'
@@ -66,11 +94,55 @@ const ClaimDialog = ({ item }: { item: TFoundItem }) => {
 								xs: 'column',
 								sm: 'row'
 							}}
+							mb={3}
 						>
-							<LFInput name='driveUrl' label='Drive URL of all document if you have (Optional)' />
+							<LFInput name='driveUrl' label='Drive URL of all documents if you have (Optional)' />
 							<LFDatePicker label='Date' setDate={setDate} dateError={dateError} setDateError={setDateError} />
 						</Stack>
-						<LFInput name='description' label='Detail Info' multiline />
+						<Stack
+							gap={2}
+							sx={{
+								width: '100%',
+								flexDirection: {
+									xs: 'column',
+									sm: 'row'
+								},
+								mb: 3
+							}}
+						>
+							<LFInput label='Description' name='description' multiline rows={5} />
+							<MultiImageUploader setImageLinks={setImageLinks} imageError={imageError} setImageError={setImageError} />
+						</Stack>
+
+						{/* uploaded images will be here */}
+						{imageLinks && (
+							<Box
+								sx={{
+									display: 'flex',
+									justifyContent: 'center',
+									alignItems: 'center',
+									flexWrap: 'wrap',
+									gap: 2,
+									width: '100%',
+									mb: 3
+								}}
+							>
+								{imageLinks.map((link, index) => (
+									<Image
+										key={index}
+										src={link}
+										width={100}
+										height={100}
+										alt='lost item'
+										style={{ maxWidth: '150px', width: '100%', height: 'auto' }}
+									/>
+								))}
+							</Box>
+						)}
+
+						<Button type='submit' sx={{ width: '100%', mt: 2 }}>
+							Claim
+						</Button>
 					</LFForm>
 				</Container>
 			</Dialog>

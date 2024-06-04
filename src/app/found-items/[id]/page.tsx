@@ -66,9 +66,7 @@ const FoundItemDetails = () => {
 				</Typography>
 				<Typography variant='body2' mt={2}>
 					{description}
-        </Typography>
-        
-
+				</Typography>
 
 				<ClaimDialog item={data?.data} />
 			</Box>

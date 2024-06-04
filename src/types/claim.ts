@@ -9,6 +9,7 @@ type TClaim = {
 	description: string;
 	pictures: string[];
 	driveUrl?: string;
+	lostDate: string;
 	createdAt: string;
 	updatedAt: string;
 	user?: TUser;

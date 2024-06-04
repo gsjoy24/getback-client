@@ -8,6 +8,7 @@ import PageTitle from '@/components/Shared/PageTitle';
 import { useGetCategoriesQuery } from '@/redux/api/categoryApi';
 import { useCreateLostItemMutation } from '@/redux/api/lostItemApi';
 import lostItemSchema from '@/schemas/lostItemSchema';
+import { isLoggedIn } from '@/services/auth.services';
 import { TCategory } from '@/types/category';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Stack } from '@mui/material';
@@ -18,7 +19,14 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 
 const ReportFoundItem = () => {
+	const router = useRouter();
 	const { data: categoriesData } = useGetCategoriesQuery(null);
+
+	const isUserLoggedIn = isLoggedIn();
+	if (isUserLoggedIn === false) {
+		toast.error('You need to login to report a lost item!');
+		router.push('/login');
+	}
 
 	const categoryOptions = categoriesData?.data?.map((category: TCategory) => ({
 		value: category.id,
@@ -31,8 +39,6 @@ const ReportFoundItem = () => {
 	const [imageLinks, setImageLinks] = useState<string[] | null>(null);
 	const [resetForm, setResetForm] = useState<boolean>(false);
 	const [createLostItem, { isLoading }] = useCreateLostItemMutation();
-
-	const router = useRouter();
 
 	const handleSubmit = async (data: any) => {
 		setDateError(null);
@@ -125,15 +131,14 @@ const ReportFoundItem = () => {
 
 					{/* uploaded images will be here */}
 					{imageLinks && (
-						<Stack
-							gap={2}
-							flexWrap='wrap'
+						<Box
 							sx={{
+								display: 'flex',
+								justifyContent: 'center',
+								alignItems: 'center',
+								flexWrap: 'wrap',
+								gap: 2,
 								width: '100%',
-								flexDirection: {
-									xs: 'column',
-									sm: 'row'
-								},
 								mb: 3
 							}}
 						>
@@ -144,10 +149,10 @@ const ReportFoundItem = () => {
 									width={100}
 									height={100}
 									alt='lost item'
-									style={{ maxWidth: '180px', width: '100%', height: 'auto' }}
+									style={{ maxWidth: '150px', width: '100%', height: 'auto' }}
 								/>
 							))}
-						</Stack>
+						</Box>
 					)}
 
 					<Button
@@ -156,7 +161,7 @@ const ReportFoundItem = () => {
 						sx={{
 							mt: 2
 						}}
-						disabled={isLoading}
+						disabled={isLoading || !isUserLoggedIn}
 					>
 						{isLoading ? 'Submitting...' : 'Submit Report'}
 					</Button>
