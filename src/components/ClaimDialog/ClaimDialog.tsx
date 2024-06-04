@@ -1,4 +1,6 @@
 'use client';
+import LoadingCompo from '@/app/loading';
+import { useCreateClaimMutation } from '@/redux/api/claimApi';
 import claimItemSchema from '@/schemas/claimItemSchema';
 import { isLoggedIn } from '@/services/auth.services';
 import TClaim from '@/types/claim';
@@ -12,6 +14,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { MdOutlineClose } from 'react-icons/md';
+import { toast } from 'sonner';
 import LFDatePicker from '../Form/LFDatePicker';
 import LFForm from '../Form/LFForm';
 import LFInput from '../Form/lFInput';
@@ -35,7 +38,10 @@ const ClaimDialog = ({ item }: { item: TFoundItem }) => {
 	const [imageError, setImageError] = useState<boolean>(false);
 	const [imageLinks, setImageLinks] = useState<string[] | null>(null);
 	const [resetForm, setResetForm] = useState<boolean>(false);
-	const handleClaim = (data: Partial<TClaim>) => {
+
+	const [createClaim, { isLoading }] = useCreateClaimMutation();
+
+	const handleClaim = async (data: Partial<TClaim>) => {
 		setDateError(null);
 		setImageError(false);
 
@@ -51,7 +57,25 @@ const ClaimDialog = ({ item }: { item: TFoundItem }) => {
 
 		data.lostDate = date.toISOString();
 		data.pictures = imageLinks;
+		data.foundItemId = item?.id;
+
 		console.log(data);
+
+		try {
+			const res = await createClaim(data);
+			console.log(res?.data);
+			if (res?.data?.success) {
+				toast.success(res?.data?.message);
+			} else {
+				toast.error(res?.data?.message);
+			}
+		} catch (error) {
+			console.error(error);
+		} finally {
+			setOpen(false);
+			setResetForm(true);
+			setImageLinks(null);
+		}
 	};
 
 	return (
@@ -78,73 +102,81 @@ const ClaimDialog = ({ item }: { item: TFoundItem }) => {
 					<MdOutlineClose size={25} />
 				</IconButton>
 
-				<Container sx={{ py: 3 }}>
-					<PageTitle
-						title={`Claim ${item?.itemName}`}
-						desc='Enter the required details to verify and retrieve your lost belonging. Follow our simple steps to confirm your claim and get your item back.'
-					/>
-					<br />
-					{/* form to claim */}
-					<LFForm onSubmit={handleClaim} resolver={zodResolver(claimItemSchema)} resetForm={resetForm}>
-						<Stack
-							justifyContent='center'
-							alignItems='center'
-							gap={2}
-							direction={{
-								xs: 'column',
-								sm: 'row'
-							}}
-							mb={3}
-						>
-							<LFInput name='driveUrl' label='Drive URL of all documents if you have (Optional)' />
-							<LFDatePicker label='Date' setDate={setDate} dateError={dateError} setDateError={setDateError} />
-						</Stack>
-						<Stack
-							gap={2}
-							sx={{
-								width: '100%',
-								flexDirection: {
+				{item && item?.id ? (
+					<Container sx={{ py: 3 }}>
+						<PageTitle
+							title={`Claim ${item?.itemName}`}
+							desc='Enter the required details to verify and retrieve your lost belonging. Follow our simple steps to confirm your claim and get your item back.'
+						/>
+						<br />
+						{/* form to claim */}
+						<LFForm onSubmit={handleClaim} resolver={zodResolver(claimItemSchema)} resetForm={resetForm}>
+							<Stack
+								justifyContent='center'
+								alignItems='center'
+								gap={2}
+								direction={{
 									xs: 'column',
 									sm: 'row'
-								},
-								mb: 3
-							}}
-						>
-							<LFInput label='Description' name='description' multiline rows={5} />
-							<MultiImageUploader setImageLinks={setImageLinks} imageError={imageError} setImageError={setImageError} />
-						</Stack>
-
-						{/* uploaded images will be here */}
-						{imageLinks && (
-							<Box
+								}}
+								mb={3}
+							>
+								<LFInput name='driveUrl' label='Drive URL of all documents if you have (Optional)' />
+								<LFDatePicker label='Date' setDate={setDate} dateError={dateError} setDateError={setDateError} />
+							</Stack>
+							<Stack
+								gap={2}
 								sx={{
-									display: 'flex',
-									justifyContent: 'center',
-									alignItems: 'center',
-									flexWrap: 'wrap',
-									gap: 2,
 									width: '100%',
+									flexDirection: {
+										xs: 'column',
+										sm: 'row'
+									},
 									mb: 3
 								}}
 							>
-								{imageLinks.map((link, index) => (
-									<Image
-										key={index}
-										src={link}
-										width={100}
-										height={100}
-										alt='lost item'
-										style={{ maxWidth: '150px', width: '100%', height: 'auto' }}
-									/>
-								))}
-							</Box>
-						)}
+								<LFInput label='Description' name='description' multiline rows={5} />
+								<MultiImageUploader
+									setImageLinks={setImageLinks}
+									imageError={imageError}
+									setImageError={setImageError}
+								/>
+							</Stack>
 
-						<Button type='submit' sx={{ width: '100%', mt: 2 }}>
-							Claim
-						</Button>
-					</LFForm>
-				</Container>
+							{/* uploaded images will be here */}
+							{imageLinks && (
+								<Box
+									sx={{
+										display: 'flex',
+										justifyContent: 'center',
+										alignItems: 'center',
+										flexWrap: 'wrap',
+										gap: 2,
+										width: '100%',
+										mb: 3
+									}}
+								>
+									{imageLinks.map((link, index) => (
+										<Image
+											key={index}
+											src={link}
+											width={100}
+											height={100}
+											alt='lost item'
+											style={{ maxWidth: '150px', width: '100%', height: 'auto' }}
+										/>
+									))}
+								</Box>
+							)}
+
+							<Button type='submit' sx={{ width: '100%', mt: 2 }} disabled={isLoading}>
+								{isLoading ? 'Claiming...' : 'Claim'}
+							</Button>
+						</LFForm>
+					</Container>
+				) : (
+					<LoadingCompo />
+				)}
 			</Dialog>
 		</>
 	);
