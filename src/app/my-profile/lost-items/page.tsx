@@ -4,17 +4,18 @@ import LFForm from '@/components/Form/LFForm';
 import LFInput from '@/components/Form/lFInput';
 import LFBackdrop from '@/components/Shared/Backdrop/Backdrop';
 import EmptyCard from '@/components/Shared/EmptyCard/EmptyCard';
-import FoundItemCard from '@/components/Shared/FoundItemCard/FoundItemCard';
+import LostItemCard from '@/components/Shared/LostItemCard/LostItemCard';
 import PageTitle from '@/components/Shared/PageTitle';
 import { useGetCategoriesQuery } from '@/redux/api/features/categoryApi';
-import { useGetFoundItemsQuery } from '@/redux/api/features/foundItemApi';
+import { useGetMyLostItemsQuery } from '@/redux/api/features/lostItemApi';
+import { getUserInfo } from '@/services/auth.services';
 import { TQueryParams } from '@/types';
 import { Box, IconButton, Pagination, Stack } from '@mui/material';
 import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
 
-const FoundItems = () => {
+const LostItems = () => {
 	const [filterParam, setFilterParam] = useState({} as TQueryParams);
 	const [searchTerm, setSearchTerm] = useState({} as TQueryParams);
 	const [page, setPage] = useState<number>(1);
@@ -23,8 +24,10 @@ const FoundItems = () => {
 		label: category.name,
 		value: category.id
 	}));
+	const userInfo = getUserInfo();
+	console.log(userInfo);
 
-	const { data, isFetching } = useGetFoundItemsQuery([
+	const { data, isFetching } = useGetMyLostItemsQuery([
 		filterParam,
 		searchTerm,
 		{
@@ -34,6 +37,10 @@ const FoundItems = () => {
 		{
 			name: 'page',
 			value: page
+		},
+		{
+			name: 'userId',
+			value: 'createdAt:desc'
 		}
 	]);
 
@@ -42,12 +49,11 @@ const FoundItems = () => {
 		setPage(1);
 		setSearchTerm({ name: 'searchTerm', value: data.searchTerm });
 	};
-
 	return (
 		<div>
 			<PageTitle
-				title='Found Items'
-				desc='Dive into a collection of Found items awaiting reconnection with their owners.'
+				title='Lost Items'
+				desc='Dive into a collection of lost items awaiting reconnection with their owners.'
 			/>
 
 			<Box
@@ -104,7 +110,7 @@ const FoundItems = () => {
 			>
 				{isFetching && <LFBackdrop />}
 				{data?.data?.length ? (
-					data?.data?.map((item: any) => <FoundItemCard key={item.id} item={item} />)
+					data?.data?.map((item: any) => <LostItemCard key={item.id} item={item} />)
 				) : (
 					<EmptyCard />
 				)}
@@ -149,4 +155,4 @@ const FoundItems = () => {
 	);
 };
 
-export default FoundItems;
+export default LostItems;

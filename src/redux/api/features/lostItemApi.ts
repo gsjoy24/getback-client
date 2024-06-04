@@ -13,10 +13,18 @@ const lostItemApi = baseApi.injectEndpoints({
 		}),
 
 		getMyLostItems: build.query({
-			query: () => ({
-				url: '/my-lost-items',
-				method: 'GET'
-			})
+			query: (args) => {
+				const params = new URLSearchParams();
+				args?.forEach((param: TQueryParams) => {
+					params.append(param.name, param.value);
+				});
+
+				return {
+					url: '/my-lost-items',
+					method: 'GET',
+					params
+				};
+			}
 		}),
 
 		getLostItems: build.query({

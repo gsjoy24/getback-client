@@ -7,7 +7,7 @@ import EmptyCard from '@/components/Shared/EmptyCard/EmptyCard';
 import FoundItemCard from '@/components/Shared/FoundItemCard/FoundItemCard';
 import PageTitle from '@/components/Shared/PageTitle';
 import { useGetCategoriesQuery } from '@/redux/api/features/categoryApi';
-import { useGetFoundItemsQuery } from '@/redux/api/features/foundItemApi';
+import { useGetMyFoundItemsQuery } from '@/redux/api/features/foundItemApi';
 import { TQueryParams } from '@/types';
 import { Box, IconButton, Pagination, Stack } from '@mui/material';
 import { useState } from 'react';
@@ -24,7 +24,7 @@ const FoundItems = () => {
 		value: category.id
 	}));
 
-	const { data, isFetching } = useGetFoundItemsQuery([
+	const { data, isFetching } = useGetMyFoundItemsQuery([
 		filterParam,
 		searchTerm,
 		{

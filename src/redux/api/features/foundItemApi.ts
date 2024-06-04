@@ -24,8 +24,7 @@ const foundItemApi = baseApi.injectEndpoints({
 					method: 'GET',
 					params
 				};
-			},
-			providesTags: ['FoundItems']
+			}
 		}),
 
 		getFoundItems: build.query({
@@ -71,6 +70,7 @@ const foundItemApi = baseApi.injectEndpoints({
 export const {
 	useCreateFoundItemMutation,
 	useGetFoundItemsQuery,
+	useGetMyFoundItemsQuery,
 	useGetFoundItemQuery,
 	useUpdateFoundItemMutation,
 	useDeleteFoundItemMutation
