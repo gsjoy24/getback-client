@@ -127,12 +127,10 @@ const ReportLostItem = () => {
 						<Stack
 							gap={2}
 							flexWrap='wrap'
+							justifyContent='center'
+							alignItems='center'
 							sx={{
 								width: '100%',
-								flexDirection: {
-									xs: 'column',
-									sm: 'row'
-								},
 								mb: 3
 							}}
 						>

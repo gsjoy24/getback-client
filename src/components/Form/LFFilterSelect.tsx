@@ -9,9 +9,10 @@ type LFSelectProps = {
 	name: string;
 	sx?: SxProps;
 	setFilterParam: Dispatch<SetStateAction<TQueryParams>>;
+	setPage: Dispatch<SetStateAction<number>>;
 };
 
-const LFFilterSelect = ({ label, options, name, sx, setFilterParam }: LFSelectProps) => {
+const LFFilterSelect = ({ label, options, name, sx, setFilterParam, setPage }: LFSelectProps) => {
 	const { control } = useFormContext();
 
 	return (
@@ -32,6 +33,7 @@ const LFFilterSelect = ({ label, options, name, sx, setFilterParam }: LFSelectPr
 						value={field.value || ''}
 						onChange={(e) => {
 							field.onChange(e);
+							setPage(1);
 							setFilterParam({ name: 'categoryId', value: e.target.value });
 						}}
 					>

@@ -1,7 +1,8 @@
 'use client';
 import ImageIcon from '@mui/icons-material/Image';
-import { Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import { CldUploadWidget } from 'next-cloudinary';
+import Image from 'next/image';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 type TProps = {

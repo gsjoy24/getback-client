@@ -35,7 +35,8 @@ const LFDatePicker = ({ setDate, label, dateError, setDateError }: TLFDatePicker
 				}
 			}}
 			sx={{
-				width: '100%'
+				width: '100%',
+				mb: 2
 			}}
 		/>
 	);

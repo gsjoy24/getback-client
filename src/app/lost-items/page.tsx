@@ -39,6 +39,7 @@ const LostItems = () => {
 
 	const totalPage = data?.meta?.total / data?.meta?.limit;
 	const handleSubmit = (data: FieldValues) => {
+		setPage(1);
 		setSearchTerm({ name: 'searchTerm', value: data.searchTerm });
 	};
 
@@ -77,6 +78,7 @@ const LostItems = () => {
 							options={categoryOptions}
 							name='categoryId'
 							setFilterParam={setFilterParam}
+							setPage={setPage}
 						/>
 					</Stack>
 				</LFForm>
