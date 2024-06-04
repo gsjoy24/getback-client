@@ -1,3 +1,4 @@
+import userLogout from '@/services/actions/userLogout';
 import { getUserInfo, logout } from '@/services/auth.services';
 import { Button } from '@mui/material';
 import Link from 'next/link';
@@ -12,8 +13,14 @@ const AuthButton = ({ setOpen }: TAuthButtonProps) => {
 	const userData = getUserInfo();
 	const router = useRouter();
 
-	const handleLogout = () => {
+	const handleLogout = async () => {
 		logout();
+		try {
+			const res = await userLogout({});
+			console.log(res);
+		} catch (error) {
+			console.log(error);
+		}
 		router.refresh();
 	};
 

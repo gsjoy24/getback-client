@@ -5,10 +5,10 @@ import LFSelect from '@/components/Form/LFSelect';
 import LFInput from '@/components/Form/lFInput';
 import MultiImageUploader from '@/components/Shared/MultiImageUploader/MultiImageUploader';
 import PageTitle from '@/components/Shared/PageTitle';
+
 import { useGetCategoriesQuery } from '@/redux/api/categoryApi';
 import { useCreateFoundItemMutation } from '@/redux/api/foundItemApi';
 import foundItemSchema from '@/schemas/foundItemSchema';
-import { isLoggedIn } from '@/services/auth.services';
 import { TCategory } from '@/types/category';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Stack } from '@mui/material';
@@ -17,15 +17,10 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
-const ReportLostItem = () => {
+
+const ReportFoundItem = () => {
 	const router = useRouter();
 	const { data: categoriesData } = useGetCategoriesQuery(null);
-
-	const isUserLoggedIn = isLoggedIn();
-	if (isUserLoggedIn === false) {
-		toast.error('You need to login to report a found item!');
-		router.push('/login');
-	}
 
 	const categoryOptions = categoriesData?.data?.map((category: TCategory) => ({
 		value: category.id,
@@ -170,4 +165,4 @@ const ReportLostItem = () => {
 	);
 };
 
-export default ReportLostItem;
+export default ReportFoundItem;

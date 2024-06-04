@@ -8,7 +8,6 @@ import PageTitle from '@/components/Shared/PageTitle';
 import { useGetCategoriesQuery } from '@/redux/api/categoryApi';
 import { useCreateLostItemMutation } from '@/redux/api/lostItemApi';
 import lostItemSchema from '@/schemas/lostItemSchema';
-import { isLoggedIn } from '@/services/auth.services';
 import { TCategory } from '@/types/category';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Stack } from '@mui/material';
@@ -18,15 +17,9 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-const ReportFoundItem = () => {
+const ReportLostItem = () => {
 	const router = useRouter();
 	const { data: categoriesData } = useGetCategoriesQuery(null);
-
-	const isUserLoggedIn = isLoggedIn();
-	if (isUserLoggedIn === false) {
-		toast.error('You need to login to report a lost item!');
-		router.push('/login');
-	}
 
 	const categoryOptions = categoriesData?.data?.map((category: TCategory) => ({
 		value: category.id,
@@ -161,7 +154,7 @@ const ReportFoundItem = () => {
 						sx={{
 							mt: 2
 						}}
-						disabled={isLoading || !isUserLoggedIn}
+						disabled={isLoading}
 					>
 						{isLoading ? 'Submitting...' : 'Submit Report'}
 					</Button>
@@ -171,4 +164,4 @@ const ReportFoundItem = () => {
 	);
 };
 
-export default ReportFoundItem;
+export default ReportLostItem;

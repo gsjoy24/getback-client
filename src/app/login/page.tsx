@@ -5,22 +5,29 @@ import LFForm from '@/components/Form/LFForm';
 import LFInput from '@/components/Form/lFInput';
 import LoginValidationSchema from '@/schemas/loginSchema';
 import userLogin from '@/services/actions/userLogin';
-import { storeUserInfo } from '@/services/auth.services';
+import { isLoggedIn, storeUserInfo } from '@/services/auth.services';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Grid, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { toast } from 'sonner';
 
 const LoginPage = () => {
+	const router = useRouter();
+	const [redirectTo, setRedirectTo] = useState<string | null>(null);
 	const [showPass, setShowPass] = useState<boolean>(false);
 	const [resetForm, setResetForm] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(false);
-	const router = useRouter();
+
+	useEffect(() => {
+		const searchParams = new URLSearchParams(window?.location.search);
+		const redirect = searchParams.get('redirect');
+		setRedirectTo(redirect);
+	}, []);
 
 	const handleSubmit = async (data: FieldValues) => {
 		try {
@@ -29,8 +36,8 @@ const LoginPage = () => {
 			if (res.success) {
 				setResetForm(true);
 				toast.success(res.message);
-				storeUserInfo(res?.data?.token);
-				router.push('/');
+				await storeUserInfo(res?.data?.token);
+				router.push(redirectTo || '/');
 			} else {
 				toast.error(res.message);
 			}
