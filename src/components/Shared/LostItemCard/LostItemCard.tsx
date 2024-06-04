@@ -1,5 +1,6 @@
 'use client';
 import formatDateToString from '@/helpers/formatDateToString';
+import { getUserInfo } from '@/services/auth.services';
 import { Box } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -10,9 +11,12 @@ import { FaCalendarAlt } from 'react-icons/fa';
 import { IoIosArrowRoundForward } from 'react-icons/io';
 import { IoLocationSharp } from 'react-icons/io5';
 import SimpleImageSlider from 'react-simple-image-slider';
+import CardOptions from '../CardOptions/CardOptions';
 
 const LostItemCard = ({ item }: any) => {
-	const { itemName, description, pictures, location, lostDate } = item;
+	const userInfo = getUserInfo();
+	const { itemName, description, pictures, location, lostDate, userId } = item;
+
 	const date = formatDateToString(lostDate);
 	const images = pictures.map((picture: any) => ({ url: picture }));
 	return (
@@ -27,7 +31,12 @@ const LostItemCard = ({ item }: any) => {
 			}}
 		>
 			<SimpleImageSlider width={330} height={200} images={images} showNavs={true} navSize={25} showBullets={false} />
-			<CardContent>
+			<CardContent
+				sx={{
+					position: 'relative'
+				}}
+			>
+				{userInfo?.id === userId && <CardOptions />}
 				<Typography gutterBottom variant='h5'>
 					{itemName}
 				</Typography>
