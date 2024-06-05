@@ -20,8 +20,8 @@ const PrivacyPolicyPage = () => {
 				Privacy Policy
 			</Typography>
 			<Typography variant='body1' paragraph>
-				At Lost & Found, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use,
-				and disclose information about you when you use our website and services.
+				At GetBack, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and
+				disclose information about you when you use our website and services.
 			</Typography>
 			<Divider sx={{ my: 4 }} />
 			<Typography variant='h4' gutterBottom>

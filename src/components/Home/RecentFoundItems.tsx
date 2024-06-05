@@ -13,46 +13,48 @@ const RecentFoundItems = async () => {
 	});
 	const { data: items } = await fetchItems.json();
 	return (
-		<Container
-			sx={{
-				mb: 5
-			}}
-		>
-			<SectionTitle
-				title='Recent Found Items'
-				desc='Our collection of recently found items waiting to be reunited with their owners. Check them out!'
-			/>
-			<Stack
-				justifyContent='center'
-				alignItems='center'
-				gap={5}
-				flexWrap='wrap'
-				pb={5}
+		items?.length && (
+			<Container
 				sx={{
-					flexDirection: {
-						xs: 'column',
-						sm: 'row'
-					}
+					mb: 5
 				}}
 			>
-				{items
-					? items.map((item: TLostItem) => <FoundItemCard key={item.id} item={item} />)
-					: Array.from({ length: 3 }).map((_, index) => (
-							<Box key={index}>
-								<Skeleton animation='wave' variant='rectangular' width={330} height={118} />
-								<Skeleton animation='wave' width={230} height={40} />
-								<Skeleton animation='wave' width={230} height={20} />
-								<Skeleton animation='wave' width={200} height={20} />
-								<Skeleton animation='wave' width={230} height={40} />
-							</Box>
-					  ))}
-			</Stack>
-			<div className='grid w-full place-items-center'>
-				<Button variant='outlined' component={Link} href='/found-items' size='large'>
-					View More
-				</Button>
-			</div>
-		</Container>
+				<SectionTitle
+					title='Recent Found Items'
+					desc='Our collection of recently found items waiting to be reunited with their owners. Check them out!'
+				/>
+				<Stack
+					justifyContent='center'
+					alignItems='center'
+					gap={5}
+					flexWrap='wrap'
+					pb={5}
+					sx={{
+						flexDirection: {
+							xs: 'column',
+							sm: 'row'
+						}
+					}}
+				>
+					{items
+						? items.map((item: TLostItem) => <FoundItemCard key={item.id} item={item} />)
+						: Array.from({ length: 3 }).map((_, index) => (
+								<Box key={index}>
+									<Skeleton animation='wave' variant='rectangular' width={330} height={118} />
+									<Skeleton animation='wave' width={230} height={40} />
+									<Skeleton animation='wave' width={230} height={20} />
+									<Skeleton animation='wave' width={200} height={20} />
+									<Skeleton animation='wave' width={230} height={40} />
+								</Box>
+						  ))}
+				</Stack>
+				<div className='grid w-full place-items-center'>
+					<Button variant='outlined' component={Link} href='/found-items' size='large'>
+						View More
+					</Button>
+				</div>
+			</Container>
+		)
 	);
 };
 

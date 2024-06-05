@@ -1,4 +1,4 @@
-import logo from '@/assets/logo/L&F-W.png';
+import logo from '@/assets/logo/logo-w.png';
 import navLinks from '@/constants/navLinks';
 import { Facebook, Instagram, LinkedIn, Twitter } from '@mui/icons-material';
 import { Box, Container, Grid, IconButton, Stack, Typography } from '@mui/material';
@@ -13,7 +13,7 @@ const Footer = () => {
 			<Container maxWidth='lg'>
 				<Grid container spacing={4}>
 					<Grid item xs={12} sm={4}>
-						<Image src={logo} alt='Lost and Found Logo' width={100} height={100} />
+						<Image src={logo} alt='GetBack Logo' width={150} height={100} />
 						<Typography variant='body2' sx={{ mt: 2 }}>
 							Learn more about our mission to reunite lost items with their owners. Our community is dedicated to
 							helping each other find what’s missing.
@@ -67,7 +67,7 @@ const Footer = () => {
 				</Grid>
 				<Box sx={{ mt: 4, textAlign: 'center' }}>
 					<Typography variant='body2'>
-						&copy; {currentYear} Lost and Found. All rights reserved. Made with ❤️ by{' '}
+						&copy; {currentYear} GetBack. All rights reserved. Made with ❤️ by{' '}
 						<Link
 							href='https://gour-chandra-saha.web.app/'
 							target='_blank'

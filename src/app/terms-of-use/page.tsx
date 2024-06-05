@@ -4,9 +4,9 @@ import Link from 'next/link';
 import React from 'react';
 
 export const metadata: Metadata = {
-	title: 'Terms of Use - Lost & Found',
+	title: 'Terms of Use - GetBack',
 	description:
-		'Welcome to Lost & Found! By accessing or using our website, you agree to comply with and be bound by the following terms and conditions of use. Please read these terms carefully before using our website.'
+		'Welcome to GetBack! By accessing or using our website, you agree to comply with and be bound by the following terms and conditions of use. Please read these terms carefully before using our website.'
 };
 
 const TermsOfUsePage = () => {
@@ -28,16 +28,16 @@ const TermsOfUsePage = () => {
 				Terms of Use
 			</Typography>
 			<Typography variant='body1' paragraph>
-				Welcome to Lost & Found! By accessing or using our website, you agree to comply with and be bound by the
-				following terms and conditions of use. Please read these terms carefully before using our website.
+				Welcome to GetBack! By accessing or using our website, you agree to comply with and be bound by the following
+				terms and conditions of use. Please read these terms carefully before using our website.
 			</Typography>
 			<Divider sx={{ my: 4 }} />
 			<Typography variant='h4' gutterBottom>
 				1. Acceptance of Terms
 			</Typography>
 			<Typography variant='body1' paragraph>
-				By accessing or using Lost & Found, you acknowledge that you have read, understood, and agree to be bound by
-				these terms of use. If you do not agree to these terms, please do not use our website.
+				By accessing or using GetBack, you acknowledge that you have read, understood, and agree to be bound by these
+				terms of use. If you do not agree to these terms, please do not use our website.
 			</Typography>
 			<Typography variant='h4' gutterBottom>
 				2. Use License
@@ -50,25 +50,25 @@ const TermsOfUsePage = () => {
 			<ul>
 				<li>modify or copy the materials;</li>
 				<li>use the materials for any commercial purpose, or for any public display (commercial or non-commercial);</li>
-				<li>attempt to decompile or reverse engineer any software contained on Lost & Found;</li>
+				<li>attempt to decompile or reverse engineer any software contained on GetBack;</li>
 				<li>remove any copyright or other proprietary notations from the materials; or</li>
 				<li>transfer the materials to another person or &quot;mirror&quot; the materials on any other server.</li>
 			</ul>
 			<Typography variant='body1' paragraph>
-				This license shall automatically terminate if you violate any of these restrictions and may be terminated by
-				Lost & Found at any time. Upon terminating your viewing of these materials or upon the termination of this
-				license, you must destroy any downloaded materials in your possession whether in electronic or printed format.
+				This license shall automatically terminate if you violate any of these restrictions and may be terminated by Get
+				Back at any time. Upon terminating your viewing of these materials or upon the termination of this license, you
+				must destroy any downloaded materials in your possession whether in electronic or printed format.
 			</Typography>
 			<Typography variant='h4' gutterBottom>
 				3. User Content
 			</Typography>
 			<Typography variant='body1' paragraph>
 				You acknowledge and agree that any content, including but not limited to text, images, or other material,
-				provided by you on Lost & Found (User Content), will be deemed non-confidential and non-proprietary. By
-				providing any User Content, you grant Lost & Found a perpetual, irrevocable, worldwide, royalty-free, and
-				non-exclusive license to use, reproduce, modify, adapt, publish, translate, distribute, and display such User
-				Content (in whole or in part) and to incorporate it into other works in any form, media, or technology now known
-				or later developed, without compensation to you.
+				provided by you on GetBack (User Content), will be deemed non-confidential and non-proprietary. By providing any
+				User Content, you grant GetBack a perpetual, irrevocable, worldwide, royalty-free, and non-exclusive license to
+				use, reproduce, modify, adapt, publish, translate, distribute, and display such User Content (in whole or in
+				part) and to incorporate it into other works in any form, media, or technology now known or later developed,
+				without compensation to you.
 			</Typography>
 			<Typography variant='h4' gutterBottom>
 				4. Governing Law
@@ -81,8 +81,8 @@ const TermsOfUsePage = () => {
 				5. Changes to Terms
 			</Typography>
 			<Typography variant='body1' paragraph>
-				Lost & Found reserves the right to change these terms and conditions at any time without notice. By using our
-				website you are agreeing to be bound by the then current version of these terms of use.
+				GetBack reserves the right to change these terms and conditions at any time without notice. By using our website
+				you are agreeing to be bound by the then current version of these terms of use.
 			</Typography>
 
 			<Divider sx={{ my: 4 }} />
@@ -99,7 +99,7 @@ const TermsOfUsePage = () => {
 				Phone: (123) 456-7890
 			</Typography>
 			<Typography variant='body1' paragraph>
-				Address: 1234 Lost & Found Way, New York, NY 10001
+				Address: 1234 GetBack Way, New York, NY 10001
 			</Typography>
 		</Container>
 	);

@@ -7,9 +7,9 @@ import StayUpdated from '@/components/Home/StayUpdated';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-	title: 'Home - Lost & Found',
+	title: 'Home - GetBack',
 	description:
-		'Lost & Found is a platform for finding lost items. Post your lost items and find them easily. We help you find your lost items. Join us on our journey! Find out how we transform moments of loss into stories of reunion and hope. Stay updated with the latest news and updates.'
+		'GetBack is a platform for finding lost items. Post your lost items and find them easily. We help you find your lost items. Join us on our journey! Find out how we transform moments of loss into stories of reunion and hope. Stay updated with the latest news and updates.'
 };
 
 const HomePage = () => {

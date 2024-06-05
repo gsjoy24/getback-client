@@ -1,4 +1,4 @@
-import BlackLogo from '@/assets/logo/L&F-B.png';
+import BlackLogo from '@/assets/logo/logo-b.png';
 import navLinks from '@/constants/navLinks';
 import { Divider, Drawer, IconButton, Stack, Typography } from '@mui/material';
 import dynamic from 'next/dynamic';
@@ -25,7 +25,7 @@ const UserDrawer = ({ open, setOpen }: TUserDrawerProps) => {
 			}}
 		>
 			{/* logo */}
-			<Image src={BlackLogo} alt='logo' width={80} height={80} className='mx-auto py-3 mt-10' />
+			<Image src={BlackLogo} alt='logo' width={140} height={80} className='mx-auto py-3 mt-10' />
 
 			{/* close icon */}
 			<IconButton

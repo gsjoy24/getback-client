@@ -24,7 +24,7 @@ const LoadingCompo = () => {
 					color: '#1586FD'
 				}}
 			>
-				LOST & FOUND
+				GET BACK
 			</Typography>
 		</Stack>
 	);

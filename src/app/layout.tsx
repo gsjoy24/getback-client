@@ -13,9 +13,9 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-	title: 'Lost & Found',
+	title: 'GetBack: Reunite Lost Items with Their Owners Easily',
 	description:
-		'Lost & Found is a platform for finding lost items. Post your lost items and find them easily. We help you find your lost items.'
+		'GetBack: Lost something important? GetBack helps you find lost items in (City Name) and connect with those who found them. Free, fast, and easy to use! Recover lost phones, wallets, keys, and more. #GetBack #LostAndFound #LostItems #FoundItems #LostAndFoundApp #LostAndFoundService #LostAndFoundWebsite #LostAndFoundNearMe #LostAndFoundUSA'
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

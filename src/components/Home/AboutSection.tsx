@@ -28,12 +28,12 @@ const AboutSection = () => {
 							}
 						}}
 					>
-						About Lost & Found
+						About GetBack
 					</Typography>
 					<Typography variant='body2'>
-						Lost & Found is a community-driven platform designed to help people report and reclaim lost items. Our
-						mission is to connect finders with owners, making it easier for lost belongings to be reunited with their
-						rightful owners. Join us today and be part of a community dedicated to bringing lost items back home.
+						GetBack is a community-driven platform designed to help people report and reclaim lost items. Our mission is
+						to connect finders with owners, making it easier for lost belongings to be reunited with their rightful
+						owners. Join us today and be part of a community dedicated to bringing lost items back home.
 					</Typography>
 					<Button component={Link} href='/about' color='primary' sx={{ mt: 2 }}>
 						Our Journey

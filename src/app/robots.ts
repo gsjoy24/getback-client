@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
 			allow: '/',
 			disallow: '/dashboard/'
 		},
-		sitemap: 'https://lost-and-found1.vercel.app/sitemap.xml'
+		sitemap: 'https://getback.vercel.app/sitemap.xml'
 	};
 }

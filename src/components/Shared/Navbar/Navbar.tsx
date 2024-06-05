@@ -1,5 +1,5 @@
 'use client';
-import BlackLogo from '@/assets/logo/L&F-B.png';
+import BlackLogo from '@/assets/logo/logo-b.png';
 import navLinks from '@/constants/navLinks';
 import { Box, Container, IconButton, Stack } from '@mui/material';
 import dynamic from 'next/dynamic';
@@ -29,7 +29,7 @@ const Navbar = () => {
 			<Container>
 				<Stack justifyContent={'space-between'} alignItems={'center'} direction={'row'} py={1}>
 					<Box component={Link} href='/'>
-						<Image src={BlackLogo} alt='logo' width={80} height={80} />
+						<Image src={BlackLogo} alt='logo' width={140} height={80} />
 					</Box>
 
 					{/* nav links for big screen */}

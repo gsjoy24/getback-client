@@ -3,67 +3,67 @@ import { MetadataRoute } from 'next';
 export default function sitemap(): MetadataRoute.Sitemap {
 	return [
 		{
-			url: 'https://lost-and-found1.vercel.app/',
+			url: 'https://getback.vercel.app/',
 			lastModified: new Date(),
 			changeFrequency: 'weekly',
 			priority: 1
 		},
 		{
-			url: 'https://lost-and-found1.vercel.app/lost-items',
+			url: 'https://getback.vercel.app/lost-items',
 			lastModified: new Date(),
 			changeFrequency: 'weekly',
 			priority: 0.8
 		},
 		{
-			url: 'https://lost-and-found1.vercel.app/found-items',
+			url: 'https://getback.vercel.app/found-items',
 			lastModified: new Date(),
 			changeFrequency: 'weekly',
 			priority: 0.8
 		},
 		{
-			url: 'https://lost-and-found1.vercel.app/login',
+			url: 'https://getback.vercel.app/login',
 			lastModified: new Date(),
 			changeFrequency: 'yearly',
 			priority: 0.8
 		},
 		{
-			url: 'https://lost-and-found1.vercel.app/signup',
+			url: 'https://getback.vercel.app/signup',
 			lastModified: new Date(),
 			changeFrequency: 'yearly',
 			priority: 0.8
 		},
 		{
-			url: 'https://lost-and-found1.vercel.app/report-lost-item',
+			url: 'https://getback.vercel.app/report-lost-item',
 			lastModified: new Date(),
 			changeFrequency: 'yearly',
 			priority: 0.8
 		},
 		{
-			url: 'https://lost-and-found1.vercel.app/report-found-item',
+			url: 'https://getback.vercel.app/report-found-item',
 			lastModified: new Date(),
 			changeFrequency: 'yearly',
 			priority: 0.8
 		},
 		{
-			url: 'https://lost-and-found1.vercel.app/contact',
+			url: 'https://getback.vercel.app/contact',
 			lastModified: new Date(),
 			changeFrequency: 'yearly',
 			priority: 0.8
 		},
 		{
-			url: 'https://lost-and-found1.vercel.app/about',
+			url: 'https://getback.vercel.app/about',
 			lastModified: new Date(),
 			changeFrequency: 'yearly',
 			priority: 0.8
 		},
 		{
-			url: 'https://lost-and-found1.vercel.app/privacy-policy',
+			url: 'https://getback.vercel.app/privacy-policy',
 			lastModified: new Date(),
 			changeFrequency: 'yearly',
 			priority: 0.8
 		},
 		{
-			url: 'https://lost-and-found1.vercel.app/terms-of-use',
+			url: 'https://getback.vercel.app/terms-of-use',
 			lastModified: new Date(),
 			changeFrequency: 'yearly',
 			priority: 0.8

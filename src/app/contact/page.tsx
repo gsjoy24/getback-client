@@ -4,9 +4,9 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
-	title: 'Contact Us - Lost & Found',
+	title: 'Contact Us - GetBack',
 	description:
-		'Have a question or feedback? Get in touch with us! Fill out the form below and we will get back to you as soon as possible. We are here to help you!'
+		'Have a question or feedback? Get in touch with us! Fill out the form below and we will GetBack to you as soon as possible. We are here to help you!'
 };
 
 const ContactPage = () => {
