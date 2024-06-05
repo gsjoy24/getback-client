@@ -2,6 +2,7 @@ import { TFoundItem } from './foundItem';
 import { TUser } from './user';
 
 type TClaim = {
+	id: string;
 	userId: string;
 	foundItemId: string;
 	response: string;

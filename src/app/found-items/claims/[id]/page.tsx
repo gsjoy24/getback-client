@@ -2,6 +2,8 @@
 import LoadingCompo from '@/app/loading';
 import LFForm from '@/components/Form/LFForm';
 import LFInput from '@/components/Form/lFInput';
+import LFBackdrop from '@/components/Shared/Backdrop/Backdrop';
+import ClaimCard from '@/components/Shared/ClaimCard/ClaimCard';
 import EmptyCard from '@/components/Shared/EmptyCard/EmptyCard';
 import PageTitle from '@/components/Shared/PageTitle';
 import { useGetClaimsQuery } from '@/redux/api/features/claimApi';
@@ -84,12 +86,8 @@ const ItemsClaims = () => {
 					position: 'relative'
 				}}
 			>
-				{/* {isFetching && <LFBackdrop />}
-				{data?.data?.length ? (
-					data?.data?.map((item: any) => <FoundItemCard key={item.id} item={item} />)
-				) : (
-					<EmptyCard />
-				)} */}
+				{isFetching && <LFBackdrop />}
+				{data?.data?.length ? data?.data?.map((item: any) => <ClaimCard key={item.id} item={item} />) : <EmptyCard />}
 			</Stack>
 
 			{/* for mobile */}
