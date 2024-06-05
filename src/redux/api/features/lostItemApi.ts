@@ -65,6 +65,24 @@ const lostItemApi = baseApi.injectEndpoints({
 				method: 'DELETE'
 			}),
 			invalidatesTags: ['LostItems']
+		}),
+
+		markAsFound: build.mutation({
+			query: (id) => ({
+				url: `/lost-items/${id}/`,
+				method: 'PATCH',
+				data: { isFound: true }
+			}),
+			invalidatesTags: ['LostItems']
+		}),
+
+		toggleMarkAsFound: build.mutation({
+			query: ({ id, status }) => ({
+				url: `/lost-items/${id}/`,
+				method: 'PATCH',
+				data: { isFound: status }
+			}),
+			invalidatesTags: ['LostItems']
 		})
 	})
 });
@@ -75,5 +93,6 @@ export const {
 	useGetLostItemsQuery,
 	useGetLostItemQuery,
 	useUpdateLostItemMutation,
-	useDeleteLostItemMutation
+	useDeleteLostItemMutation,
+	useToggleMarkAsFoundMutation
 } = lostItemApi;

@@ -36,7 +36,7 @@ const LostItemCard = ({ item }: any) => {
 					position: 'relative'
 				}}
 			>
-				{userInfo?.id === userId && <CardOptions />}
+				{userInfo?.id === userId && <CardOptions item={item} />}
 				<Typography gutterBottom variant='h5'>
 					{itemName}
 				</Typography>
