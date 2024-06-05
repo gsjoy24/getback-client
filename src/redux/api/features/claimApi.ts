@@ -65,6 +65,15 @@ const claimApi = baseApi.injectEndpoints({
 				method: 'DELETE'
 			}),
 			invalidatesTags: ['Claims', 'My-claims', 'My-profile']
+		}),
+
+		makeResponseToClaim: build.mutation({
+			query: ({ id, data }) => ({
+				url: `/claims/status/${id}`,
+				method: 'PUT',
+				data
+			}),
+			invalidatesTags: ['Claims', 'My-claims', 'My-profile']
 		})
 	})
 });
@@ -74,5 +83,6 @@ export const {
 	useGetClaimsQuery,
 	useGetClaimQuery,
 	useUpdateClaimMutation,
-	useDeleteClaimMutation
+	useDeleteClaimMutation,
+	useMakeResponseToClaimMutation
 } = claimApi;
