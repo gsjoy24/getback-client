@@ -9,7 +9,7 @@ const foundItemApi = baseApi.injectEndpoints({
 				method: 'POST',
 				data
 			}),
-			invalidatesTags: ['FoundItems', 'My-found-items']
+			invalidatesTags: ['FoundItems', 'My-found-items', 'My-profile']
 		}),
 
 		getMyFoundItems: build.query({
@@ -25,7 +25,7 @@ const foundItemApi = baseApi.injectEndpoints({
 					params
 				};
 			},
-			providesTags: ['FoundItems', 'My-found-items']
+			providesTags: ['FoundItems', 'My-found-items', 'My-profile']
 		}),
 
 		getFoundItems: build.query({
@@ -41,7 +41,7 @@ const foundItemApi = baseApi.injectEndpoints({
 					params
 				};
 			},
-			providesTags: ['FoundItems', 'My-found-items']
+			providesTags: ['FoundItems', 'My-found-items', 'My-profile']
 		}),
 
 		getFoundItem: build.query({
@@ -57,7 +57,7 @@ const foundItemApi = baseApi.injectEndpoints({
 				method: 'PUT',
 				data
 			}),
-			invalidatesTags: ['FoundItems', 'Claims', 'My-found-items']
+			invalidatesTags: ['FoundItems', 'Claims', 'My-found-items', 'My-profile']
 		}),
 
 		deleteFoundItem: build.mutation({
@@ -65,7 +65,7 @@ const foundItemApi = baseApi.injectEndpoints({
 				url: `/found-items/${id}`,
 				method: 'DELETE'
 			}),
-			invalidatesTags: ['FoundItems', 'Claims', 'My-found-items']
+			invalidatesTags: ['FoundItems', 'Claims', 'My-found-items', 'My-profile']
 		}),
 
 		toggleReturnStatus: build.mutation({
@@ -74,7 +74,7 @@ const foundItemApi = baseApi.injectEndpoints({
 				method: 'PUT',
 				data: { isReturned: status }
 			}),
-			invalidatesTags: ['FoundItems', 'My-found-items']
+			invalidatesTags: ['FoundItems', 'My-found-items', 'My-profile']
 		})
 	})
 });

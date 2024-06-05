@@ -9,7 +9,7 @@ const lostItemApi = baseApi.injectEndpoints({
 				method: 'POST',
 				data
 			}),
-			invalidatesTags: ['LostItems']
+			invalidatesTags: ['LostItems', 'My-profile', 'My-lost-items']
 		}),
 
 		getMyLostItems: build.query({
@@ -24,7 +24,8 @@ const lostItemApi = baseApi.injectEndpoints({
 					method: 'GET',
 					params
 				};
-			}
+			},
+			providesTags: ['My-lost-items']
 		}),
 
 		getLostItems: build.query({
@@ -64,16 +65,7 @@ const lostItemApi = baseApi.injectEndpoints({
 				url: `/lost-items/${id}`,
 				method: 'DELETE'
 			}),
-			invalidatesTags: ['LostItems']
-		}),
-
-		markAsFound: build.mutation({
-			query: (id) => ({
-				url: `/lost-items/${id}/`,
-				method: 'PATCH',
-				data: { isFound: true }
-			}),
-			invalidatesTags: ['LostItems']
+			invalidatesTags: ['LostItems', 'My-profile', 'My-lost-items']
 		}),
 
 		toggleMarkAsFound: build.mutation({
@@ -82,7 +74,7 @@ const lostItemApi = baseApi.injectEndpoints({
 				method: 'PATCH',
 				data: { isFound: status }
 			}),
-			invalidatesTags: ['LostItems']
+			invalidatesTags: ['LostItems', 'My-profile', 'My-lost-items']
 		})
 	})
 });
