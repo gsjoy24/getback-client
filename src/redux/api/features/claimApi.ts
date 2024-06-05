@@ -1,3 +1,4 @@
+import { TQueryParams } from '@/types';
 import { baseApi } from '../baseApi';
 
 const claimApi = baseApi.injectEndpoints({
@@ -11,17 +12,35 @@ const claimApi = baseApi.injectEndpoints({
 		}),
 
 		getMyClaims: build.query({
-			query: () => ({
-				url: '/my-claims',
-				method: 'GET'
-			})
+			query: (args) => {
+				const params = new URLSearchParams();
+				args?.forEach((param: TQueryParams) => {
+					params.append(param.name, param.value);
+				});
+
+				return {
+					url: '/my-claims',
+					method: 'GET',
+					params
+				};
+			},
+			providesTags: ['My-profile', 'Claims', 'My-claims']
 		}),
 
 		getClaims: build.query({
-			query: () => ({
-				url: '/claims',
-				method: 'GET'
-			})
+			query: (args) => {
+				const params = new URLSearchParams();
+				args?.forEach((param: TQueryParams) => {
+					params.append(param.name, param.value);
+				});
+
+				return {
+					url: '/claims',
+					method: 'GET',
+					params
+				};
+			},
+			providesTags: ['My-profile', 'Claims', 'My-claims']
 		}),
 
 		getClaim: build.query({
@@ -36,14 +55,16 @@ const claimApi = baseApi.injectEndpoints({
 				url: `/claims/${id}`,
 				method: 'PUT',
 				data
-			})
+			}),
+			invalidatesTags: ['Claims', 'My-claims', 'My-profile']
 		}),
 
 		deleteClaim: build.mutation({
 			query: (id) => ({
 				url: `/claims/${id}`,
 				method: 'DELETE'
-			})
+			}),
+			invalidatesTags: ['Claims', 'My-claims', 'My-profile']
 		})
 	})
 });

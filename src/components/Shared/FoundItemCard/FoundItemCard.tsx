@@ -1,5 +1,6 @@
 'use client';
 import formatDateToString from '@/helpers/formatDateToString';
+import { getUserInfo } from '@/services/auth.services';
 import { Box } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -13,7 +14,8 @@ import SimpleImageSlider from 'react-simple-image-slider';
 import FoundCardOptions from '../CardOptions/FoundICardOptions';
 
 const FoundItemCard = ({ item }: any) => {
-	const { itemName, description, pictures, location, foundDate } = item;
+	const userInfo = getUserInfo();
+	const { userId, itemName, description, pictures, location, foundDate } = item;
 	const date = formatDateToString(foundDate);
 	const images = pictures.map((picture: any) => ({ url: picture }));
 	return (
@@ -33,7 +35,7 @@ const FoundItemCard = ({ item }: any) => {
 					position: 'relative'
 				}}
 			>
-				<FoundCardOptions item={item} />
+				{userInfo?.id === userId && <FoundCardOptions item={item} />}
 				<Typography gutterBottom variant='h5'>
 					{itemName}
 				</Typography>

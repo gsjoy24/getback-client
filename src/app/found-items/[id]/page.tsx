@@ -2,8 +2,10 @@
 import LoadingCompo from '@/app/loading';
 import ClaimDialog from '@/components/ClaimDialog/ClaimDialog';
 import { useGetFoundItemQuery } from '@/redux/api/features/foundItemApi';
+import { getUserInfo } from '@/services/auth.services';
 import DateToString from '@/utils/DateToString';
-import { Box, Chip, Stack, Typography } from '@mui/material';
+import { Box, Button, Chip, Stack, Typography } from '@mui/material';
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { HiOutlineFolder } from 'react-icons/hi2';
 import ImageGallery from 'react-image-gallery';
@@ -11,13 +13,14 @@ import 'react-image-gallery/styles/css/image-gallery.css';
 
 const FoundItemDetails = () => {
 	const { id } = useParams<{ id: string }>();
+	const userInfo = getUserInfo();
 	const { data, isFetching } = useGetFoundItemQuery(id);
 
 	if (isFetching) {
 		return <LoadingCompo />;
 	}
 
-	const { itemName, pictures, description, location, foundDate, user, category } = data?.data;
+	const { userId, itemName, pictures, description, location, foundDate, user, category } = data?.data;
 
 	const images =
 		pictures &&
@@ -68,7 +71,13 @@ const FoundItemDetails = () => {
 					{description}
 				</Typography>
 
-				<ClaimDialog item={data?.data} />
+				{userInfo?.id === userId ? (
+					<Button component={Link} href={`/found-items/claims/${id}`} sx={{ mt: 2 }}>
+						See Claims
+					</Button>
+				) : (
+					<ClaimDialog item={data?.data} />
+				)}
 			</Box>
 		</Stack>
 	);
