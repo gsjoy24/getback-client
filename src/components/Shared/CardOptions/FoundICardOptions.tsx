@@ -26,9 +26,11 @@ const FoundCardOptions = ({ item }: { item: TFoundItem }) => {
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
-	const handleMarking = async () => {
+
+	const handleReturnStatus = async () => {
 		try {
 			const res = await toggleReturnStatus({ id: item.id, status: !item?.isReturned });
+			console.log(res);
 			if (res.data.success) {
 				toast.success(`Item marked as ${!item?.isReturned ? 'returned' : 'found'}`);
 				setAnchorEl(null);
@@ -37,6 +39,7 @@ const FoundCardOptions = ({ item }: { item: TFoundItem }) => {
 			console.log(error);
 		}
 	};
+
 	const handleDelete = async () => {
 		try {
 			const res = await deleteFoundItem(item.id);
@@ -48,6 +51,7 @@ const FoundCardOptions = ({ item }: { item: TFoundItem }) => {
 			console.log(error);
 		}
 	};
+
 	return (
 		<div className='absolute top-2 right-2'>
 			<IconButton
@@ -80,7 +84,7 @@ const FoundCardOptions = ({ item }: { item: TFoundItem }) => {
 						Edit [Coming soon]
 					</span>
 				</MenuItem>
-				<MenuItem onClick={handleMarking} className={`${isLoading && 'Mui-disabled'}`}>
+				<MenuItem onClick={handleReturnStatus} className={`${isLoading && 'Mui-disabled'}`}>
 					{item?.isReturned ? (
 						<span className='flex justify-center items-center gap-2'>
 							<CloseIcon sx={{ fontSize: '16px' }} />
