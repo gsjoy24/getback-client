@@ -2,6 +2,7 @@
 import LoadingCompo from '@/app/loading';
 import ClaimResponseDialog from '@/components/ClaimResponseDialog/ClaimResponseDialog';
 import PrivateRoute from '@/components/PrivateRoute/PrivateRoute';
+import EmptyCard from '@/components/Shared/EmptyCard/EmptyCard';
 import { useGetClaimQuery } from '@/redux/api/features/claimApi';
 import DateToString from '@/utils/DateToString';
 import LinkIcon from '@mui/icons-material/Link';
@@ -17,9 +18,11 @@ const ClaimDetails = () => {
 
 	if (isFetching) {
 		return <LoadingCompo />;
+	} else if (!data?.data) {
+		return <EmptyCard />;
 	}
 
-	const { status, description, pictures, driveUrl, lostDate, user, location } = data?.data;
+	const { description, pictures, driveUrl, lostDate, user, location } = data?.data;
 	const images =
 		pictures &&
 		pictures.map((image: string) => ({
@@ -56,7 +59,7 @@ const ClaimDetails = () => {
 						<strong>Phone:</strong> {user?.phone} <br />
 						<strong>Location:</strong> {location} <br />
 						<strong>Found Date:</strong> {DateToString(lostDate)} <br />
-						<strong>Status:</strong> {status}
+						<strong>Status:</strong> {data?.data?.status}
 					</Typography>
 
 					{driveUrl && (
@@ -79,7 +82,20 @@ const ClaimDetails = () => {
 					<Typography variant='body2' my={2}>
 						{description}
 					</Typography>
-					<ClaimResponseDialog item={data?.data} />
+					{data?.data?.status === 'PENDING' ? (
+						<ClaimResponseDialog item={data?.data} />
+					) : (
+						<Typography
+							variant='body2'
+							sx={{
+								border: '1px solid black',
+								padding: '10px',
+								display: 'inline-block'
+							}}
+						>
+							Action already taken!
+						</Typography>
+					)}
 				</Box>
 			</Stack>
 		</PrivateRoute>

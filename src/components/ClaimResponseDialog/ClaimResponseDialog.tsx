@@ -4,6 +4,7 @@ import { useMakeResponseToClaimMutation } from '@/redux/api/features/claimApi';
 import ClaimResSchema from '@/schemas/claimResSchema';
 import TClaim from '@/types/claim';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { DialogContentText, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
@@ -66,13 +67,25 @@ const ClaimResponseDialog = ({ item }: { item: TClaim }) => {
 				aria-describedby='alert-dialog-slide-description'
 			>
 				<DialogTitle>send response to {item?.user?.name} </DialogTitle>
+
 				<DialogContent>
+					<DialogContentText id='alert-dialog-slide-description'>
+						The user will be notified about your response through email.
+					</DialogContentText>
 					<LFForm onSubmit={handleSubmit} resolver={zodResolver(ClaimResSchema)} resetForm={resetForm}>
 						<LFInput name='response' label='Response' multiline sx={{ mb: 2 }} />
 						<LFSelect name='status' label='Status' options={statusOptions} />
-						<Button type='submit' fullWidth sx={{ mt: 2 }} disabled={isLoading}>
-							{isLoading ? 'Submitting...' : 'Submit'}
-						</Button>
+
+						{/* second layer safety */}
+						{item?.status === 'PENDING' ? (
+							<Button type='submit' fullWidth sx={{ mt: 2 }} disabled={isLoading}>
+								{isLoading ? 'Submitting...' : 'Submit'}
+							</Button>
+						) : (
+							<Typography variant='body2' my={2}>
+								Action already taken!
+							</Typography>
+						)}
 					</LFForm>
 				</DialogContent>
 			</Dialog>

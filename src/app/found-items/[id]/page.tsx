@@ -1,6 +1,7 @@
 'use client';
 import LoadingCompo from '@/app/loading';
 import ClaimDialog from '@/components/ClaimDialog/ClaimDialog';
+import EmptyCard from '@/components/Shared/EmptyCard/EmptyCard';
 import { useGetFoundItemQuery } from '@/redux/api/features/foundItemApi';
 import { getUserInfo } from '@/services/auth.services';
 import DateToString from '@/utils/DateToString';
@@ -18,6 +19,8 @@ const FoundItemDetails = () => {
 
 	if (isFetching) {
 		return <LoadingCompo />;
+	} else if (!data?.data) {
+		return <EmptyCard />;
 	}
 
 	const { userId, itemName, pictures, description, location, foundDate, user, category } = data?.data;

@@ -1,5 +1,6 @@
 'use client';
 import LoadingCompo from '@/app/loading';
+import EmptyCard from '@/components/Shared/EmptyCard/EmptyCard';
 import { useGetLostItemQuery } from '@/redux/api/features/lostItemApi';
 import DateToString from '@/utils/DateToString';
 import { Box, Chip, Stack, Typography } from '@mui/material';
@@ -14,6 +15,8 @@ const LostItemDetails = () => {
 
 	if (isFetching) {
 		return <LoadingCompo />;
+	} else if (!data?.data) {
+		return <EmptyCard />;
 	}
 
 	const { itemName, pictures, description, location, lostDate, user, category } = data?.data;

@@ -1,5 +1,7 @@
 'use client';
 import PrivateRoute from '@/components/PrivateRoute/PrivateRoute';
+import EmptyCard from '@/components/Shared/EmptyCard/EmptyCard';
+import FoundItemCard from '@/components/Shared/FoundItemCard/FoundItemCard';
 import LostItemCard from '@/components/Shared/LostItemCard/LostItemCard';
 import SectionTitle from '@/components/Shared/SectionTitle';
 import { useGetProfileQuery } from '@/redux/api/features/profileApi';
@@ -21,6 +23,8 @@ const MyProfile = () => {
 
 	if (isFetching) {
 		return <LoadingCompo />;
+	} else if (!data?.data) {
+		return <EmptyCard />;
 	}
 
 	const { user, bio, image, age, createdAt, lostItems, foundItems, counts } = data?.data;
@@ -208,42 +212,51 @@ const MyProfile = () => {
 							}
 						}}
 					>
-						<SectionTitle title='Lost Items' />
-						<Stack justifyContent='center' alignItems='center' flexWrap='wrap' direction='row' gap={3}>
-							{lostItems?.map((item: TLostItem) => (
-								<LostItemCard key={item.id} item={item} />
-							))}
-						</Stack>
-						<div className='text-center mb-8'>
-							<Button
-								component={Link}
-								href={'/my-profile/lost-items'}
-								sx={{
-									mt: 2
-								}}
-							>
-								See All
-							</Button>
-						</div>
+						{/* /* lost items */}
+						{lostItems?.length && (
+							<>
+								<SectionTitle title='Lost Items' />
+								<Stack justifyContent='center' alignItems='center' flexWrap='wrap' direction='row' gap={3}>
+									{lostItems?.map((item: TLostItem) => (
+										<LostItemCard key={item.id} item={item} />
+									))}
+								</Stack>
+								<div className='text-center mb-8'>
+									<Button
+										component={Link}
+										href={'/my-profile/lost-items'}
+										sx={{
+											mt: 2
+										}}
+									>
+										See All
+									</Button>
+								</div>
+							</>
+						)}
 
 						{/* found items */}
-						<SectionTitle title='Found Items' />
-						<Stack justifyContent='center' alignItems='center' flexWrap='wrap' direction='row' gap={3}>
-							{foundItems?.map((item: TFoundItem) => (
-								<LostItemCard key={item.id} item={item} />
-							))}
-						</Stack>
-						<div className='text-center'>
-							<Button
-								component={Link}
-								href={'/my-profile/found-items'}
-								sx={{
-									mt: 2
-								}}
-							>
-								See All
-							</Button>
-						</div>
+						{foundItems?.length && (
+							<>
+								<SectionTitle title='Found Items' />
+								<Stack justifyContent='center' alignItems='center' flexWrap='wrap' direction='row' gap={3}>
+									{foundItems?.map((item: TFoundItem) => (
+										<FoundItemCard key={item.id} item={item} />
+									))}
+								</Stack>
+								<div className='text-center'>
+									<Button
+										component={Link}
+										href={'/my-profile/found-items'}
+										sx={{
+											mt: 2
+										}}
+									>
+										See All
+									</Button>
+								</div>
+							</>
+						)}
 					</Grid>
 				</Grid>
 			</Container>

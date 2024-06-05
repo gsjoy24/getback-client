@@ -54,7 +54,7 @@ const lostItemApi = baseApi.injectEndpoints({
 		updateLostItem: build.mutation({
 			query: ({ id, data }) => ({
 				url: `/lost-items/${id}`,
-				method: 'PATCH',
+				method: 'PUT',
 				data
 			}),
 			invalidatesTags: ({ id }) => [{ type: 'LostItems' }, { type: 'LostItems', id }]
@@ -71,7 +71,7 @@ const lostItemApi = baseApi.injectEndpoints({
 		toggleMarkAsFound: build.mutation({
 			query: ({ id, status }) => ({
 				url: `/lost-items/${id}/`,
-				method: 'PATCH',
+				method: 'PUT',
 				data: { isFound: status }
 			}),
 			invalidatesTags: ['LostItems', 'My-profile', 'My-lost-items']
