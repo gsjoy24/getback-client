@@ -63,6 +63,14 @@ const foundItemApi = baseApi.injectEndpoints({
 				url: `/found-items/${id}`,
 				method: 'DELETE'
 			})
+		}),
+
+		toggleReturnStatus: build.mutation({
+			query: ({ id, status }) => ({
+				url: `/found-items/${id}`,
+				method: 'PUT',
+				data: { isReturned: status }
+			})
 		})
 	})
 });
@@ -73,5 +81,6 @@ export const {
 	useGetMyFoundItemsQuery,
 	useGetFoundItemQuery,
 	useUpdateFoundItemMutation,
-	useDeleteFoundItemMutation
+	useDeleteFoundItemMutation,
+	useToggleReturnStatusMutation
 } = foundItemApi;

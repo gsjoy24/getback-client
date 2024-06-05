@@ -11,7 +11,7 @@ import { FaCalendarAlt } from 'react-icons/fa';
 import { IoIosArrowRoundForward } from 'react-icons/io';
 import { IoLocationSharp } from 'react-icons/io5';
 import SimpleImageSlider from 'react-simple-image-slider';
-import CardOptions from '../CardOptions/CardOptions';
+import LostCardOptions from '../CardOptions/LostCardOptions';
 
 const LostItemCard = ({ item }: any) => {
 	const userInfo = getUserInfo();
@@ -36,7 +36,7 @@ const LostItemCard = ({ item }: any) => {
 					position: 'relative'
 				}}
 			>
-				{userInfo?.id === userId && <CardOptions item={item} />}
+				{userInfo?.id === userId && <LostCardOptions item={item} />}
 				<Typography gutterBottom variant='h5'>
 					{itemName}
 				</Typography>

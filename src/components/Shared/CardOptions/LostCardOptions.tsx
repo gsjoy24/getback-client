@@ -12,7 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import * as React from 'react';
 import { toast } from 'sonner';
 
-const CardOptions = ({ item }: { item: TLostItem }) => {
+const LostCardOptions = ({ item }: { item: TLostItem }) => {
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
 	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -76,7 +76,7 @@ const CardOptions = ({ item }: { item: TLostItem }) => {
 				<MenuItem onClick={handleClose}>
 					<span className='flex justify-center items-center gap-2'>
 						<EditIcon sx={{ fontSize: '16px' }} />
-						Edit
+						Edit [Coming soon]
 					</span>
 				</MenuItem>
 				<MenuItem onClick={handleMarking} className={`${isMarking && 'Mui-disabled'}`}>
@@ -97,4 +97,4 @@ const CardOptions = ({ item }: { item: TLostItem }) => {
 	);
 };
 
-export default CardOptions;
+export default LostCardOptions;

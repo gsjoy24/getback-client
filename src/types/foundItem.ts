@@ -10,7 +10,7 @@ export type TFoundItem = {
 	location: string;
 	foundDate: string;
 	pictures: string[];
-	isFound: boolean;
+	isReturned: boolean;
 	createdAt: string;
 	updatedAt: string;
 	user?: TUser;

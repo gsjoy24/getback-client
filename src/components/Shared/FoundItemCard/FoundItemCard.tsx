@@ -10,6 +10,7 @@ import { FaCalendarAlt } from 'react-icons/fa';
 import { IoIosArrowRoundForward } from 'react-icons/io';
 import { IoLocationSharp } from 'react-icons/io5';
 import SimpleImageSlider from 'react-simple-image-slider';
+import FoundCardOptions from '../CardOptions/FoundICardOptions';
 
 const FoundItemCard = ({ item }: any) => {
 	const { itemName, description, pictures, location, foundDate } = item;
@@ -27,7 +28,12 @@ const FoundItemCard = ({ item }: any) => {
 			}}
 		>
 			<SimpleImageSlider width={330} height={200} images={images} showNavs={true} navSize={25} showBullets={false} />
-			<CardContent>
+			<CardContent
+				sx={{
+					position: 'relative'
+				}}
+			>
+				<FoundCardOptions item={item} />
 				<Typography gutterBottom variant='h5'>
 					{itemName}
 				</Typography>
