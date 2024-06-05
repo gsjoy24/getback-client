@@ -1,5 +1,5 @@
 'use client';
-import { useToggleMarkAsFoundMutation } from '@/redux/api/features/lostItemApi';
+import { useDeleteLostItemMutation, useToggleMarkAsFoundMutation } from '@/redux/api/features/lostItemApi';
 import { TLostItem } from '@/types/lostItem';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
@@ -10,6 +10,7 @@ import { IconButton } from '@mui/material';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import * as React from 'react';
+import { toast } from 'sonner';
 
 const CardOptions = ({ item }: { item: TLostItem }) => {
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -19,6 +20,7 @@ const CardOptions = ({ item }: { item: TLostItem }) => {
 	};
 
 	const [toggleMarkAsFound, { isLoading: isMarking }] = useToggleMarkAsFoundMutation();
+	const [deleteLostItem, { isLoading: isDeleting }] = useDeleteLostItemMutation();
 
 	const handleClose = () => {
 		setAnchorEl(null);
@@ -26,7 +28,21 @@ const CardOptions = ({ item }: { item: TLostItem }) => {
 	const handleMarking = async () => {
 		try {
 			const res = await toggleMarkAsFound({ id: item.id, status: !item.isFound });
-			console.log(res.data);
+			if (res.data.success) {
+				toast.success(`Item marked as ${!item.isFound ? 'found' : 'not found'}`);
+				setAnchorEl(null);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+	const handleDelete = async () => {
+		try {
+			const res = await deleteLostItem(item.id);
+			if (res.data.success) {
+				toast.success('Item deleted successfully');
+				setAnchorEl(null);
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -51,10 +67,10 @@ const CardOptions = ({ item }: { item: TLostItem }) => {
 					'aria-labelledby': 'basic-button'
 				}}
 			>
-				<MenuItem onClick={handleClose}>
+				<MenuItem onClick={handleDelete} className={`${isDeleting && 'Mui-disabled'}`}>
 					<span className='flex justify-center items-center gap-2'>
 						<DeleteIcon sx={{ fontSize: '16px' }} />
-						Delete
+						{isDeleting ? 'Deleting...' : 'Delete'}
 					</span>
 				</MenuItem>
 				<MenuItem onClick={handleClose}>
