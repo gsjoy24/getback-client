@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 						{children}
 						<Footer />
 					</AppRouterCacheProvider>
-					<Toaster position='top-center' expand={true} closeButton={true} />
+					<Toaster position='top-center' expand={true} closeButton={true} duration={2000} />
 				</body>
 			</html>
 		</Providers>

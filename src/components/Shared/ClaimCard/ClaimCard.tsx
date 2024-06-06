@@ -21,7 +21,15 @@ const ClaimCard = ({ item }: { item: TClaim }) => {
 				}
 			}}
 		>
-			<SimpleImageSlider width={330} height={200} images={images} showNavs={true} navSize={25} showBullets={false} />
+			<SimpleImageSlider
+				width={330}
+				height={200}
+				images={images}
+				showNavs={true}
+				navSize={25}
+				showBullets={false}
+				autoPlay={true}
+			/>
 			<CardContent
 				sx={{
 					position: 'relative'

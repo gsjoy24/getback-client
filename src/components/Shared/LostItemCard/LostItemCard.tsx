@@ -30,7 +30,15 @@ const LostItemCard = ({ item }: any) => {
 				}
 			}}
 		>
-			<SimpleImageSlider width={330} height={200} images={images} showNavs={true} navSize={25} showBullets={false} />
+			<SimpleImageSlider
+				width={330}
+				autoPlay={true}
+				height={200}
+				images={images}
+				showNavs={true}
+				navSize={25}
+				showBullets={false}
+			/>
 			<CardContent
 				sx={{
 					position: 'relative'
