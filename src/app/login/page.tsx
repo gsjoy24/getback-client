@@ -22,12 +22,16 @@ const LoginPage = () => {
 	const [showPass, setShowPass] = useState<boolean>(false);
 	const [resetForm, setResetForm] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(false);
+	const isLogin = isLoggedIn();
 
 	useEffect(() => {
+		if (isLogin) {
+			router.push('/');
+		}
 		const searchParams = new URLSearchParams(window?.location.search);
 		const redirect = searchParams.get('redirect');
 		setRedirectTo(redirect);
-	}, []);
+	}, [router, isLogin]);
 
 	const handleSubmit = async (data: FieldValues) => {
 		try {

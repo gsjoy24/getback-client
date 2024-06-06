@@ -19,7 +19,7 @@ const claimApi = baseApi.injectEndpoints({
 				});
 
 				return {
-					url: '/me',
+					url: '/claims/me',
 					method: 'GET',
 					params
 				};

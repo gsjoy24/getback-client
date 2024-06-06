@@ -4,7 +4,7 @@ const profileApi = baseApi.injectEndpoints({
 	endpoints: (build) => ({
 		getProfile: build.query({
 			query: () => ({
-				url: '/me',
+				url: '/users/me',
 				method: 'GET'
 			}),
 			providesTags: ['My-profile', 'My-found-items', 'My-lost-items', 'My-claims']
@@ -12,7 +12,7 @@ const profileApi = baseApi.injectEndpoints({
 
 		updateProfile: build.mutation({
 			query: (data) => ({
-				url: '/me',
+				url: '/users/me',
 				method: 'PUT',
 				data
 			}),

@@ -20,7 +20,7 @@ const foundItemApi = baseApi.injectEndpoints({
 				});
 
 				return {
-					url: '/me',
+					url: '/found-items/me',
 					method: 'GET',
 					params
 				};

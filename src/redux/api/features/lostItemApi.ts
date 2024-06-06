@@ -20,7 +20,7 @@ const lostItemApi = baseApi.injectEndpoints({
 				});
 
 				return {
-					url: '/me',
+					url: '/lost-items/me',
 					method: 'GET',
 					params
 				};
