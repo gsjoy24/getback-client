@@ -3,7 +3,7 @@ import config from '@/lib/config';
 import { FieldValues } from 'react-hook-form';
 
 const userLogin = async (data: FieldValues) => {
-	const res = await fetch(`${config.serverURL}/login`, {
+	const res = await fetch(`${config.serverURL}/auth/login`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'

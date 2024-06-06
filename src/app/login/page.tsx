@@ -36,7 +36,7 @@ const LoginPage = () => {
 			if (res.success) {
 				setResetForm(true);
 				toast.success(res.message);
-				await storeUserInfo(res?.data?.token);
+				await storeUserInfo(res?.data?.accessToken);
 				router.push(redirectTo || '/');
 			} else {
 				toast.error(res.message);

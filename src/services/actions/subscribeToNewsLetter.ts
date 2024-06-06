@@ -3,7 +3,7 @@ import config from '@/lib/config';
 import { FieldValues } from 'react-hook-form';
 
 const subscribeToNewsLetter = async (data: FieldValues) => {
-	const res = await fetch(`${config.serverURL}/subscribe`, {
+	const res = await fetch(`${config.serverURL}/newsletter/subscribe`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'

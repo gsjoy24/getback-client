@@ -4,15 +4,16 @@ const profileApi = baseApi.injectEndpoints({
 	endpoints: (build) => ({
 		getProfile: build.query({
 			query: () => ({
-				url: '/my-profile',
+				url: '/me',
 				method: 'GET'
 			}),
 			providesTags: ['My-profile', 'My-found-items', 'My-lost-items', 'My-claims']
 		}),
+
 		updateProfile: build.mutation({
 			query: (data) => ({
-				url: '/profile',
-				method: 'PATCH',
+				url: '/me',
+				method: 'PUT',
 				data
 			}),
 			invalidatesTags: ['My-profile', 'My-found-items', 'My-lost-items', 'My-claims']

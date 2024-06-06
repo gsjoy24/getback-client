@@ -14,12 +14,9 @@ const NoPageHere = () => {
 	}, [router]);
 
 	return (
-		<div className='h-full w-full flex justify-center items-center'>
-			<div>
-				<PageTitle title='Page Not Found' desc='redirecting to found items page' />
-				<br />
-				<Loading />
-			</div>
+		<div className='min-h-[90vh] h-full w-full flex justify-center items-center flex-col gap-4'>
+			<Loading />
+			<PageTitle title='Page Not Found' desc='redirecting to found items page' />
 		</div>
 	);
 };
