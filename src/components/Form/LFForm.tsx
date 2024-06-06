@@ -19,7 +19,7 @@ const LFForm = ({ children, onSubmit, resolver, resetForm }: TLFFormProps) => {
 	const { handleSubmit, reset } = methods;
 	const submit: SubmitHandler<FieldValues> = (data) => {
 		onSubmit(data);
-		resetForm && reset();
+		resetForm === true && reset();
 	};
 	return (
 		<FormProvider {...methods}>

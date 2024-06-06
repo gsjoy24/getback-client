@@ -18,7 +18,6 @@ const StayUpdated = () => {
 			setLoading(true);
 			const res = await subscribeToNewsLetter(data);
 			if (res.success) {
-				setResetForm(true);
 				toast.success(res.message);
 			} else {
 				toast.error(res.message);
@@ -26,6 +25,7 @@ const StayUpdated = () => {
 		} catch (error: any) {
 			toast.error(error?.message);
 		} finally {
+			setResetForm(true);
 			setLoading(false);
 		}
 	};
