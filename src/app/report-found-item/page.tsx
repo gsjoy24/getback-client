@@ -60,9 +60,7 @@ const ReportFoundItem = () => {
 				toast.success(res?.data?.message);
 				router.push('/found-items');
 			}
-		} catch (error) {
-			console.log(error);
-		}
+		} catch (error) {}
 	};
 
 	return (

@@ -60,9 +60,7 @@ const ReportLostItem = () => {
 				toast.success(res?.data?.message);
 				router.push('/lost-items');
 			}
-		} catch (error) {
-			console.log(error);
-		}
+		} catch (error) {}
 	};
 
 	return (

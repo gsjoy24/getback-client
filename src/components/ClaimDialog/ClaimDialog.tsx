@@ -61,11 +61,8 @@ const ClaimDialog = ({ item }: { item: TFoundItem }) => {
 		data.pictures = imageLinks;
 		data.foundItemId = item?.id;
 
-		console.log(data);
-
 		try {
 			const res = await createClaim(data);
-			console.log(res?.data);
 			if (res?.data?.success) {
 				toast.success(res?.data?.message);
 			} else {

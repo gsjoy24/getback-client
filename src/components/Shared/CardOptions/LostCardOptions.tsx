@@ -32,9 +32,7 @@ const LostCardOptions = ({ item }: { item: TLostItem }) => {
 				toast.success(`Item marked as ${!item.isFound ? 'found' : 'not found'}`);
 				setAnchorEl(null);
 			}
-		} catch (error) {
-			console.log(error);
-		}
+		} catch (error) {}
 	};
 	const handleDelete = async () => {
 		try {
@@ -43,9 +41,7 @@ const LostCardOptions = ({ item }: { item: TLostItem }) => {
 				toast.success('Item deleted successfully');
 				setAnchorEl(null);
 			}
-		} catch (error) {
-			console.log(error);
-		}
+		} catch (error) {}
 	};
 	return (
 		<div className='absolute top-2 right-2'>

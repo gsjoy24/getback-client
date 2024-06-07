@@ -29,7 +29,6 @@ const ChangePassword = () => {
 
 		try {
 			const res = await changePassword(modifiedData);
-			console.log(res);
 			if (res?.data?.success) {
 				setResetForm(true);
 				toast.success(res?.data?.message);

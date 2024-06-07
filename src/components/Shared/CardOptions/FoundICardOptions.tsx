@@ -30,14 +30,11 @@ const FoundCardOptions = ({ item }: { item: TFoundItem }) => {
 	const handleReturnStatus = async () => {
 		try {
 			const res = await toggleReturnStatus({ id: item.id, status: !item?.isReturned });
-			console.log(res);
 			if (res.data.success) {
 				toast.success(`Item marked as ${!item?.isReturned ? 'returned' : 'found'}`);
 				setAnchorEl(null);
 			}
-		} catch (error) {
-			console.log(error);
-		}
+		} catch (error) {}
 	};
 
 	const handleDelete = async () => {
@@ -47,9 +44,7 @@ const FoundCardOptions = ({ item }: { item: TFoundItem }) => {
 				toast.success('Item deleted successfully');
 				setAnchorEl(null);
 			}
-		} catch (error) {
-			console.log(error);
-		}
+		} catch (error) {}
 	};
 
 	return (

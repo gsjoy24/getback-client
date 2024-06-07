@@ -8,7 +8,6 @@ import LostItemCard from '@/components/Shared/LostItemCard/LostItemCard';
 import PageTitle from '@/components/Shared/PageTitle';
 import { useGetCategoriesQuery } from '@/redux/api/features/categoryApi';
 import { useGetMyLostItemsQuery } from '@/redux/api/features/lostItemApi';
-import { getUserInfo } from '@/services/auth.services';
 import { TQueryParams } from '@/types';
 import { Box, IconButton, Pagination, Stack } from '@mui/material';
 import dynamic from 'next/dynamic';
@@ -26,9 +25,6 @@ const LostItems = () => {
 		label: category.name,
 		value: category.id
 	}));
-	const userInfo = getUserInfo();
-	console.log(userInfo);
-
 	const { data, isFetching } = useGetMyLostItemsQuery([
 		filterParam,
 		searchTerm,

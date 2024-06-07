@@ -49,9 +49,7 @@ const ClaimResponseDialog = ({ item }: { item: TClaim }) => {
 			} else {
 				toast.error('Failed to send response! Try again later.');
 			}
-		} catch (error) {
-			console.log(error);
-		}
+		} catch (error) {}
 	};
 
 	return (
