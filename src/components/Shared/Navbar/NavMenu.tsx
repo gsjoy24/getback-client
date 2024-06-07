@@ -1,6 +1,6 @@
 import { getUserInfo, logout } from '@/services/auth.services';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Avatar, IconButton } from '@mui/material';
+import { IconButton } from '@mui/material';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
