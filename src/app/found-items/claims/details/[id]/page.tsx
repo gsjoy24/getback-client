@@ -30,7 +30,7 @@ const ClaimDetails = () => {
 			const res = await deleteClaim(id);
 			if (res?.data?.success) {
 				toast.success('Claim deleted successfully');
-				router.push('/my-profile/claimed-items');
+				router.push('/my-profile/claims');
 			}
 		} catch (error) {}
 	};

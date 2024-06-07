@@ -242,7 +242,7 @@ const FaqsPage = () => {
 			{data.map((category, index) => (
 				<Stack key={index}>
 					<Typography
-						variant='h4'
+						variant='h5'
 						sx={{
 							display: 'flex',
 							alignItems: 'center',

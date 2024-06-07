@@ -1,10 +1,10 @@
 import logo from '@/assets/logo/logo-w.png';
 import navLinks from '@/constants/navLinks';
-import { Facebook, Instagram, LinkedIn, Twitter } from '@mui/icons-material';
+import { Facebook, Instagram, LinkedIn, Twitter, X } from '@mui/icons-material';
 import { Box, Container, Grid, IconButton, Stack, Typography } from '@mui/material';
+import { visuallyHidden } from '@mui/utils';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 
 const Footer = () => {
 	const currentYear = new Date().getFullYear();
@@ -47,19 +47,23 @@ const Footer = () => {
 						<Typography variant='h5' gutterBottom>
 							Contact Us
 						</Typography>
-						<Typography variant='body2'>Email: support@lostandfound.com</Typography>
+						<Typography variant='body2'>Email: gour.joy24@gmail.com</Typography>
 						<Typography variant='body2'>Phone: (123) 456-7890</Typography>
 						<Box sx={{ mt: 2 }}>
-							<IconButton href='https://www.facebook.com' color='inherit'>
+							<IconButton href='https://www.facebook.com/goursahajoy' color='inherit'>
+								<span style={visuallyHidden}>Facebook</span>
 								<Facebook />
 							</IconButton>
-							<IconButton href='https://www.twitter.com' color='inherit'>
-								<Twitter />
-							</IconButton>
-							<IconButton href='https://www.instagram.com' color='inherit'>
+							<IconButton href='https://www.instagram.com/goursahajoy' color='inherit'>
+								<span style={visuallyHidden}>Instagram</span>
 								<Instagram />
 							</IconButton>
-							<IconButton href='https://www.linkedin.com' color='inherit'>
+							<IconButton href='https://x.com/goursahajoy' color='inherit'>
+								<span style={visuallyHidden}>X</span>
+								<X />
+							</IconButton>
+							<IconButton href='https://www.linkedin.com/in/goursahajoy' color='inherit'>
+								<span style={visuallyHidden}>LinkedIn</span>
 								<LinkedIn />
 							</IconButton>
 						</Box>

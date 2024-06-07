@@ -11,11 +11,13 @@ import { useGetMyLostItemsQuery } from '@/redux/api/features/lostItemApi';
 import { getUserInfo } from '@/services/auth.services';
 import { TQueryParams } from '@/types';
 import { Box, IconButton, Pagination, Stack } from '@mui/material';
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
 
 const LostItems = () => {
+	const PrivateRoute = dynamic(() => import('@/components/PrivateRoute/PrivateRoute'), { ssr: false });
 	const [filterParam, setFilterParam] = useState({} as TQueryParams);
 	const [searchTerm, setSearchTerm] = useState({} as TQueryParams);
 	const [page, setPage] = useState<number>(1);
@@ -50,7 +52,7 @@ const LostItems = () => {
 		setSearchTerm({ name: 'searchTerm', value: data.searchTerm });
 	};
 	return (
-		<div>
+		<PrivateRoute>
 			<PageTitle title='Lost Items' desc='Your collection of items that you have lost.' />
 
 			<Box
@@ -148,7 +150,7 @@ const LostItems = () => {
 					</div>
 				</>
 			)}
-		</div>
+		</PrivateRoute>
 	);
 };
 

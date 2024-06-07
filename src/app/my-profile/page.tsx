@@ -300,7 +300,7 @@ const MyProfile = () => {
 								<div className='text-center'>
 									<Button
 										component={Link}
-										href={'/my-profile/claimed-items'}
+										href={'/my-profile/claims'}
 										sx={{
 											mt: 2
 										}}

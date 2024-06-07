@@ -21,6 +21,7 @@ const LFInput = ({ label, type = 'text', name, sx, multiline = false, rows }: LF
 			render={({ field, fieldState: { error } }) => (
 				<TextField
 					{...field}
+					inputProps={{ ...field, autoComplete: name }}
 					sx={{ ...sx, width: '100%', borderRadius: '5px', mb: 2 }}
 					label={label}
 					placeholder={label}

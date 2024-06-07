@@ -10,11 +10,13 @@ import { useGetCategoriesQuery } from '@/redux/api/features/categoryApi';
 import { useGetMyClaimsQuery } from '@/redux/api/features/claimApi';
 import { TQueryParams } from '@/types';
 import { Box, IconButton, Pagination, Stack } from '@mui/material';
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
 
 const ClaimedItems = () => {
+	const PrivateRoute = dynamic(() => import('@/components/PrivateRoute/PrivateRoute'), { ssr: false });
 	const [filterParam, setFilterParam] = useState({} as TQueryParams);
 	const [searchTerm, setSearchTerm] = useState({} as TQueryParams);
 	const [page, setPage] = useState<number>(1);
@@ -44,7 +46,7 @@ const ClaimedItems = () => {
 	};
 
 	return (
-		<div>
+		<PrivateRoute>
 			<PageTitle title='Claimed Items' desc='Your collection of items that you have claimed.' />
 
 			<Box
@@ -138,7 +140,7 @@ const ClaimedItems = () => {
 					</div>
 				</>
 			)}
-		</div>
+		</PrivateRoute>
 	);
 };
 

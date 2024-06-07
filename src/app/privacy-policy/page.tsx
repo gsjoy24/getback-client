@@ -1,9 +1,10 @@
-// pages/privacy-policy.js
 import { Container, Divider, Typography } from '@mui/material';
 import Link from 'next/link';
 import React from 'react';
 
 const PrivacyPolicyPage = () => {
+		// as this content is not important, I took help from chatGPT to generate this content
+
 	return (
 		<Container maxWidth='md' sx={{ py: 6 }}>
 			<Typography

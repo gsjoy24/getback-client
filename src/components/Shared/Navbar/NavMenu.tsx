@@ -1,4 +1,6 @@
+'use client';
 import { getUserInfo, logout } from '@/services/auth.services';
+import { TUser } from '@/types/user';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { IconButton } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -6,10 +8,10 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import * as React from 'react';
+import { useEffect, useState } from 'react';
 
 export default function BasicMenu() {
-	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
 	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
 		setAnchorEl(event.currentTarget);
@@ -18,8 +20,12 @@ export default function BasicMenu() {
 		setAnchorEl(null);
 	};
 
-	const userData = getUserInfo();
 	const router = useRouter();
+	const [userData, setUserData] = useState<TUser | null>(null);
+
+	useEffect(() => {
+		setUserData(getUserInfo());
+	}, []);
 
 	const handleLogout = () => {
 		logout();
@@ -47,13 +53,13 @@ export default function BasicMenu() {
 				}}
 			>
 				{userData?.role === 'admin' && (
-					<MenuItem onClick={handleClose}>
-						<Link href='/dashboard'>Dashboard</Link>
-					</MenuItem>
+					<Link href='/dashboard'>
+						<MenuItem onClick={handleClose}>Dashboard</MenuItem>
+					</Link>
 				)}
-				<MenuItem onClick={handleClose}>
-					<Link href='/my-profile'>My Profile</Link>
-				</MenuItem>
+				<Link href='/my-profile'>
+					<MenuItem onClick={handleClose}>My Profile</MenuItem>
+				</Link>
 				<MenuItem onClick={handleLogout}>Logout</MenuItem>
 			</Menu>
 		</div>

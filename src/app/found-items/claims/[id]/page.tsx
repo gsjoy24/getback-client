@@ -9,12 +9,14 @@ import PageTitle from '@/components/Shared/PageTitle';
 import { useGetClaimsQuery } from '@/redux/api/features/claimApi';
 import { TQueryParams } from '@/types';
 import { Box, IconButton, Pagination, Stack } from '@mui/material';
+import dynamic from 'next/dynamic';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
 
 const ItemsClaims = () => {
+	const PrivateRoute = dynamic(() => import('@/components/PrivateRoute/PrivateRoute'), { ssr: false });
 	const { id } = useParams<{ id: string }>();
 	const [page, setPage] = useState<number>(1);
 	const [searchTerm, setSearchTerm] = useState({} as TQueryParams);
@@ -41,7 +43,7 @@ const ItemsClaims = () => {
 	};
 
 	return (
-		<div>
+		<PrivateRoute>
 			<PageTitle title='Claims for the item' desc='Check the claims to return the item to the real owner!' />
 
 			<Box
@@ -125,7 +127,7 @@ const ItemsClaims = () => {
 					</div>
 				</>
 			)}
-		</div>
+		</PrivateRoute>
 	);
 };
 

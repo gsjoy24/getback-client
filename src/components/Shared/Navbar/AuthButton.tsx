@@ -1,7 +1,10 @@
+'use client';
 import { getUserInfo, logout } from '@/services/auth.services';
+import { TUser } from '@/types/user';
 import { Button } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import NavItem from './NavItem';
 
 type TAuthButtonProps = {
@@ -9,8 +12,12 @@ type TAuthButtonProps = {
 };
 
 const AuthButton = ({ setOpen }: TAuthButtonProps) => {
-	const userData = getUserInfo();
 	const router = useRouter();
+	const [userData, setUserData] = useState<TUser | null>(null);
+
+	useEffect(() => {
+		setUserData(getUserInfo());
+	}, []);
 
 	const handleLogout = async () => {
 		logout();
