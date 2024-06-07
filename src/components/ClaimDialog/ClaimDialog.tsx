@@ -12,7 +12,8 @@ import { TransitionProps } from '@mui/material/transitions';
 import { Dayjs } from 'dayjs';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { usePathname } from 'next/navigation';
+import React, { use, useState } from 'react';
 import { MdOutlineClose } from 'react-icons/md';
 import { toast } from 'sonner';
 import LFDatePicker from '../Form/LFDatePicker';
@@ -31,6 +32,7 @@ const Transition = React.forwardRef(function Transition(
 });
 
 const ClaimDialog = ({ item }: { item: TFoundItem }) => {
+	const currentURL = usePathname();
 	const isUserLoggedIn = isLoggedIn();
 	const [open, setOpen] = useState(false);
 	const [date, setDate] = useState<Dayjs | null>(null);
@@ -85,7 +87,7 @@ const ClaimDialog = ({ item }: { item: TFoundItem }) => {
 					Claim
 				</Button>
 			) : (
-				<Button component={Link} href='/login' sx={{ width: '180px', mt: 2 }}>
+				<Button component={Link} href={`/login?redirect=${currentURL}`} sx={{ width: '180px', mt: 2 }}>
 					Login to Claim
 				</Button>
 			)}

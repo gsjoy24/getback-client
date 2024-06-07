@@ -1,6 +1,5 @@
 'use client';
 import PrivateRoute from '@/components/PrivateRoute/PrivateRoute';
-import ClaimCard from '@/components/Shared/ClaimCard/ClaimCard';
 import MyClaimCard from '@/components/Shared/ClaimCard/MyClaimCard';
 import EmptyCard from '@/components/Shared/EmptyCard/EmptyCard';
 import FoundItemCard from '@/components/Shared/FoundItemCard/FoundItemCard';
@@ -221,7 +220,7 @@ const MyProfile = () => {
 						}}
 					>
 						{/* /* lost items */}
-						{lostItems?.length && (
+						{lostItems?.length > 0 && (
 							<>
 								<SectionTitle title='Lost Items' />
 								<Stack justifyContent='center' alignItems='center' flexWrap='wrap' direction='row' gap={3}>
@@ -244,7 +243,7 @@ const MyProfile = () => {
 						)}
 
 						{/* found items */}
-						{foundItems?.length && (
+						{foundItems?.length > 0 && (
 							<>
 								<SectionTitle title='Found Items' />
 								<Stack justifyContent='center' alignItems='center' flexWrap='wrap' direction='row' gap={3}>
@@ -267,7 +266,7 @@ const MyProfile = () => {
 						)}
 
 						{/* claimed items */}
-						{claimedItems?.length && (
+						{claimedItems?.length > 0 && (
 							<>
 								<SectionTitle title='Claimed Items' />
 								<Stack justifyContent='center' alignItems='center' flexWrap='wrap' direction='row' gap={3}>
