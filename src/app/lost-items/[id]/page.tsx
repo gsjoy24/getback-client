@@ -68,7 +68,14 @@ const LostItemDetails = () => {
 					<strong>Location:</strong> {location} <br />
 					<strong>Found Date:</strong> {DateToString(lostDate)}
 				</Typography>
-				<Typography variant='body2' mt={2}>
+				<Typography
+					variant='body2'
+					component='pre'
+					mt={2}
+					sx={{
+						whiteSpace: 'pre-line'
+					}}
+				>
 					{description}
 				</Typography>
 			</Box>

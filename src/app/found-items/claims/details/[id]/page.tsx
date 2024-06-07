@@ -97,7 +97,14 @@ const ClaimDetails = () => {
 						</Typography>
 					)}
 
-					<Typography variant='body2' my={2}>
+					<Typography
+						variant='body2'
+						component='pre'
+						mt={2}
+						sx={{
+							whiteSpace: 'pre-line'
+						}}
+					>
 						{description}
 					</Typography>
 					{userInfo?.id === user?.id ? (

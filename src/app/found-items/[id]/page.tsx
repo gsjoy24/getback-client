@@ -70,7 +70,14 @@ const FoundItemDetails = () => {
 					<strong>Location:</strong> {location} <br />
 					<strong>Found Date:</strong> {DateToString(foundDate)}
 				</Typography>
-				<Typography variant='body2' mt={2}>
+				<Typography
+					variant='body2'
+					component='pre'
+					mt={2}
+					sx={{
+						whiteSpace: 'pre-line'
+					}}
+				>
 					{description}
 				</Typography>
 
