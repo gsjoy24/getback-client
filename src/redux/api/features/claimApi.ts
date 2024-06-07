@@ -84,5 +84,6 @@ export const {
 	useGetClaimQuery,
 	useUpdateClaimMutation,
 	useDeleteClaimMutation,
-	useMakeResponseToClaimMutation
+	useMakeResponseToClaimMutation,
+	useGetMyClaimsQuery
 } = claimApi;

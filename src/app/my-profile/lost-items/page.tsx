@@ -51,10 +51,7 @@ const LostItems = () => {
 	};
 	return (
 		<div>
-			<PageTitle
-				title='Lost Items'
-				desc='Dive into a collection of lost items awaiting reconnection with their owners.'
-			/>
+			<PageTitle title='Lost Items' desc='Your collection of items that you have lost.' />
 
 			<Box
 				sx={{

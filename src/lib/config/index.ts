@@ -5,6 +5,7 @@ const cloudinaryApiSecret = process.env.NEXT_PUBLIC_CLOUDINARY_API_SECRET as str
 
 const config = {
 	serverURL,
+	googleAnalyticsId: process.env.NEXT_PUBLIC_MEASUREMENT_ID as string,
 	cloudinary: {
 		cloudName: cloudinaryCloudName,
 		apiKey: cloudinaryApiKey,

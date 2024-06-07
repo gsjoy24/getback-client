@@ -3,18 +3,18 @@ import LFFilterSelect from '@/components/Form/LFFilterSelect';
 import LFForm from '@/components/Form/LFForm';
 import LFInput from '@/components/Form/lFInput';
 import LFBackdrop from '@/components/Shared/Backdrop/Backdrop';
+import MyClaimCard from '@/components/Shared/ClaimCard/MyClaimCard';
 import EmptyCard from '@/components/Shared/EmptyCard/EmptyCard';
-import FoundItemCard from '@/components/Shared/FoundItemCard/FoundItemCard';
 import PageTitle from '@/components/Shared/PageTitle';
 import { useGetCategoriesQuery } from '@/redux/api/features/categoryApi';
-import { useGetMyFoundItemsQuery } from '@/redux/api/features/foundItemApi';
+import { useGetMyClaimsQuery } from '@/redux/api/features/claimApi';
 import { TQueryParams } from '@/types';
 import { Box, IconButton, Pagination, Stack } from '@mui/material';
 import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
 
-const FoundItems = () => {
+const ClaimedItems = () => {
 	const [filterParam, setFilterParam] = useState({} as TQueryParams);
 	const [searchTerm, setSearchTerm] = useState({} as TQueryParams);
 	const [page, setPage] = useState<number>(1);
@@ -24,7 +24,7 @@ const FoundItems = () => {
 		value: category.id
 	}));
 
-	const { data, isFetching } = useGetMyFoundItemsQuery([
+	const { data, isFetching } = useGetMyClaimsQuery([
 		filterParam,
 		searchTerm,
 		{
@@ -45,7 +45,7 @@ const FoundItems = () => {
 
 	return (
 		<div>
-			<PageTitle title='Found Items' desc='Your collection of items that you have found.' />
+			<PageTitle title='Claimed Items' desc='Your collection of items that you have claimed.' />
 
 			<Box
 				sx={{
@@ -100,11 +100,7 @@ const FoundItems = () => {
 				}}
 			>
 				{isFetching && <LFBackdrop />}
-				{data?.data?.length ? (
-					data?.data?.map((item: any) => <FoundItemCard key={item.id} item={item} />)
-				) : (
-					<EmptyCard />
-				)}
+				{data?.data?.length ? data?.data?.map((item: any) => <MyClaimCard key={item.id} item={item} />) : <EmptyCard />}
 			</Stack>
 
 			{/* for mobile */}
@@ -146,4 +142,4 @@ const FoundItems = () => {
 	);
 };
 
-export default FoundItems;
+export default ClaimedItems;

@@ -1,10 +1,13 @@
 'use client';
 import PrivateRoute from '@/components/PrivateRoute/PrivateRoute';
+import ClaimCard from '@/components/Shared/ClaimCard/ClaimCard';
+import MyClaimCard from '@/components/Shared/ClaimCard/MyClaimCard';
 import EmptyCard from '@/components/Shared/EmptyCard/EmptyCard';
 import FoundItemCard from '@/components/Shared/FoundItemCard/FoundItemCard';
 import LostItemCard from '@/components/Shared/LostItemCard/LostItemCard';
 import SectionTitle from '@/components/Shared/SectionTitle';
 import { useGetProfileQuery } from '@/redux/api/features/profileApi';
+import TClaim from '@/types/claim';
 import { TFoundItem } from '@/types/foundItem';
 import { TLostItem } from '@/types/lostItem';
 import DateToString from '@/utils/DateToString';
@@ -27,7 +30,7 @@ const MyProfile = () => {
 		return <EmptyCard />;
 	}
 
-	const { user, bio, image, age, createdAt, lostItems, foundItems, counts } = data?.data;
+	const { user, bio, image, age, createdAt, lostItems, foundItems, claimedItems, counts } = data?.data;
 	const { name, email, phone, username } = user;
 	return (
 		<PrivateRoute>
@@ -168,6 +171,11 @@ const MyProfile = () => {
 								<Typography>{counts?.lostItems}</Typography>
 							</Box>
 
+							<Divider
+								sx={{
+									my: 2
+								}}
+							></Divider>
 							<Box
 								display='flex'
 								alignItems='center'
@@ -221,7 +229,7 @@ const MyProfile = () => {
 										<LostItemCard key={item.id} item={item} />
 									))}
 								</Stack>
-								<div className='text-center mb-8'>
+								<div className='text-center mb-14'>
 									<Button
 										component={Link}
 										href={'/my-profile/lost-items'}
@@ -244,10 +252,33 @@ const MyProfile = () => {
 										<FoundItemCard key={item.id} item={item} />
 									))}
 								</Stack>
-								<div className='text-center'>
+								<div className='text-center mb-14'>
 									<Button
 										component={Link}
 										href={'/my-profile/found-items'}
+										sx={{
+											mt: 2
+										}}
+									>
+										See All
+									</Button>
+								</div>
+							</>
+						)}
+
+						{/* claimed items */}
+						{claimedItems?.length && (
+							<>
+								<SectionTitle title='Claimed Items' />
+								<Stack justifyContent='center' alignItems='center' flexWrap='wrap' direction='row' gap={3}>
+									{claimedItems?.map((item: TClaim) => (
+										<MyClaimCard key={item.id} item={item} />
+									))}
+								</Stack>
+								<div className='text-center'>
+									<Button
+										component={Link}
+										href={'/my-profile/claimed-items'}
 										sx={{
 											mt: 2
 										}}

@@ -4,9 +4,10 @@ import ClaimResponseDialog from '@/components/ClaimResponseDialog/ClaimResponseD
 import PrivateRoute from '@/components/PrivateRoute/PrivateRoute';
 import EmptyCard from '@/components/Shared/EmptyCard/EmptyCard';
 import { useGetClaimQuery } from '@/redux/api/features/claimApi';
+import { getUserInfo } from '@/services/auth.services';
 import DateToString from '@/utils/DateToString';
 import LinkIcon from '@mui/icons-material/Link';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Button, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import ReactImageGallery from 'react-image-gallery';
@@ -14,6 +15,7 @@ import 'react-image-gallery/styles/css/image-gallery.css';
 
 const ClaimDetails = () => {
 	const { id } = useParams<{ id: string }>();
+	const userInfo = getUserInfo();
 	const { data, isFetching } = useGetClaimQuery(id);
 
 	if (isFetching) {
@@ -82,7 +84,13 @@ const ClaimDetails = () => {
 					<Typography variant='body2' my={2}>
 						{description}
 					</Typography>
-					{data?.data?.status === 'PENDING' ? (
+					{userInfo?.id === user?.id ? (
+						<div className='flex justify-center md:justify-start items-center gap-3'>
+							{/* delete and edit button */}
+							<Button color='error'>Delete</Button>
+							<Button color='error'>Edit</Button>
+						</div>
+					) : data?.data?.status === 'PENDING' ? (
 						<ClaimResponseDialog item={data?.data} />
 					) : (
 						<Typography

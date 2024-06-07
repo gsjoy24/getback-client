@@ -1,3 +1,4 @@
+import GoogleAnalytics from '@/components/GoogleAnalytics/GoogleAnalytics';
 import Footer from '@/components/Shared/Footer/Footer';
 import Navbar from '@/components/Shared/Navbar/Navbar';
 import Providers from '@/lib/Providers/Providers';
@@ -15,13 +16,14 @@ const roboto = Roboto({
 export const metadata: Metadata = {
 	title: 'GetBack: Reunite Lost Items with Their Owners Easily',
 	description:
-		'GetBack: Lost something important? GetBack helps you find lost items in (City Name) and connect with those who found them. Free, fast, and easy to use! Recover lost phones, wallets, keys, and more. #GetBack #LostAndFound #LostItems #FoundItems #LostAndFoundApp #LostAndFoundService #LostAndFoundWebsite #LostAndFoundNearMe #LostAndFoundUSA'
+		'GetBack: Lost something important? GetBack helps you find lost items in (City Name) and connect with those who found them. Free, fast, and easy to use! Recover lost phones, wallets, keys, and more. #GetBack #LostAndFound #LostItems #FoundItems #LostAndFoundApp #LostAndFoundService #LostAndFoundWebsite #LostAndFoundNearMe #LostAndFoundUSA #LostAndFoundBD #GourChandraSaha #GourSahaJoy #GourJoy #GourChandraSahaJoy #GourChandraSahaBD #GourSahaJoyBD #GourJoyBD #GourChandraSahaJoyBD #GourChandraSahaUSA #GourSahaJoyUSA #GourJoyUSA #GourChandraSahaJoyUSA #GourChandraSahaBDUSA #GourSahaJoyBDUSA #GourJoyBDUSA #GourChandraSahaJoyBDUSA #GourChandraSahaUSA #GourSahaJoyUSA #GourJoyUSA #GourChandraSahaJoyUSA #GourChandraSahaBDUSA #GourSahaJoyBDUSA #GourJoyBDUSA #GourChandraSahaJoyBDUSA #GourChandraSahaUSA #GourSahaJoyUSA #GourJoyUSA #GourChandraSahaJoyUSA #GourChandraSahaBDUSA #GourSahaJoyBDUSA #GourJoyBDUSA #GourChandraSahaJoyBDUSA #GourChandraSahaUSA #GourSahaJoyUSA #GourJoyUSA #GourChandraSahaJoyUSA #GourChandraSahaBDUSA #GourSahaJoyBDUSA #GourJoyBDUSA #GourChandraSahaJoyBDUSA #GourChandraSahaUSA #GourSahaJoyUSA #GourJoyUSA #GourChandraSahaJoyUSA #GourChandraSahaBDUSA #GourSahaJoyBDUSA #GourJoyBDUSA #GourChandraSahaJoyBDUSA #GourChandraSahaUSA #GourSahaJoyUSA #GourJoyUSA #GourChandraSahaJoyUSA #GourChandraSahaBDUSA #GourSahaJoyBDUSA #GourJoyBDUSA #GourChandraSahaJoyBDUSA #GourChandraSahaUSA #GourSahaJoyUSA #GourJoyUSA #GourChandraSahaJoyUSA #GourChandraSahaBDUSA #GourSahaJoyBDUSA #GourJoyBDUSA #GourChandraSahaJoyBDUSA #GourChandraSahaUSA #GourSahaJoyUSA #GourJoyUSA #GourChandra'
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<Providers>
 			<html lang='en'>
+				<GoogleAnalytics />
 				<body className={roboto.className}>
 					<AppRouterCacheProvider>
 						<Navbar />
