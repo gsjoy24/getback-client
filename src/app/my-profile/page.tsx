@@ -1,5 +1,4 @@
 'use client';
-import PrivateRoute from '@/components/PrivateRoute/PrivateRoute';
 import MyClaimCard from '@/components/Shared/ClaimCard/MyClaimCard';
 import EmptyCard from '@/components/Shared/EmptyCard/EmptyCard';
 import FoundItemCard from '@/components/Shared/FoundItemCard/FoundItemCard';
@@ -16,11 +15,13 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import PersonIcon from '@mui/icons-material/Person';
 import UpdateIcon from '@mui/icons-material/Update';
 import { Box, Button, Container, Divider, Grid, Stack, Typography } from '@mui/material';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import LoadingCompo from '../loading';
 
 const MyProfile = () => {
+	const PrivateRoute = dynamic(() => import('@/components/PrivateRoute/PrivateRoute'), { ssr: false });
 	const { data, isFetching } = useGetProfileQuery(null);
 
 	if (isFetching) {
@@ -50,6 +51,18 @@ const MyProfile = () => {
 						sx={{
 							p: {
 								md: 1
+							},
+							maxHeight: {
+								md: 'calc(100vh - 60px)'
+							},
+							overflow: {
+								md: 'auto'
+							},
+							position: {
+								md: 'sticky'
+							},
+							top: {
+								md: 60
 							}
 						}}
 					>
@@ -170,11 +183,7 @@ const MyProfile = () => {
 								<Typography>{counts?.lostItems}</Typography>
 							</Box>
 
-							<Divider
-								sx={{
-									my: 2
-								}}
-							></Divider>
+							<Divider />
 							<Box
 								display='flex'
 								alignItems='center'
@@ -186,7 +195,7 @@ const MyProfile = () => {
 								<Typography>Found Items</Typography>
 								<Typography>{counts?.foundItems}</Typography>
 							</Box>
-
+							<Divider />
 							<Box
 								display='flex'
 								alignItems='center'
@@ -198,6 +207,20 @@ const MyProfile = () => {
 								<Typography>Claimed Items</Typography>
 								<Typography>{counts?.claimedItems}</Typography>
 							</Box>
+							<Divider sx={{ my: 2 }} />
+
+							{/* edit profile, change password and delete account option */}
+							<Stack spacing={2}>
+								<Button component={Link} href='/my-profile/edit' variant='outlined'>
+									Edit Profile
+								</Button>
+								<Button component={Link} href='/my-profile/change-password' variant='outlined'>
+									Change Password
+								</Button>
+								<Button component={Link} href='/my-profile/delete' variant='outlined'>
+									Delete Account
+								</Button>
+							</Stack>
 						</div>
 					</Grid>
 

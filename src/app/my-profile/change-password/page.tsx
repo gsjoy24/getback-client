@@ -1,24 +1,24 @@
 'use client';
 import LFForm from '@/components/Form/LFForm';
 import LFInput from '@/components/Form/lFInput';
-import PrivateRoute from '@/components/PrivateRoute/PrivateRoute';
 import PageTitle from '@/components/Shared/PageTitle';
 import { useChangePasswordMutation } from '@/redux/api/features/authApi';
 import ChangePasswordValidationSchema from '@/schemas/changePasswordSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Container } from '@mui/material';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { toast } from 'sonner';
 
 const ChangePassword = () => {
+	const PrivateRoute = dynamic(() => import('@/components/PrivateRoute/PrivateRoute'), { ssr: false });
 	const router = useRouter();
 	const [showCurrentPass, setShowCurrentPass] = useState<boolean>(false);
 	const [showNewPass, setShowNewPass] = useState<boolean>(false);
 	const [showConfirmPass, setShowConfirmPass] = useState<boolean>(false);
 	const [resetForm, setResetForm] = useState<boolean>(false);
-
 	const [changePassword, { isLoading }] = useChangePasswordMutation();
 
 	const handleSubmit = async (data: any) => {
@@ -39,11 +39,12 @@ const ChangePassword = () => {
 			}
 		} catch (error) {}
 	};
+
 	return (
 		<PrivateRoute>
 			<Container
 				sx={{
-					minHeight: 'calc(100vh - 64px)',
+					minHeight: 'calc(100vh - 100px)',
 					display: 'flex',
 					flexDirection: 'column',
 					justifyContent: 'center',

@@ -6,7 +6,11 @@ type FaqItemProps = {
 };
 const FaqItem = ({ question, answer }: FaqItemProps) => {
 	return (
-		<Box>
+		<Box
+			sx={{
+				mb: 2
+			}}
+		>
 			<Typography variant='h6' gutterBottom>
 				{question}
 			</Typography>

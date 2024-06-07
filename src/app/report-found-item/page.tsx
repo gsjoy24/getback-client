@@ -3,10 +3,8 @@ import LFDatePicker from '@/components/Form/LFDatePicker';
 import LFForm from '@/components/Form/LFForm';
 import LFSelect from '@/components/Form/LFSelect';
 import LFInput from '@/components/Form/lFInput';
-import PrivateRoute from '@/components/PrivateRoute/PrivateRoute';
 import MultiImageUploader from '@/components/Shared/MultiImageUploader/MultiImageUploader';
 import PageTitle from '@/components/Shared/PageTitle';
-
 import { useGetCategoriesQuery } from '@/redux/api/features/categoryApi';
 import { useCreateFoundItemMutation } from '@/redux/api/features/foundItemApi';
 import foundItemSchema from '@/schemas/foundItemSchema';
@@ -14,12 +12,14 @@ import { TCategory } from '@/types/category';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Stack } from '@mui/material';
 import { Dayjs } from 'dayjs';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
 const ReportFoundItem = () => {
+	const PrivateRoute = dynamic(() => import('@/components/PrivateRoute/PrivateRoute'), { ssr: false });
 	const router = useRouter();
 	const { data: categoriesData } = useGetCategoriesQuery(null);
 
