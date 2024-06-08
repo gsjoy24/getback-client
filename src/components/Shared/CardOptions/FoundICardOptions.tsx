@@ -7,9 +7,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { IconButton } from '@mui/material';
+import { Button, IconButton, Typography } from '@mui/material';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import Link from 'next/link';
 import * as React from 'react';
 import { toast } from 'sonner';
 
@@ -73,12 +74,24 @@ const FoundCardOptions = ({ item }: { item: TFoundItem }) => {
 						{isDeleting ? 'Deleting...' : 'Delete'}
 					</span>
 				</MenuItem>
-				<MenuItem onClick={handleClose}>
-					<span className='flex justify-center items-center gap-2'>
-						<EditIcon sx={{ fontSize: '16px' }} />
-						Edit [Coming soon]
-					</span>
+
+				<MenuItem>
+					<Button
+						component={Link}
+						href={`/my-profile/found-items/edit/${item.id}`}
+						variant='text'
+						sx={{
+							p: 0,
+							color: 'inherit'
+						}}
+					>
+						<Typography variant='body2' className='flex justify-center gap-2'>
+							<EditIcon sx={{ fontSize: '16px' }} />
+							Edit
+						</Typography>
+					</Button>
 				</MenuItem>
+
 				<MenuItem onClick={handleReturnStatus} className={`${isLoading && 'Mui-disabled'}`}>
 					{item?.isReturned ? (
 						<span className='flex justify-center items-center gap-2'>

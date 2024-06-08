@@ -189,7 +189,7 @@ const EditClaim = () => {
 									m: 3
 								}}
 							>
-								{imageLinks?.map((link: string, index: Key) => (
+								{imageLinks?.map((link: string, index: number) => (
 									<Image
 										key={index}
 										src={link}
