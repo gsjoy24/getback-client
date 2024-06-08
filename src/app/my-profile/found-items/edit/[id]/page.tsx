@@ -8,11 +8,7 @@ import PrivateRoute from '@/components/PrivateRoute/PrivateRoute';
 import MultiImageUploader from '@/components/Shared/MultiImageUploader/MultiImageUploader';
 import PageTitle from '@/components/Shared/PageTitle';
 import { useGetCategoriesQuery } from '@/redux/api/features/categoryApi';
-import {
-	useCreateFoundItemMutation,
-	useGetFoundItemQuery,
-	useUpdateFoundItemMutation
-} from '@/redux/api/features/foundItemApi';
+import { useGetFoundItemQuery, useUpdateFoundItemMutation } from '@/redux/api/features/foundItemApi';
 import foundItemSchema from '@/schemas/foundItemSchema';
 import { TCategory } from '@/types/category';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -23,6 +19,7 @@ import { Dayjs } from 'dayjs';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { FieldValues } from 'react-hook-form';
 import { toast } from 'sonner';
 
 const EditFoundItem = () => {
@@ -63,11 +60,10 @@ const EditFoundItem = () => {
 		return <LoadingCompo />;
 	}
 	const { pictures, foundDate } = data?.data;
-
-	const handleSubmit = async (data: any) => {
+	const handleSubmit = async (formData: FieldValues) => {
 		const modifiedData = {
-			...data,
-			lostDate: date ? date.toISOString() : foundDate,
+			...formData,
+			foundDate: date ? date.toISOString() : foundDate,
 			pictures: imageLinks?.length ? imageLinks : pictures
 		};
 
@@ -78,7 +74,9 @@ const EditFoundItem = () => {
 				toast.success(res?.data?.message);
 				router.push(`/found-items/${id}?updated=${new Date().getTime()}`);
 			}
-		} catch (error) {}
+		} catch (error) {
+			console.log(error);
+		}
 	};
 	return (
 		<PrivateRoute>
@@ -241,9 +239,9 @@ const EditFoundItem = () => {
 							sx={{
 								mt: 2
 							}}
-							disabled={isLoading}
+							disabled={isLoading || !imageLinks?.length}
 						>
-							{isLoading ? 'Submitting...' : 'Submit Report'}
+							{isLoading ? 'Updating...' : 'Update'}
 						</Button>
 					</LFForm>
 				</Box>
