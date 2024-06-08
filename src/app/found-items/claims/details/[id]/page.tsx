@@ -90,7 +90,8 @@ const ClaimDetails = () => {
 							sx={{
 								display: 'flex',
 								alignItems: 'center',
-								gap: 1
+								gap: 1,
+								width: 'fit-content'
 							}}
 						>
 							<LinkIcon /> Drive Link
@@ -102,18 +103,22 @@ const ClaimDetails = () => {
 						component='pre'
 						mt={2}
 						sx={{
-							whiteSpace: 'pre-line'
+							whiteSpace: 'pre-line',
+							mb: 2
 						}}
 					>
 						{description}
 					</Typography>
+
 					{userInfo?.id === user?.id ? (
 						<div className='flex justify-center md:justify-start items-center gap-3'>
 							{/* delete and edit button */}
 							<Button color='error' onClick={() => setIsDeleteOpen(true)} disabled={isDeleting}>
 								{isDeleting ? 'Deleting...' : 'Delete'}
 							</Button>
-							<Button>Edit</Button>
+							<Button LinkComponent={Link} href={`/my-profile/claims/edit/${id}`}>
+								Edit
+							</Button>
 						</div>
 					) : data?.data?.status === 'PENDING' ? (
 						<ClaimResponseDialog item={data?.data} />

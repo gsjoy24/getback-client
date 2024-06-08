@@ -157,7 +157,7 @@ const MyProfile = () => {
 								}}
 							>
 								<UpdateIcon sx={{ mr: 1 }} />
-								<Typography>{DateToString(createdAt)}</Typography>
+								<Typography variant='body2'>{DateToString(createdAt)}</Typography>
 							</Box>
 
 							<Divider
