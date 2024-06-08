@@ -6,38 +6,79 @@ import LFInput from '@/components/Form/lFInput';
 import PrivateRoute from '@/components/PrivateRoute/PrivateRoute';
 import MultiImageUploader from '@/components/Shared/MultiImageUploader/MultiImageUploader';
 import PageTitle from '@/components/Shared/PageTitle';
-import { useGetClaimQuery } from '@/redux/api/features/claimApi';
+import { useGetClaimQuery, useUpdateClaimMutation } from '@/redux/api/features/claimApi';
 import claimItemSchema from '@/schemas/claimItemSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Button, Container, Stack, Typography } from '@mui/material';
+import { CheckCircleOutline } from '@mui/icons-material';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
+import { Box, Button, Container, Stack, ToggleButton, Typography } from '@mui/material';
 import { Dayjs } from 'dayjs';
 import Image from 'next/image';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { Key, useState } from 'react';
 import { FieldValues } from 'react-hook-form';
+import { toast } from 'sonner';
 
 const EditClaim = () => {
 	const { id } = useParams<{ id: string }>();
+	const router = useRouter();
 	const { data, isFetching } = useGetClaimQuery(id);
+	const [updateClaim, { isLoading }] = useUpdateClaimMutation();
+	const [date, setDate] = useState<Dayjs | null>(null);
 
-	const [date, setDate] = useState<Dayjs | null>(data?.data?.lostDate || null);
 	const [dateError, setDateError] = useState<string | null>(null);
 	const [imageError, setImageError] = useState<boolean>(false);
-	const [imageLinks, setImageLinks] = useState<string[] | null>(null);
-	const isLoading = false;
+	const [imageLinks, setImageLinks] = useState<string[]>(data?.data?.pictures || []);
+
+	const toggleImage = (index: number) => {
+		const selectedImage = data?.data?.pictures[index];
+		const isImageSelected = imageLinks?.includes(selectedImage);
+
+		if (isImageSelected) {
+			const filteredImages = imageLinks?.filter((image) => image !== selectedImage);
+			setImageLinks(filteredImages);
+		} else {
+			setImageLinks([...imageLinks, selectedImage]);
+		}
+	};
+
+	const isImageSelected = (index: number) => {
+		const selectedImage = data?.data?.pictures[index];
+		return imageLinks?.includes(selectedImage);
+	};
 
 	if (isFetching || !data?.data) {
 		return <LoadingCompo />;
 	}
 
-	const { pictures } = data?.data;
-	const handleEdit = (data: FieldValues) => {
-		console.log(data);
+	const { pictures, lostDate } = data?.data;
+
+	const handleEdit = async (data: FieldValues) => {
+		const modifiedData = {
+			...data,
+			lostDate: date ? date.toISOString() : lostDate,
+			pictures: imageLinks?.length ? imageLinks : pictures
+		};
+
+		try {
+			const res = await updateClaim({ id, data: modifiedData });
+			if (res?.data?.success) {
+				toast.success('Claim updated successfully!');
+				router.push(`/found-items/claims/details/${id}`);
+			} else {
+				toast.error(res?.data?.message);
+			}
+		} catch (error) {}
 	};
 
 	return (
 		<PrivateRoute>
-			<Container>
+			<Container
+				sx={{
+					py: 3
+				}}
+			>
 				<PageTitle title='Edit Your Claim' desc='Make all necessary changes you want!' />
 				<LFForm onSubmit={handleEdit} resolver={zodResolver(claimItemSchema)} defaultValues={data?.data}>
 					<Stack
@@ -69,14 +110,20 @@ const EditClaim = () => {
 							setImageLinks={setImageLinks}
 							imageError={imageError}
 							setImageError={setImageError}
-							title='Upload new images to replace old ones!'
+							title='Upload new images or select from old!'
 						/>
 					</Stack>
 
 					{/* old images will be here */}
 					{pictures.length && (
 						<>
-							<Typography variant='h6' align='center'>
+							<Typography
+								variant='h6'
+								align='center'
+								sx={{
+									mb: 2
+								}}
+							>
 								Current Images
 							</Typography>
 							<Box
@@ -90,22 +137,44 @@ const EditClaim = () => {
 									mb: 3
 								}}
 							>
-								{pictures?.map((link: string, index: Key) => (
-									<Image
-										key={index}
-										src={link}
-										width={100}
-										height={100}
-										alt='lost item'
-										style={{ maxWidth: '150px', width: '100%', height: 'auto' }}
-									/>
+								{pictures?.map((link: string, index: number) => (
+									<div key={index} className='relative'>
+										<ToggleButton
+											value='check'
+											selected={isImageSelected(index)}
+											sx={{
+												position: 'absolute',
+												top: '-15px',
+												right: '-15px',
+												backgroundColor: 'white',
+												borderRadius: '50%',
+												zIndex: 1,
+												p: '5px',
+												'&:hover': {
+													backgroundColor: 'white'
+												}
+											}}
+											onChange={() => {
+												toggleImage(index);
+											}}
+										>
+											{isImageSelected(index) ? <CloseIcon /> : <CheckIcon />}
+										</ToggleButton>
+										<Image
+											src={link}
+											width={150}
+											height={150}
+											alt='lost item'
+											style={{ maxWidth: '200px', width: '100%', height: 'auto' }}
+										/>
+									</div>
 								))}
 							</Box>
 						</>
 					)}
 
 					{/* uploaded images will be here */}
-					{imageLinks.length && (
+					{imageLinks?.length > 0 && (
 						<>
 							<Typography variant='h6' align='center'>
 								New Images
@@ -125,18 +194,18 @@ const EditClaim = () => {
 									<Image
 										key={index}
 										src={link}
-										width={100}
-										height={100}
+										width={150}
+										height={150}
 										alt='lost item'
-										style={{ maxWidth: '150px', width: '100%', height: 'auto' }}
+										style={{ maxWidth: '200px', width: '100%', height: 'auto' }}
 									/>
 								))}
 							</Box>
 						</>
 					)}
 
-					<Button type='submit' sx={{ width: '100%', mt: 2 }} disabled={isLoading}>
-						{isLoading ? 'Claiming...' : 'Claim'}
+					<Button type='submit' sx={{ width: '100%', mt: 2 }} disabled={isLoading || !imageLinks?.length}>
+						{isLoading ? 'Updating...' : 'Update'}
 					</Button>
 				</LFForm>
 			</Container>

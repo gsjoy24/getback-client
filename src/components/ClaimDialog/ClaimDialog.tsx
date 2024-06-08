@@ -38,7 +38,7 @@ const ClaimDialog = ({ item }: { item: TFoundItem }) => {
 	const [date, setDate] = useState<Dayjs | null>(null);
 	const [dateError, setDateError] = useState<string | null>(null);
 	const [imageError, setImageError] = useState<boolean>(false);
-	const [imageLinks, setImageLinks] = useState<string[] | null>(null);
+	const [imageLinks, setImageLinks] = useState<string[]>([]);
 	const [resetForm, setResetForm] = useState<boolean>(false);
 
 	const [createClaim, { isLoading }] = useCreateClaimMutation();
@@ -73,7 +73,7 @@ const ClaimDialog = ({ item }: { item: TFoundItem }) => {
 		} finally {
 			setOpen(false);
 			setResetForm(true);
-			setImageLinks(null);
+			setImageLinks([]);
 		}
 	};
 

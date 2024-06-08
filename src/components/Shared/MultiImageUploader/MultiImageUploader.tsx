@@ -1,13 +1,12 @@
 'use client';
 import ImageIcon from '@mui/icons-material/Image';
-import { Stack, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { CldUploadWidget } from 'next-cloudinary';
-import Image from 'next/image';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 type TProps = {
 	imageError: boolean;
-	setImageLinks: Dispatch<SetStateAction<string[] | null>>;
+	setImageLinks: Dispatch<SetStateAction<string[]>>;
 	setImageError: Dispatch<SetStateAction<boolean>>;
 	title: string;
 };
@@ -17,7 +16,7 @@ const MultiImageUploader = ({ imageError, setImageLinks, setImageError, title }:
 	useEffect(() => {
 		if (imgInfos.length > 0) {
 			const links = imgInfos.map((img) => img.secure_url);
-			setImageLinks(links);
+			setImageLinks((prev) => [...prev, ...links]);
 		}
 	}, [imgInfos, setImageLinks]);
 	return (
