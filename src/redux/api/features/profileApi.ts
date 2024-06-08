@@ -15,8 +15,16 @@ const profileApi = baseApi.injectEndpoints({
 				method: 'PUT',
 				data
 			})
+		}),
+
+		deleteAccount: build.mutation({
+			query: (data) => ({
+				url: '/auth/delete-account',
+				method: 'DELETE',
+				data
+			})
 		})
 	})
 });
 
-export const { useGetProfileQuery, useUpdateProfileMutation } = profileApi;
+export const { useGetProfileQuery, useUpdateProfileMutation, useDeleteAccountMutation } = profileApi;

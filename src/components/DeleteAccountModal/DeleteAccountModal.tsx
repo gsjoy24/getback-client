@@ -1,5 +1,7 @@
 'use client';
+import { useDeleteAccountMutation } from '@/redux/api/features/profileApi';
 import DeleteAccountSchema from '@/schemas/deleteAccountSchema';
+import { logout } from '@/services/auth.services';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Slide, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -8,9 +10,11 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { TransitionProps } from '@mui/material/transitions';
+import { useRouter } from 'next/navigation';
 import * as React from 'react';
 import { FieldValues } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { toast } from 'sonner';
 import LFForm from '../Form/LFForm';
 import LFInput from '../Form/lFInput';
 
@@ -29,9 +33,21 @@ const Transition = React.forwardRef(function Transition(
 });
 
 const DeleteAccountModal = ({ open, setOpen }: TProps) => {
+	const router = useRouter();
 	const [showPass, setShowPass] = React.useState<boolean>(false);
-	const onConfirm = (data: FieldValues) => {
-		console.log(data);
+
+	const [deleteAccount, { isLoading }] = useDeleteAccountMutation();
+
+	const onConfirm = async (data: FieldValues) => {
+		try {
+			const res = await deleteAccount({ password: data.password });
+			if (res?.data?.success) {
+				setOpen(false);
+				toast.success('Account deleted successfully!');
+				logout();
+				router.push('/');
+			}
+		} catch (error) {}
 	};
 
 	return (
@@ -64,7 +80,9 @@ const DeleteAccountModal = ({ open, setOpen }: TProps) => {
 						<Button onClick={() => setOpen(false)} type='button'>
 							Cancel
 						</Button>
-						<Button type='submit'>Confirm</Button>
+						<Button type='submit' color='error' disabled={isLoading}>
+							{isLoading ? 'Deleting...' : 'Delete'}
+						</Button>
 					</DialogActions>
 				</LFForm>
 			</DialogContent>
