@@ -81,12 +81,10 @@ const MyProfile = () => {
 							</Typography>
 
 							<Typography variant='body2' gutterBottom align='center' fontSize={14}>
-								<Box display='flex' alignItems='center' justifyContent='center'>
-									<AlternateEmailIcon sx={{ fontSize: '12px' }} />
-									{username}
-								</Box>
+								<AlternateEmailIcon sx={{ fontSize: '12px' }} />
+								{username}
 							</Typography>
-							<Typography variant='body1' gutterBottom align='center'>
+							<Typography variant='body2' gutterBottom align='center'>
 								{bio}
 							</Typography>
 
