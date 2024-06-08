@@ -1,4 +1,5 @@
 'use client';
+import DeleteAccountModal from '@/components/DeleteAccountModal/DeleteAccountModal';
 import PrivateRoute from '@/components/PrivateRoute/PrivateRoute';
 import MyClaimCard from '@/components/Shared/ClaimCard/MyClaimCard';
 import EmptyCard from '@/components/Shared/EmptyCard/EmptyCard';
@@ -18,9 +19,11 @@ import UpdateIcon from '@mui/icons-material/Update';
 import { Box, Button, Container, Divider, Grid, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 import LoadingCompo from '../loading';
 
 const MyProfile = () => {
+	const [openDeleteAccountModal, setOpenDeleteAccountModal] = useState(false);
 	const { data, isFetching } = useGetProfileQuery(null);
 
 	if (isFetching) {
@@ -73,13 +76,10 @@ const MyProfile = () => {
 								alt={user}
 								className='border-[6px] rounded-full border-[#1586FD] mb-2 mx-auto'
 							/>
-
 							{/*name , username and bio in center  */}
-
 							<Typography variant='h4' align='center'>
 								{name}
 							</Typography>
-
 							<Typography variant='body2' gutterBottom align='center' fontSize={14}>
 								<AlternateEmailIcon sx={{ fontSize: '12px' }} />
 								{username}
@@ -87,13 +87,11 @@ const MyProfile = () => {
 							<Typography variant='body2' gutterBottom align='center'>
 								{bio}
 							</Typography>
-
 							<Divider
 								sx={{
 									my: 2
 								}}
 							/>
-
 							<Box
 								display='flex'
 								alignItems='center'
@@ -105,13 +103,11 @@ const MyProfile = () => {
 								<EmailIcon sx={{ mr: 1 }} />
 								<Typography>{email}</Typography>
 							</Box>
-
 							<Divider
 								sx={{
 									my: 2
 								}}
 							/>
-
 							<Box
 								display='flex'
 								alignItems='center'
@@ -123,13 +119,11 @@ const MyProfile = () => {
 								<LocalPhoneIcon sx={{ mr: 1 }} />
 								<Typography>{phone}</Typography>
 							</Box>
-
 							<Divider
 								sx={{
 									my: 2
 								}}
 							/>
-
 							<Box
 								display='flex'
 								alignItems='center'
@@ -141,13 +135,11 @@ const MyProfile = () => {
 								<PersonIcon sx={{ mr: 1 }} />
 								<Typography>{age} years</Typography>
 							</Box>
-
 							<Divider
 								sx={{
 									my: 2
 								}}
 							/>
-
 							<Box
 								display='flex'
 								alignItems='center'
@@ -159,7 +151,6 @@ const MyProfile = () => {
 								<UpdateIcon sx={{ mr: 1 }} />
 								<Typography variant='body2'>{DateToString(createdAt)}</Typography>
 							</Box>
-
 							<Divider
 								sx={{
 									my: 2
@@ -167,7 +158,6 @@ const MyProfile = () => {
 							>
 								<span className='text-[10px]'>Counts</span>
 							</Divider>
-
 							<Box
 								display='flex'
 								alignItems='center'
@@ -179,7 +169,6 @@ const MyProfile = () => {
 								<Typography>Lost Items</Typography>
 								<Typography>{counts?.lostItems}</Typography>
 							</Box>
-
 							<Divider />
 							<Box
 								display='flex'
@@ -205,19 +194,20 @@ const MyProfile = () => {
 								<Typography>{counts?.claimedItems}</Typography>
 							</Box>
 							<Divider sx={{ my: 2 }} />
-
 							{/* edit profile, change password and delete account option */}
 							<Stack spacing={2}>
-								<Button component={Link} href='/my-profile/edit' variant='outlined'>
+								<Button component={Link} href='/my-profile/edit' variant='outlined' disabled>
 									Edit Profile
 								</Button>
 								<Button component={Link} href='/my-profile/change-password' variant='outlined'>
 									Change Password
 								</Button>
-								<Button component={Link} href='/my-profile/delete' variant='outlined'>
+								<Button onClick={() => setOpenDeleteAccountModal(true)} variant='outlined'>
 									Delete Account
 								</Button>
 							</Stack>
+							{/* here vai */}
+							<DeleteAccountModal open={openDeleteAccountModal} setOpen={setOpenDeleteAccountModal} />
 						</div>
 					</Grid>
 
