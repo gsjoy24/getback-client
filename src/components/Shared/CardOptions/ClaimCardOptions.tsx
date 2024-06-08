@@ -1,14 +1,13 @@
 'use client';
-import { useDeleteLostItemMutation, useToggleMarkAsFoundMutation } from '@/redux/api/features/lostItemApi';
+import { useDeleteClaimMutation } from '@/redux/api/features/claimApi';
 import TClaim from '@/types/claim';
-import CheckIcon from '@mui/icons-material/Check';
-import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { IconButton, Typography } from '@mui/material';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import Link from 'next/link';
 import * as React from 'react';
 import { toast } from 'sonner';
 
@@ -19,7 +18,7 @@ const ClaimCardOptions = ({ item }: { item: TClaim }) => {
 		setAnchorEl(event.currentTarget);
 	};
 
-	const [deleteLostItem, { isLoading: isDeleting }] = useDeleteLostItemMutation();
+	const [deleteClaim, { isLoading: isDeleting }] = useDeleteClaimMutation();
 
 	const handleClose = () => {
 		setAnchorEl(null);
@@ -27,7 +26,7 @@ const ClaimCardOptions = ({ item }: { item: TClaim }) => {
 
 	const handleDelete = async () => {
 		try {
-			const res = await deleteLostItem(item.id);
+			const res = await deleteClaim(item.id);
 			if (res.data.success) {
 				toast.success('Item deleted successfully');
 				setAnchorEl(null);
@@ -55,20 +54,19 @@ const ClaimCardOptions = ({ item }: { item: TClaim }) => {
 					'aria-labelledby': 'basic-button'
 				}}
 			>
+				<Link href={`/my-profile/claims/edit/${item.id}`}>
+					<MenuItem>
+						<Typography variant='body2' className='flex justify-center gap-2'>
+							<EditIcon sx={{ fontSize: '16px' }} />
+							Edit
+						</Typography>
+					</MenuItem>
+				</Link>
 				<MenuItem onClick={handleDelete} className={`${isDeleting && 'Mui-disabled'}`}>
 					<span className='flex justify-center items-center gap-2'>
 						<DeleteIcon sx={{ fontSize: '16px' }} />
 						{isDeleting ? 'Deleting...' : 'Delete'}
 					</span>
-				</MenuItem>
-				<MenuItem onClick={handleClose}>
-					{/* <span className='flex justify-center items-center gap-2'>
-					
-					</span> */}
-					<Typography variant='body2' className='flex justify-center gap-2'>
-						<EditIcon sx={{ fontSize: '16px' }} />
-						Edit
-					</Typography>
 				</MenuItem>
 			</Menu>
 		</div>

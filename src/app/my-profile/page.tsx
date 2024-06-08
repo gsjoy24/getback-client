@@ -221,7 +221,7 @@ const MyProfile = () => {
 						</div>
 					</Grid>
 
-					{/* side */}
+					{/* items side */}
 
 					<Grid
 						item
@@ -239,74 +239,82 @@ const MyProfile = () => {
 							}
 						}}
 					>
-						{/* /* lost items */}
-						{lostItems?.length > 0 && (
-							<>
-								<SectionTitle title='Lost Items' />
-								<Stack justifyContent='center' alignItems='center' flexWrap='wrap' direction='row' gap={3}>
-									{lostItems?.map((item: TLostItem) => (
-										<LostItemCard key={item.id} item={item} />
-									))}
-								</Stack>
-								<div className='text-center mb-14'>
-									<Button
-										component={Link}
-										href={'/my-profile/lost-items'}
-										sx={{
-											mt: 2
-										}}
-									>
-										See All
-									</Button>
-								</div>
-							</>
-						)}
+						{
+							// if there is no lost items, found items and claimed items, show empty card, else show the items
+							!lostItems.length && !foundItems.length && !claimedItems.length ? (
+								<EmptyCard />
+							) : (
+								<>
+									{lostItems?.length > 0 && (
+										<>
+											<SectionTitle title='Lost Items' />
+											<Stack justifyContent='center' alignItems='center' flexWrap='wrap' direction='row' gap={3}>
+												{lostItems?.map((item: TLostItem) => (
+													<LostItemCard key={item.id} item={item} />
+												))}
+											</Stack>
+											<div className='text-center mb-14'>
+												<Button
+													component={Link}
+													href={'/my-profile/lost-items'}
+													sx={{
+														mt: 2
+													}}
+												>
+													See All
+												</Button>
+											</div>
+										</>
+									)}
 
-						{/* found items */}
-						{foundItems?.length > 0 && (
-							<>
-								<SectionTitle title='Found Items' />
-								<Stack justifyContent='center' alignItems='center' flexWrap='wrap' direction='row' gap={3}>
-									{foundItems?.map((item: TFoundItem) => (
-										<FoundItemCard key={item.id} item={item} />
-									))}
-								</Stack>
-								<div className='text-center mb-14'>
-									<Button
-										component={Link}
-										href={'/my-profile/found-items'}
-										sx={{
-											mt: 2
-										}}
-									>
-										See All
-									</Button>
-								</div>
-							</>
-						)}
+									{/* found items */}
+									{foundItems?.length > 0 && (
+										<>
+											<SectionTitle title='Found Items' />
+											<Stack justifyContent='center' alignItems='center' flexWrap='wrap' direction='row' gap={3}>
+												{foundItems?.map((item: TFoundItem) => (
+													<FoundItemCard key={item.id} item={item} />
+												))}
+											</Stack>
+											<div className='text-center mb-14'>
+												<Button
+													component={Link}
+													href={'/my-profile/found-items'}
+													sx={{
+														mt: 2
+													}}
+												>
+													See All
+												</Button>
+											</div>
+										</>
+									)}
 
-						{/* claimed items */}
-						{claimedItems?.length > 0 && (
-							<>
-								<SectionTitle title='Claimed Items' />
-								<Stack justifyContent='center' alignItems='center' flexWrap='wrap' direction='row' gap={3}>
-									{claimedItems?.map((item: TClaim) => (
-										<MyClaimCard key={item.id} item={item} />
-									))}
-								</Stack>
-								<div className='text-center'>
-									<Button
-										component={Link}
-										href={'/my-profile/claims'}
-										sx={{
-											mt: 2
-										}}
-									>
-										See All
-									</Button>
-								</div>
-							</>
-						)}
+									{/* claimed items */}
+									{claimedItems?.length > 0 && (
+										<>
+											<SectionTitle title='Claimed Items' />
+											<Stack justifyContent='center' alignItems='center' flexWrap='wrap' direction='row' gap={3}>
+												{claimedItems?.map((item: TClaim) => (
+													<MyClaimCard key={item.id} item={item} />
+												))}
+											</Stack>
+											<div className='text-center'>
+												<Button
+													component={Link}
+													href={'/my-profile/claims'}
+													sx={{
+														mt: 2
+													}}
+												>
+													See All
+												</Button>
+											</div>
+										</>
+									)}
+								</>
+							)
+						}
 					</Grid>
 				</Grid>
 			</Container>

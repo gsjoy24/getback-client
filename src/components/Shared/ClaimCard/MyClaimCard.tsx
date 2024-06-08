@@ -2,6 +2,7 @@ import TClaim from '@/types/claim';
 import { Box, Button, ButtonGroup, Card, CardContent, Typography } from '@mui/material';
 import Link from 'next/link';
 import SimpleImageSlider from 'react-simple-image-slider';
+import ClaimCardOptions from '../CardOptions/ClaimCardOptions';
 
 const MyClaimCard = ({ item }: { item: TClaim }) => {
 	const { id, status, description, pictures, foundItem, response } = item;
@@ -50,6 +51,7 @@ const MyClaimCard = ({ item }: { item: TClaim }) => {
 					>
 						{status}
 					</Typography>
+					<ClaimCardOptions item={item} />
 				</Box>
 
 				<Typography
