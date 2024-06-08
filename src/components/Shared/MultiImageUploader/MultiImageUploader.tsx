@@ -9,8 +9,9 @@ type TProps = {
 	imageError: boolean;
 	setImageLinks: Dispatch<SetStateAction<string[] | null>>;
 	setImageError: Dispatch<SetStateAction<boolean>>;
+	title: string;
 };
-const MultiImageUploader = ({ imageError, setImageLinks, setImageError }: TProps) => {
+const MultiImageUploader = ({ imageError, setImageLinks, setImageError, title }: TProps) => {
 	const [imgInfos, setImgInfos] = useState<any[]>([]);
 
 	useEffect(() => {
@@ -41,9 +42,9 @@ const MultiImageUploader = ({ imageError, setImageLinks, setImageError }: TProps
 								fontSize: 40
 							}}
 						/>
-						<Typography>Upload a profile picture</Typography>
+						<Typography>{title}</Typography>
 						<Typography fontSize={10} lineHeight={0.5}>
-							Max 5 images are allowed
+							Max 5 images are ALLOWED
 						</Typography>
 						<Typography fontSize={10} lineHeight={0.5}>
 							Horizontal images are RECOMMENDED

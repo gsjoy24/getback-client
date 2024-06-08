@@ -4,7 +4,7 @@ import TClaim from '@/types/claim';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { IconButton, Typography } from '@mui/material';
+import { Button, IconButton, Typography } from '@mui/material';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Link from 'next/link';
@@ -54,14 +54,23 @@ const ClaimCardOptions = ({ item }: { item: TClaim }) => {
 					'aria-labelledby': 'basic-button'
 				}}
 			>
-				<Link href={`/my-profile/claims/edit/${item.id}`}>
-					<MenuItem>
+				<MenuItem>
+					<Button
+						component={Link}
+						href={`/my-profile/claims/edit/${item.id}`}
+						className={`${item.status !== 'PENDING' && 'Mui-disabled'}`}
+						variant='text'
+						sx={{
+							p: 0,
+							color: 'inherit'
+						}}
+					>
 						<Typography variant='body2' className='flex justify-center gap-2'>
 							<EditIcon sx={{ fontSize: '16px' }} />
 							Edit
 						</Typography>
-					</MenuItem>
-				</Link>
+					</Button>
+				</MenuItem>
 				<MenuItem onClick={handleDelete} className={`${isDeleting && 'Mui-disabled'}`}>
 					<span className='flex justify-center items-center gap-2'>
 						<DeleteIcon sx={{ fontSize: '16px' }} />

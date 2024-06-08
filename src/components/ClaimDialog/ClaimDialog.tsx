@@ -13,7 +13,7 @@ import { Dayjs } from 'dayjs';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React, { use, useState } from 'react';
+import React, { Key, use, useState } from 'react';
 import { MdOutlineClose } from 'react-icons/md';
 import { toast } from 'sonner';
 import LFDatePicker from '../Form/LFDatePicker';
@@ -139,6 +139,7 @@ const ClaimDialog = ({ item }: { item: TFoundItem }) => {
 									setImageLinks={setImageLinks}
 									imageError={imageError}
 									setImageError={setImageError}
+									title='Upload images as proofs!'
 								/>
 							</Stack>
 
@@ -155,7 +156,7 @@ const ClaimDialog = ({ item }: { item: TFoundItem }) => {
 										mb: 3
 									}}
 								>
-									{imageLinks.map((link, index) => (
+									{imageLinks.map((link: string, index: Key) => (
 										<Image
 											key={index}
 											src={link}

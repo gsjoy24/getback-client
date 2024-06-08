@@ -201,6 +201,7 @@ const SignPage = () => {
 									<CldUploadWidget
 										options={{ sources: ['local', 'url'] }}
 										signatureEndpoint='/api/sign-cloudinary-params'
+										maxFiles={1}
 										onSuccess={(result, { widget }) => {
 											setProfileImage(result?.info);
 											widget.close();

@@ -40,10 +40,7 @@ const SignupImageUploaderUI = ({ imageLink, openHandler, imageError }: TProps) =
 					/>
 					<Typography>Upload a profile picture</Typography>
 					<Typography fontSize={10} lineHeight={0.5}>
-						Max 5 images are allowed
-					</Typography>
-					<Typography fontSize={10} lineHeight={0.5}>
-						Horizontal images are RECOMMENDED
+						Square shaped is recommended
 					</Typography>
 				</div>
 			)}

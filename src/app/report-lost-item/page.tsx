@@ -119,7 +119,12 @@ const ReportLostItem = () => {
 							}}
 						>
 							<LFInput label='Description' name='description' multiline rows={5} />
-							<MultiImageUploader setImageLinks={setImageLinks} imageError={imageError} setImageError={setImageError} />
+							<MultiImageUploader
+								setImageLinks={setImageLinks}
+								imageError={imageError}
+								setImageError={setImageError}
+								title='Upload images of the item!'
+							/>
 						</Stack>
 
 						{/* uploaded images will be here */}
