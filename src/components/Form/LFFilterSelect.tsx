@@ -34,7 +34,7 @@ const LFFilterSelect = ({ label, options, name, sx, setFilterParam, setPage }: L
 						onChange={(e) => {
 							field.onChange(e);
 							setPage(1);
-							setFilterParam({ name: 'categoryId', value: e.target.value });
+							setFilterParam({ name: name, value: e.target.value });
 						}}
 					>
 						<MenuItem value=''>

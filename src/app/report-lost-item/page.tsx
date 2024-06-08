@@ -30,7 +30,7 @@ const ReportLostItem = () => {
 	const [date, setDate] = useState<Dayjs | null>(null);
 	const [dateError, setDateError] = useState<string | null>(null);
 	const [imageError, setImageError] = useState<boolean>(false);
-	const [imageLinks, setImageLinks] = useState<string[] | null>(null);
+	const [imageLinks, setImageLinks] = useState<string[]>([]);
 	const [resetForm, setResetForm] = useState<boolean>(false);
 	const [createLostItem, { isLoading }] = useCreateLostItemMutation();
 
@@ -55,7 +55,7 @@ const ReportLostItem = () => {
 			const res = await createLostItem(data);
 			if (res?.data?.success) {
 				setResetForm(true);
-				setImageLinks(null);
+				setImageLinks([]);
 				toast.success(res?.data?.message);
 				router.push('/lost-items');
 			}

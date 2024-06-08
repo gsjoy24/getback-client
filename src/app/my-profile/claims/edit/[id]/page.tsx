@@ -9,7 +9,6 @@ import PageTitle from '@/components/Shared/PageTitle';
 import { useGetClaimQuery, useUpdateClaimMutation } from '@/redux/api/features/claimApi';
 import claimItemSchema from '@/schemas/claimItemSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CheckCircleOutline } from '@mui/icons-material';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { Box, Button, Container, Stack, ToggleButton, Typography } from '@mui/material';
@@ -65,7 +64,7 @@ const EditClaim = () => {
 			const res = await updateClaim({ id, data: modifiedData });
 			if (res?.data?.success) {
 				toast.success('Claim updated successfully!');
-				router.push(`/found-items/claims/details/${id}`);
+				router.push(`/found-items/claims/details/${id}?updated=${new Date().getTime()}`);
 			} else {
 				toast.error(res?.data?.message);
 			}

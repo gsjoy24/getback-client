@@ -19,11 +19,7 @@ const ClaimedItems = () => {
 	const [filterParam, setFilterParam] = useState({} as TQueryParams);
 	const [searchTerm, setSearchTerm] = useState({} as TQueryParams);
 	const [page, setPage] = useState<number>(1);
-	const { data: categoryData } = useGetCategoriesQuery(null);
-	const categoryOptions = categoryData?.data?.map((category: any) => ({
-		label: category.name,
-		value: category.id
-	}));
+	const statusOptions = ['PENDING', 'APPROVED', 'REJECTED'].map((status) => ({ value: status, label: status }));
 
 	const { data, isFetching } = useGetMyClaimsQuery([
 		filterParam,
@@ -72,9 +68,9 @@ const ClaimedItems = () => {
 						</div>
 
 						<LFFilterSelect
-							label='Filter By Category'
-							options={categoryOptions}
-							name='categoryId'
+							label='Filter By Status'
+							options={statusOptions}
+							name='status'
 							setFilterParam={setFilterParam}
 							setPage={setPage}
 						/>

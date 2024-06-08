@@ -69,7 +69,6 @@ const ClaimDialog = ({ item }: { item: TFoundItem }) => {
 				toast.error(res?.data?.message);
 			}
 		} catch (error) {
-			console.error(error);
 		} finally {
 			setOpen(false);
 			setResetForm(true);

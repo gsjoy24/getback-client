@@ -30,7 +30,7 @@ const ReportFoundItem = () => {
 	const [date, setDate] = useState<Dayjs | null>(null);
 	const [dateError, setDateError] = useState<string | null>(null);
 	const [imageError, setImageError] = useState<boolean>(false);
-	const [imageLinks, setImageLinks] = useState<string[] | null>(null);
+	const [imageLinks, setImageLinks] = useState<string[]>([]);
 	const [resetForm, setResetForm] = useState<boolean>(false);
 	const [createFoundItem, { isLoading }] = useCreateFoundItemMutation();
 
@@ -55,7 +55,7 @@ const ReportFoundItem = () => {
 			const res = await createFoundItem(data);
 			if (res?.data?.success) {
 				setResetForm(true);
-				setImageLinks(null);
+				setImageLinks([]);
 				toast.success(res?.data?.message);
 				router.push('/found-items');
 			}
