@@ -75,21 +75,11 @@ const FoundCardOptions = ({ item }: { item: TFoundItem }) => {
 					</span>
 				</MenuItem>
 
-				<MenuItem>
-					<Button
-						component={Link}
-						href={`/my-profile/found-items/edit/${item.id}`}
-						variant='text'
-						sx={{
-							p: 0,
-							color: 'inherit'
-						}}
-					>
-						<Typography variant='body2' className='flex justify-center gap-2'>
-							<EditIcon sx={{ fontSize: '16px' }} />
-							Edit
-						</Typography>
-					</Button>
+				<MenuItem component={Link} href={`/my-profile/found-items/edit/${item.id}`}>
+					<Typography variant='body2' className='flex justify-center gap-2'>
+						<EditIcon sx={{ fontSize: '16px' }} />
+						Edit
+					</Typography>
 				</MenuItem>
 
 				<MenuItem onClick={handleReturnStatus} className={`${isLoading && 'Mui-disabled'}`}>

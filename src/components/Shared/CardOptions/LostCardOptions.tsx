@@ -6,9 +6,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { IconButton } from '@mui/material';
+import { IconButton, Typography } from '@mui/material';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import Link from 'next/link';
 import * as React from 'react';
 import { toast } from 'sonner';
 
@@ -69,11 +70,11 @@ const LostCardOptions = ({ item }: { item: TLostItem }) => {
 						{isDeleting ? 'Deleting...' : 'Delete'}
 					</span>
 				</MenuItem>
-				<MenuItem onClick={handleClose}>
-					<span className='flex justify-center items-center gap-2'>
+				<MenuItem component={Link} href={`/my-profile/lost-items/edit/${item.id}`}>
+					<Typography variant='body2' className='flex justify-center gap-2'>
 						<EditIcon sx={{ fontSize: '16px' }} />
-						Edit [Coming soon]
-					</span>
+						Edit
+					</Typography>
 				</MenuItem>
 				<MenuItem onClick={handleMarking} className={`${isMarking && 'Mui-disabled'}`}>
 					{item.isFound ? (

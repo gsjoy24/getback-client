@@ -8,8 +8,9 @@ import PrivateRoute from '@/components/PrivateRoute/PrivateRoute';
 import MultiImageUploader from '@/components/Shared/MultiImageUploader/MultiImageUploader';
 import PageTitle from '@/components/Shared/PageTitle';
 import { useGetCategoriesQuery } from '@/redux/api/features/categoryApi';
-import { useGetFoundItemQuery, useUpdateFoundItemMutation } from '@/redux/api/features/foundItemApi';
-import foundItemSchema from '@/schemas/foundItemSchema';
+
+import { useGetLostItemQuery, useUpdateLostItemMutation } from '@/redux/api/features/lostItemApi';
+import lostItemSchema from '@/schemas/lostItemSchema';
 import { TCategory } from '@/types/category';
 import { zodResolver } from '@hookform/resolvers/zod';
 import CheckIcon from '@mui/icons-material/Check';
@@ -22,9 +23,9 @@ import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 import { toast } from 'sonner';
 
-const EditFoundItem = () => {
+const EditLostItem = () => {
 	const { id } = useParams<{ id: string }>();
-	const { data, isFetching } = useGetFoundItemQuery(id);
+	const { data, isFetching } = useGetLostItemQuery(id);
 	const router = useRouter();
 	const { data: categoriesData } = useGetCategoriesQuery(null);
 
@@ -37,7 +38,7 @@ const EditFoundItem = () => {
 	const [dateError, setDateError] = useState<string | null>(null);
 	const [imageError, setImageError] = useState<boolean>(false);
 	const [imageLinks, setImageLinks] = useState<string[]>([]);
-	const [updateFoundItem, { isLoading }] = useUpdateFoundItemMutation();
+	const [updateLostItem, { isLoading }] = useUpdateLostItemMutation();
 
 	const toggleImage = (index: number) => {
 		const selectedImage = data?.data?.pictures[index];
@@ -59,20 +60,20 @@ const EditFoundItem = () => {
 	if (isFetching || !data?.data) {
 		return <LoadingCompo />;
 	}
-	const { pictures, foundDate } = data?.data;
+	const { pictures, lostDate } = data?.data;
 	const handleSubmit = async (formData: FieldValues) => {
 		const modifiedData = {
 			...formData,
-			foundDate: date ? date.toISOString() : foundDate,
+			lostDate: date ? date.toISOString() : lostDate,
 			pictures: imageLinks?.length ? imageLinks : pictures
 		};
 
 		try {
-			const res = await updateFoundItem({ id, data: modifiedData });
+			const res = await updateLostItem({ id, data: modifiedData });
 			if (res?.data?.success) {
 				setImageLinks([]);
 				toast.success(res?.data?.message);
-				router.push(`/found-items/${id}?updated=${new Date().getTime()}`);
+				router.push(`/lost-items/${id}?updated=${new Date().getTime()}`);
 			}
 		} catch (error) {
 			console.log(error);
@@ -82,8 +83,8 @@ const EditFoundItem = () => {
 		<PrivateRoute>
 			<Box>
 				<PageTitle
-					title='Update Found Item Report'
-					desc='Update the details of the found item report here. Make sure to provide accurate information.'
+					title='Update Lost Item Report'
+					desc='Update the lost item report by providing the necessary information. Make sure to provide accurate information.'
 				/>
 				<Box
 					sx={{
@@ -93,7 +94,7 @@ const EditFoundItem = () => {
 						my: 2
 					}}
 				>
-					<LFForm onSubmit={handleSubmit} resolver={zodResolver(foundItemSchema)} defaultValues={data?.data}>
+					<LFForm onSubmit={handleSubmit} resolver={zodResolver(lostItemSchema)} defaultValues={data?.data}>
 						<Stack
 							gap={2}
 							sx={{
@@ -122,7 +123,7 @@ const EditFoundItem = () => {
 						>
 							<LFInput label='Location' name='location' />
 							<LFDatePicker
-								label='Date of found (optional)'
+								label='Date of Lost (optional)'
 								setDate={setDate}
 								dateError={dateError}
 								setDateError={setDateError}
@@ -255,4 +256,4 @@ const EditFoundItem = () => {
 	);
 };
 
-export default EditFoundItem;
+export default EditLostItem;
