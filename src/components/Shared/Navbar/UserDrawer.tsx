@@ -43,7 +43,7 @@ const UserDrawer = ({ open, setOpen }: TUserDrawerProps) => {
 			</IconButton>
 			<Divider />
 
-			<Stack spacing={4} p={4}>
+			<Stack spacing={3} p={4}>
 				{navLinks &&
 					navLinks?.map((link, index) => (
 						<Typography

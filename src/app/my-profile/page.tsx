@@ -1,4 +1,5 @@
 'use client';
+import PrivateRoute from '@/components/PrivateRoute/PrivateRoute';
 import MyClaimCard from '@/components/Shared/ClaimCard/MyClaimCard';
 import EmptyCard from '@/components/Shared/EmptyCard/EmptyCard';
 import FoundItemCard from '@/components/Shared/FoundItemCard/FoundItemCard';
@@ -15,13 +16,11 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import PersonIcon from '@mui/icons-material/Person';
 import UpdateIcon from '@mui/icons-material/Update';
 import { Box, Button, Container, Divider, Grid, Stack, Typography } from '@mui/material';
-import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import LoadingCompo from '../loading';
 
 const MyProfile = () => {
-	const PrivateRoute = dynamic(() => import('@/components/PrivateRoute/PrivateRoute'), { ssr: false });
 	const { data, isFetching } = useGetProfileQuery(null);
 
 	if (isFetching) {

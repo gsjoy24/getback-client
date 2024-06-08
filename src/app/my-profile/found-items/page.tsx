@@ -2,6 +2,7 @@
 import LFFilterSelect from '@/components/Form/LFFilterSelect';
 import LFForm from '@/components/Form/LFForm';
 import LFInput from '@/components/Form/lFInput';
+import PrivateRoute from '@/components/PrivateRoute/PrivateRoute';
 import LFBackdrop from '@/components/Shared/Backdrop/Backdrop';
 import EmptyCard from '@/components/Shared/EmptyCard/EmptyCard';
 import FoundItemCard from '@/components/Shared/FoundItemCard/FoundItemCard';
@@ -10,13 +11,11 @@ import { useGetCategoriesQuery } from '@/redux/api/features/categoryApi';
 import { useGetMyFoundItemsQuery } from '@/redux/api/features/foundItemApi';
 import { TQueryParams } from '@/types';
 import { Box, IconButton, Pagination, Stack } from '@mui/material';
-import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
 
 const FoundItems = () => {
-	const PrivateRoute = dynamic(() => import('@/components/PrivateRoute/PrivateRoute'), { ssr: false });
 	const [filterParam, setFilterParam] = useState({} as TQueryParams);
 	const [searchTerm, setSearchTerm] = useState({} as TQueryParams);
 	const [page, setPage] = useState<number>(1);

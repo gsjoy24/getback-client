@@ -1,7 +1,7 @@
 'use client';
-import LoadingCompo from '@/app/loading';
 import LFForm from '@/components/Form/LFForm';
 import LFInput from '@/components/Form/lFInput';
+import PrivateRoute from '@/components/PrivateRoute/PrivateRoute';
 import LFBackdrop from '@/components/Shared/Backdrop/Backdrop';
 import ClaimCard from '@/components/Shared/ClaimCard/ClaimCard';
 import EmptyCard from '@/components/Shared/EmptyCard/EmptyCard';
@@ -9,14 +9,12 @@ import PageTitle from '@/components/Shared/PageTitle';
 import { useGetClaimsQuery } from '@/redux/api/features/claimApi';
 import { TQueryParams } from '@/types';
 import { Box, IconButton, Pagination, Stack } from '@mui/material';
-import dynamic from 'next/dynamic';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
 
 const ItemsClaims = () => {
-	const PrivateRoute = dynamic(() => import('@/components/PrivateRoute/PrivateRoute'), { ssr: false });
 	const { id } = useParams<{ id: string }>();
 	const [page, setPage] = useState<number>(1);
 	const [searchTerm, setSearchTerm] = useState({} as TQueryParams);

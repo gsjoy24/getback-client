@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 export default function BasicMenu() {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
+	const router = useRouter();
 	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
 		setAnchorEl(event.currentTarget);
 	};
@@ -20,7 +21,6 @@ export default function BasicMenu() {
 		setAnchorEl(null);
 	};
 
-	const router = useRouter();
 	const [userData, setUserData] = useState<TUser | null>(null);
 
 	useEffect(() => {

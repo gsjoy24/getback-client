@@ -17,7 +17,6 @@ const LFDatePicker = ({ setDate, label, dateError, setDateError }: TLFDatePicker
 			disableFuture
 			onChange={(newValue) => setDate(newValue)}
 			ampmInClock
-			closeOnSelect
 			slotProps={{
 				field: { clearable: true, onClear: () => setDate(null) },
 				textField: {

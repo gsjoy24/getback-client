@@ -2,13 +2,13 @@
 import LoadingCompo from '@/app/loading';
 import ClaimResponseDialog from '@/components/ClaimResponseDialog/ClaimResponseDialog';
 import ConfirmModal from '@/components/ConfirmModal/ConfirmModal';
+import PrivateRoute from '@/components/PrivateRoute/PrivateRoute';
 import EmptyCard from '@/components/Shared/EmptyCard/EmptyCard';
 import { useDeleteClaimMutation, useGetClaimQuery } from '@/redux/api/features/claimApi';
 import { getUserInfo } from '@/services/auth.services';
 import DateToString from '@/utils/DateToString';
 import LinkIcon from '@mui/icons-material/Link';
 import { Box, Button, Stack, Typography } from '@mui/material';
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -17,7 +17,6 @@ import 'react-image-gallery/styles/css/image-gallery.css';
 import { toast } from 'sonner';
 
 const ClaimDetails = () => {
-	const PrivateRoute = dynamic(() => import('@/components/PrivateRoute/PrivateRoute'), { ssr: false });
 	const router = useRouter();
 	const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false);
 	const { id } = useParams<{ id: string }>();
