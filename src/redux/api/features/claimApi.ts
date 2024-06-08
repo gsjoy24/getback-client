@@ -24,7 +24,7 @@ const claimApi = baseApi.injectEndpoints({
 					params
 				};
 			},
-			providesTags: ['My-profile', 'Claims', 'My-claims']
+			providesTags: ['Claims', 'My-claims']
 		}),
 
 		getClaims: build.query({
@@ -40,7 +40,7 @@ const claimApi = baseApi.injectEndpoints({
 					params
 				};
 			},
-			providesTags: ['My-profile', 'Claims', 'My-claims']
+			providesTags: ['Claims', 'My-claims']
 		}),
 
 		getClaim: build.query({
@@ -56,7 +56,7 @@ const claimApi = baseApi.injectEndpoints({
 				method: 'PUT',
 				data
 			}),
-			invalidatesTags: ['Claims', 'My-claims', 'My-profile']
+			invalidatesTags: ['Claims', 'My-claims']
 		}),
 
 		deleteClaim: build.mutation({
@@ -64,7 +64,7 @@ const claimApi = baseApi.injectEndpoints({
 				url: `/claims/${id}`,
 				method: 'DELETE'
 			}),
-			invalidatesTags: ['Claims', 'My-claims', 'My-profile']
+			invalidatesTags: ['Claims', 'My-claims']
 		}),
 
 		makeResponseToClaim: build.mutation({
@@ -73,7 +73,7 @@ const claimApi = baseApi.injectEndpoints({
 				method: 'PUT',
 				data
 			}),
-			invalidatesTags: ['Claims', 'My-claims', 'My-profile']
+			invalidatesTags: ['Claims', 'My-claims']
 		})
 	})
 });

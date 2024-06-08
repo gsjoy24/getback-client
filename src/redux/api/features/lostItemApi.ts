@@ -9,7 +9,7 @@ const lostItemApi = baseApi.injectEndpoints({
 				method: 'POST',
 				data
 			}),
-			invalidatesTags: ['LostItems', 'My-profile', 'My-lost-items']
+			invalidatesTags: ['LostItems', 'My-lost-items']
 		}),
 
 		getMyLostItems: build.query({
@@ -65,7 +65,7 @@ const lostItemApi = baseApi.injectEndpoints({
 				url: `/lost-items/${id}`,
 				method: 'DELETE'
 			}),
-			invalidatesTags: ['LostItems', 'My-profile', 'My-lost-items']
+			invalidatesTags: ['LostItems', 'My-lost-items']
 		}),
 
 		toggleMarkAsFound: build.mutation({
@@ -74,7 +74,7 @@ const lostItemApi = baseApi.injectEndpoints({
 				method: 'PUT',
 				data: { isFound: status }
 			}),
-			invalidatesTags: ['LostItems', 'My-profile', 'My-lost-items']
+			invalidatesTags: ['LostItems', 'My-lost-items']
 		})
 	})
 });

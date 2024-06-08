@@ -1,7 +1,6 @@
 import TClaim from '@/types/claim';
-import { Box, Card, CardActions, CardContent, Divider, Typography } from '@mui/material';
+import { Box, Button, ButtonGroup, Card, CardContent, Typography } from '@mui/material';
 import Link from 'next/link';
-import { IoIosArrowRoundForward } from 'react-icons/io';
 import SimpleImageSlider from 'react-simple-image-slider';
 
 const MyClaimCard = ({ item }: { item: TClaim }) => {
@@ -67,55 +66,23 @@ const MyClaimCard = ({ item }: { item: TClaim }) => {
 					{response}
 				</Typography>
 			</CardContent>
-			<CardActions
+			<ButtonGroup
 				sx={{
 					position: 'absolute',
 					bottom: 0,
 					left: 0,
-					width: '100%',
-					backgroundColor: 'primary.main'
+					width: '100%'
 				}}
+				variant='contained'
+				aria-label='Basic button group'
 			>
-				<div className='flex justify-center items-center flex-row w-full'>
-					<Typography
-						component={Link}
-						href={`/found-items/${foundItem?.id}`}
-						sx={{
-							width: '100%',
-							display: 'flex',
-							alignItems: 'center',
-							justifyContent: 'center',
-							gap: 1,
-							color: 'white',
-							transition: 'all 0.3s',
-							'&:hover': {
-								textDecoration: 'underline'
-							}
-						}}
-					>
-						<span>See Item</span> <IoIosArrowRoundForward size={20} />
-					</Typography>
-					<Divider orientation='vertical' flexItem />
-					<Typography
-						component={Link}
-						href={`/found-items/claims/details/${id}`}
-						sx={{
-							width: '100%',
-							display: 'flex',
-							alignItems: 'center',
-							justifyContent: 'center',
-							gap: 1,
-							color: 'white',
-							transition: 'all 0.3s',
-							'&:hover': {
-								textDecoration: 'underline'
-							}
-						}}
-					>
-						<span>See Details</span> <IoIosArrowRoundForward size={20} />
-					</Typography>
-				</div>
-			</CardActions>
+				<Button fullWidth component={Link} href={`/found-items/${foundItem?.id}`}>
+					See Item
+				</Button>
+				<Button fullWidth component={Link} href={`/found-items/claims/details/${id}`}>
+					See Details
+				</Button>
+			</ButtonGroup>
 		</Card>
 	);
 };
