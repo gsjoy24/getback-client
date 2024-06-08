@@ -11,7 +11,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { TransitionProps } from '@mui/material/transitions';
 import { useRouter } from 'next/navigation';
-import * as React from 'react';
+import { forwardRef, useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { toast } from 'sonner';
@@ -23,7 +23,7 @@ type TProps = {
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Transition = React.forwardRef(function Transition(
+const Transition = forwardRef(function Transition(
 	props: TransitionProps & {
 		children: React.ReactElement<any, any>;
 	},
@@ -34,7 +34,7 @@ const Transition = React.forwardRef(function Transition(
 
 const DeleteAccountModal = ({ open, setOpen }: TProps) => {
 	const router = useRouter();
-	const [showPass, setShowPass] = React.useState<boolean>(false);
+	const [showPass, setShowPass] = useState<boolean>(false);
 
 	const [deleteAccount, { isLoading }] = useDeleteAccountMutation();
 
@@ -45,6 +45,7 @@ const DeleteAccountModal = ({ open, setOpen }: TProps) => {
 				setOpen(false);
 				toast.success('Account deleted successfully!');
 				logout();
+				router.refresh();
 				router.push('/');
 			}
 		} catch (error) {}

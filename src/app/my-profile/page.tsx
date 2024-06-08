@@ -23,7 +23,7 @@ import { useState } from 'react';
 import LoadingCompo from '../loading';
 
 const MyProfile = () => {
-	const [openDeleteAccountModal, setOpenDeleteAccountModal] = useState(false);
+	const [openDeleteAccountModal, setOpenDeleteAccountModal] = useState<boolean>(false);
 	const { data, isFetching } = useGetProfileQuery(null);
 
 	if (isFetching) {
@@ -206,7 +206,7 @@ const MyProfile = () => {
 									Delete Account
 								</Button>
 							</Stack>
-							{/* here vai */}
+
 							<DeleteAccountModal open={openDeleteAccountModal} setOpen={setOpenDeleteAccountModal} />
 						</div>
 					</Grid>

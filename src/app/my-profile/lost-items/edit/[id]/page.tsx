@@ -8,7 +8,6 @@ import PrivateRoute from '@/components/PrivateRoute/PrivateRoute';
 import MultiImageUploader from '@/components/Shared/MultiImageUploader/MultiImageUploader';
 import PageTitle from '@/components/Shared/PageTitle';
 import { useGetCategoriesQuery } from '@/redux/api/features/categoryApi';
-
 import { useGetLostItemQuery, useUpdateLostItemMutation } from '@/redux/api/features/lostItemApi';
 import lostItemSchema from '@/schemas/lostItemSchema';
 import { TCategory } from '@/types/category';
@@ -46,9 +45,9 @@ const EditLostItem = () => {
 
 		if (isImageSelected) {
 			const filteredImages = imageLinks?.filter((image) => image !== selectedImage);
-			setImageLinks(filteredImages);
+			setImageLinks(filteredImages as string[]);
 		} else {
-			setImageLinks([...imageLinks, selectedImage]);
+			setImageLinks([...imageLinks, selectedImage] as string[]);
 		}
 	};
 
