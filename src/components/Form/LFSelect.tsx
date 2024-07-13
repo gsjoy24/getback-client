@@ -31,7 +31,7 @@ const LFSelect = ({ label, options, name, sx }: LFSelectProps) => {
 						error={!!error?.message}
 					>
 						{options?.map((option) => (
-							<MenuItem key={option.value} value={option.value}>
+							<MenuItem key={option?.value} value={option.value}>
 								{option.label}
 							</MenuItem>
 						))}

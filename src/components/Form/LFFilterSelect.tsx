@@ -41,7 +41,7 @@ const LFFilterSelect = ({ label, options, name, sx, setFilterParam, setPage }: L
 							<em>None</em>
 						</MenuItem>
 						{options?.map((option) => (
-							<MenuItem key={option.value} value={option.value}>
+							<MenuItem key={option?.value} value={option.value}>
 								{option.label}
 							</MenuItem>
 						))}

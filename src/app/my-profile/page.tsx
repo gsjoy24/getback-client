@@ -240,7 +240,7 @@ const MyProfile = () => {
 											<SectionTitle title='Lost Items' />
 											<Stack justifyContent='center' alignItems='center' flexWrap='wrap' direction='row' gap={3}>
 												{lostItems?.map((item: TLostItem) => (
-													<LostItemCard key={item.id} item={item} />
+													<LostItemCard key={item?.id} item={item} />
 												))}
 											</Stack>
 											<div className='text-center mb-14'>
@@ -263,7 +263,7 @@ const MyProfile = () => {
 											<SectionTitle title='Found Items' />
 											<Stack justifyContent='center' alignItems='center' flexWrap='wrap' direction='row' gap={3}>
 												{foundItems?.map((item: TFoundItem) => (
-													<FoundItemCard key={item.id} item={item} />
+													<FoundItemCard key={item?.id} item={item} />
 												))}
 											</Stack>
 											<div className='text-center mb-14'>
@@ -286,7 +286,7 @@ const MyProfile = () => {
 											<SectionTitle title='Claimed Items' />
 											<Stack justifyContent='center' alignItems='center' flexWrap='wrap' direction='row' gap={3}>
 												{claimedItems?.map((item: TClaim) => (
-													<MyClaimCard key={item.id} item={item} />
+													<MyClaimCard key={item?.id} item={item} />
 												))}
 											</Stack>
 											<div className='text-center'>

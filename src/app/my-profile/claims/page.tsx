@@ -97,7 +97,11 @@ const ClaimedItems = () => {
 				}}
 			>
 				{isFetching && <LFBackdrop />}
-				{data?.data?.length ? data?.data?.map((item: any) => <MyClaimCard key={item.id} item={item} />) : <EmptyCard />}
+				{data?.data?.length ? (
+					data?.data?.map((item: any) => <MyClaimCard key={item?.id} item={item} />)
+				) : (
+					<EmptyCard />
+				)}
 			</Stack>
 
 			{/* for mobile */}

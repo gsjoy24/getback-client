@@ -1,7 +1,7 @@
 import FaqItem from '@/components/FaqItem/FaqItem';
 import PageTitle from '@/components/Shared/PageTitle';
+import { TCategory } from '@/types/category';
 import TagIcon from '@mui/icons-material/Tag';
-
 import { Container, Divider, Stack, Typography } from '@mui/material';
 import { Metadata } from 'next';
 type TData = {
@@ -239,8 +239,8 @@ const FaqsPage = () => {
 				desc='Find Answers to Common Questions About Reporting and Recovering Lost and Found Items.'
 			/>
 			<Divider sx={{ my: 4 }} />
-			{data.map((category, index) => (
-				<Stack key={category}>
+			{data.map((category) => (
+				<Stack key={category?.category}>
 					<Typography
 						variant='h5'
 						sx={{
@@ -252,7 +252,7 @@ const FaqsPage = () => {
 						<TagIcon sx={{ fontSize: '30px' }} /> {category.category}
 					</Typography>
 					{category?.questions.map((faq, index) => (
-						<FaqItem key={faq} question={faq?.question} answer={faq?.answer} />
+						<FaqItem key={faq?.question} question={faq?.question} answer={faq?.answer} />
 					))}
 				</Stack>
 			))}

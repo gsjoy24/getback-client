@@ -37,7 +37,7 @@ const RecentFoundItems = async () => {
 					}}
 				>
 					{items
-						? items.map((item: TLostItem) => <FoundItemCard key={item.id} item={item} />)
+						? items.map((item: TLostItem) => <FoundItemCard key={item?.id} item={item} />)
 						: Array.from({ length: 3 }).map((_, index) => (
 								<Box key={index * 2}>
 									<Skeleton animation='wave' variant='rectangular' width={330} height={118} />

@@ -25,7 +25,7 @@ const Footer = () => {
 						</Typography>
 						<Stack direction='column' gap={1}>
 							{navLinks.map((link) => (
-								<span key={link.title}>
+								<span key={link?.title}>
 									<Link href={link.href} className='hover:underline underline-offset-4'>
 										{link.title}
 									</Link>
@@ -72,11 +72,7 @@ const Footer = () => {
 				<Box sx={{ mt: 4, textAlign: 'center' }}>
 					<Typography variant='body2'>
 						&copy; {currentYear} GetBack. All rights reserved. Made with ❤️ by{' '}
-						<Link
-							href='https://gour-chandra-saha.web.app/'
-							target='_blank'
-							className='hover:underline underline-offset-4'
-						>
+						<Link href='https://goursahajoy.me/' target='_blank' className='hover:underline underline-offset-4'>
 							Gour Saha Joy
 						</Link>
 					</Typography>

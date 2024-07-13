@@ -103,7 +103,7 @@ const LostItems = () => {
 			>
 				{isFetching && <LFBackdrop />}
 				{data?.data?.length ? (
-					data?.data?.map((item: any) => <LostItemCard key={item.id} item={item} />)
+					data?.data?.map((item: any) => <LostItemCard key={item?.id} item={item} />)
 				) : (
 					<EmptyCard />
 				)}
