@@ -21,8 +21,7 @@ const AuthButton = ({ setOpen }: TAuthButtonProps) => {
 
 	const handleLogout = async () => {
 		logout();
-
-		router.refresh();
+		window.location.reload();
 	};
 
 	return (

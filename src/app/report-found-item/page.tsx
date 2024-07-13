@@ -142,7 +142,7 @@ const ReportFoundItem = () => {
 							>
 								{imageLinks.map((link, index) => (
 									<Image
-										key={index}
+										key={link + index}
 										src={link}
 										width={100}
 										height={100}

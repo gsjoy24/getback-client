@@ -29,7 +29,7 @@ export default function BasicMenu() {
 
 	const handleLogout = () => {
 		logout();
-		router.refresh();
+		window.location.reload();
 	};
 
 	return userData && userData?.email ? (

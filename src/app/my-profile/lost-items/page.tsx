@@ -34,10 +34,6 @@ const LostItems = () => {
 		{
 			name: 'page',
 			value: page
-		},
-		{
-			name: 'userId',
-			value: 'createdAt:desc'
 		}
 	]);
 

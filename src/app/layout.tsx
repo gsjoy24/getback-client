@@ -14,9 +14,24 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-	title: 'GetBack: Reunite Lost Items with Their Owners Easily',
+	title: 'GetBack',
 	description:
-		'GetBack: Lost something important? GetBack helps you find lost items in (City Name) and connect with those who found them. Free, fast, and easy to use! Recover lost phones, wallets, keys, and more. #GetBack #LostAndFound #LostItems #FoundItems #LostAndFoundApp #LostAndFoundService #LostAndFoundWebsite #LostAndFoundNearMe #LostAndFoundUSA #LostAndFoundBD #GourChandraSaha #GourSahaJoy #GourJoy #GourChandraSahaJoy #GourChandraSahaBD #GourSahaJoyBD #GourJoyBD #GourChandraSahaJoyBD #GourChandraSahaUSA #GourSahaJoyUSA #GourJoyUSA #GourChandraSahaJoyUSA #GourChandraSahaBDUSA #GourSahaJoyBDUSA #GourJoyBDUSA #GourChandraSahaJoyBDUSA #GourChandraSahaUSA #GourSahaJoyUSA #GourJoyUSA #GourChandraSahaJoyUSA #GourChandraSahaBDUSA #GourSahaJoyBDUSA #GourJoyBDUSA #GourChandraSahaJoyBDUSA #GourChandraSahaUSA #GourSahaJoyUSA #GourJoyUSA #GourChandraSahaJoyUSA #GourChandraSahaBDUSA #GourSahaJoyBDUSA #GourJoyBDUSA #GourChandraSahaJoyBDUSA #GourChandraSahaUSA #GourSahaJoyUSA #GourJoyUSA #GourChandraSahaJoyUSA #GourChandraSahaBDUSA #GourSahaJoyBDUSA #GourJoyBDUSA #GourChandraSahaJoyBDUSA #GourChandraSahaUSA #GourSahaJoyUSA #GourJoyUSA #GourChandraSahaJoyUSA #GourChandraSahaBDUSA #GourSahaJoyBDUSA #GourJoyBDUSA #GourChandraSahaJoyBDUSA #GourChandraSahaUSA #GourSahaJoyUSA #GourJoyUSA #GourChandraSahaJoyUSA #GourChandraSahaBDUSA #GourSahaJoyBDUSA #GourJoyBDUSA #GourChandraSahaJoyBDUSA #GourChandraSahaUSA #GourSahaJoyUSA #GourJoyUSA #GourChandraSahaJoyUSA #GourChandraSahaBDUSA #GourSahaJoyBDUSA #GourJoyBDUSA #GourChandraSahaJoyBDUSA #GourChandraSahaUSA #GourSahaJoyUSA #GourJoyUSA #GourChandra'
+		'Lost something important? GetBack helps you find lost items and connect with those who found them. Free, fast, and easy to use! Recover lost phones, wallets, keys, and more. GetBack Gour Saha Joy.',
+	keywords: 'GetBack, Gour Saha Joy, goursahajoy',
+	authors: [{ name: 'Gour Saha Joy' }],
+	twitter: {
+		card: 'summary_large_image',
+		site: '@goursahajoy',
+		creator: '@goursahajoy',
+		images: 'https://res.cloudinary.com/dghszztcc/image/upload/v1719901124/getback_dgg2ja.png'
+	},
+	openGraph: {
+		type: 'website',
+		title: 'GetBack',
+		description:
+			'Lost something important? GetBack helps you find lost items and connect with those who found them. Free, fast, and easy to use! Recover lost phones, wallets, keys, and more. GetBack Gour Saha Joy',
+		images: 'https://res.cloudinary.com/dghszztcc/image/upload/v1719901124/getback_dgg2ja.png'
+	}
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

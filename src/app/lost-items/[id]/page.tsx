@@ -66,7 +66,7 @@ const LostItemDetails = () => {
 					<strong>Email:</strong> {user?.email} <br />
 					<strong>Phone:</strong> {user?.phone} <br />
 					<strong>Location:</strong> {location} <br />
-					<strong>Found Date:</strong> {DateToString(lostDate)}
+					<strong>Lost Date:</strong> {DateToString(lostDate)}
 				</Typography>
 				<Typography
 					variant='body2'

@@ -172,7 +172,7 @@ const EditFoundItem = () => {
 									}}
 								>
 									{pictures?.map((link: string, index: number) => (
-										<div key={index} className='relative'>
+										<div key={link + index} className='relative'>
 											<ToggleButton
 												value='check'
 												selected={isImageSelected(index)}
@@ -226,7 +226,7 @@ const EditFoundItem = () => {
 								>
 									{imageLinks?.map((link: string, index: number) => (
 										<Image
-											key={index}
+											key={link + index}
 											src={link}
 											width={150}
 											height={150}

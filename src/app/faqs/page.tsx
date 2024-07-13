@@ -240,7 +240,7 @@ const FaqsPage = () => {
 			/>
 			<Divider sx={{ my: 4 }} />
 			{data.map((category, index) => (
-				<Stack key={index}>
+				<Stack key={category}>
 					<Typography
 						variant='h5'
 						sx={{
@@ -252,7 +252,7 @@ const FaqsPage = () => {
 						<TagIcon sx={{ fontSize: '30px' }} /> {category.category}
 					</Typography>
 					{category?.questions.map((faq, index) => (
-						<FaqItem key={index} question={faq?.question} answer={faq?.answer} />
+						<FaqItem key={faq} question={faq?.question} answer={faq?.answer} />
 					))}
 				</Stack>
 			))}

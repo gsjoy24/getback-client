@@ -45,7 +45,7 @@ const DeleteAccountModal = ({ open, setOpen }: TProps) => {
 				setOpen(false);
 				toast.success('Account deleted successfully!');
 				logout();
-				router.refresh();
+				window.location.reload();
 				router.push('/');
 			}
 		} catch (error) {}
