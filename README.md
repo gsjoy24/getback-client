@@ -5,20 +5,20 @@ GetBack is a platform designed to help people report and find lost and found ite
 ## Instructions on how to run the application locally 📝
 
 - 1️⃣ Clone the repository to your machine. Use this link to do it.
-  ↦ <https://github.com/gsjoy24/getback-client>
+  ↦ <https://github.com/gsjoy24/getback-client.git>
 - 2️⃣ Open the project in vs code and create a file named .env in the root of the folder.
 - 3️⃣ Add the code bellow in the .env file
 
 ```
 NEXT_PUBLIC_SERVER_URL=https://lost-and-found-server-joy.vercel.app/api
-# NEXT_PUBLIC_SERVER_URL=http://localhost:5000/api
 
 # cloudinary
-NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=dghszztcc
-NEXT_PUBLIC_CLOUDINARY_API_KEY=352726779243478
-NEXT_PUBLIC_CLOUDINARY_API_SECRET=2CPq5j1h00o8HYdZ0-DySEsgeIw
+# use your credentials here
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=
+NEXT_PUBLIC_CLOUDINARY_API_KEY=
+NEXT_PUBLIC_CLOUDINARY_API_SECRET=
 
-NEXT_PUBLIC_MEASUREMENT_ID=G-LVCM1XWYW6
+NEXT_PUBLIC_MEASUREMENT_ID=
 ```
 
 - 4️⃣ Open the command prompt on the project path or terminal on the vs code by pressing Ctrl + `
@@ -37,7 +37,7 @@ links ↦
 - client-live: <http://getback.vercel.app/>
 - backend-live: <https://lost-and-found-server-joy.vercel.app/>
 
-admin - there is no dashboard right now. but all apis create already created on the server.
+admin - there is no dashboard right now. but all apis are already created on the server.
 
 - email : <gour.joy24@gmail.com>
 - password : SuperAdmin0
