@@ -1,4 +1,4 @@
-import { SxProps, TextField, Typography } from '@mui/material';
+import { SxProps, TextField } from '@mui/material';
 import { Controller, useFormContext } from 'react-hook-form';
 import { CiWarning } from 'react-icons/ci';
 
@@ -25,11 +25,11 @@ const LFInput = ({ label, type = 'text', name, sx, multiline = false, rows }: LF
 					sx={{ ...sx, width: '100%', borderRadius: '5px', mb: 2 }}
 					label={label}
 					placeholder={label}
-					minRows={rows || 6}
+					minRows={rows ?? 6}
 					variant='standard'
 					multiline={multiline}
 					type={type}
-					value={field.value || ''}
+					value={field?.value ?? ''}
 					size='small'
 					fullWidth
 					error={!!error?.message}

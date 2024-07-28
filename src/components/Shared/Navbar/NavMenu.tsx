@@ -7,13 +7,11 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 export default function BasicMenu() {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
-	const router = useRouter();
 	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
 		setAnchorEl(event.currentTarget);
 	};
@@ -32,7 +30,7 @@ export default function BasicMenu() {
 		window.location.reload();
 	};
 
-	return userData && userData?.email ? (
+	return userData?.email ? (
 		<div>
 			<IconButton
 				aria-controls={open ? 'basic-menu' : undefined}

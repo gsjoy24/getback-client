@@ -44,35 +44,34 @@ const UserDrawer = ({ open, setOpen }: TUserDrawerProps) => {
 			<Divider />
 
 			<Stack spacing={3} p={4}>
-				{navLinks &&
-					navLinks?.map((link) => (
-						<Typography
-							key={link?.href}
-							color='#000'
-							component={Link}
-							href={link.href}
-							onClick={() => setOpen(false)}
-							sx={{
-								display: 'flex',
-								flexDirection: 'column',
-								justifyContent: 'center',
-								alignItems: 'center',
-								'& span': {
-									width: '0%',
-									height: 2,
-									mt: 1,
-									backgroundColor: 'primary.main',
-									transition: 'width 0.2s ease'
-								},
-								'&:hover span': {
-									width: '50%'
-								}
-							}}
-						>
-							{link.title}
-							<span></span>
-						</Typography>
-					))}
+				{navLinks?.map((link) => (
+					<Typography
+						key={link?.href}
+						color='#000'
+						component={Link}
+						href={link.href}
+						onClick={() => setOpen(false)}
+						sx={{
+							display: 'flex',
+							flexDirection: 'column',
+							justifyContent: 'center',
+							alignItems: 'center',
+							'& span': {
+								width: '0%',
+								height: 2,
+								mt: 1,
+								backgroundColor: 'primary.main',
+								transition: 'width 0.2s ease'
+							},
+							'&:hover span': {
+								width: '50%'
+							}
+						}}
+					>
+						{link.title}
+						<span></span>
+					</Typography>
+				))}
 				<AuthButton setOpen={setOpen} />
 			</Stack>
 		</Drawer>

@@ -13,7 +13,7 @@ type TLFDatePickerProps = {
 const LFDatePicker = ({ setDate, label, dateError, setDateError }: TLFDatePickerProps) => {
 	return (
 		<MobileDateTimePicker
-			label={label || 'Date'}
+			label={label ?? 'Date'}
 			disableFuture
 			onChange={(newValue) => setDate(newValue)}
 			ampmInClock

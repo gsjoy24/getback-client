@@ -1,6 +1,6 @@
 import config from '@/lib/config';
 import { TLostItem } from '@/types/lostItem';
-import { Box, Button, Container, Skeleton, Stack, Typography } from '@mui/material';
+import { Box, Button, Container, Skeleton, Stack } from '@mui/material';
 import Link from 'next/link';
 import LostItemCard from '../Shared/LostItemCard/LostItemCard';
 import SectionTitle from '../Shared/SectionTitle';

@@ -1,6 +1,6 @@
 import logo from '@/assets/logo/logo-w.png';
 import navLinks from '@/constants/navLinks';
-import { Facebook, Instagram, LinkedIn, Twitter, X } from '@mui/icons-material';
+import { Facebook, Instagram, LinkedIn, X } from '@mui/icons-material';
 import { Box, Container, Grid, IconButton, Stack, Typography } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
 import Image from 'next/image';

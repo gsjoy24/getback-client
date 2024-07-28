@@ -42,7 +42,9 @@ const Navbar = () => {
 							gap: 4
 						}}
 					>
-						{navLinks && navLinks?.map((link) => <NavItem key={link?.href} link={link} setOpen={setOpen} />)}
+						{navLinks?.map((link) => (
+							<NavItem key={link?.href} link={link} setOpen={setOpen} />
+						))}
 
 						<NavMenu />
 					</Box>

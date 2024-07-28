@@ -3,16 +3,14 @@ import { getUserInfo, logout } from '@/services/auth.services';
 import { TUser } from '@/types/user';
 import { Button } from '@mui/material';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import NavItem from './NavItem';
 
 type TAuthButtonProps = {
-	setOpen?: (open: boolean) => void;
+	setOpen: (open: boolean) => void;
 };
 
 const AuthButton = ({ setOpen }: TAuthButtonProps) => {
-	const router = useRouter();
 	const [userData, setUserData] = useState<TUser | null>(null);
 
 	useEffect(() => {
@@ -26,7 +24,7 @@ const AuthButton = ({ setOpen }: TAuthButtonProps) => {
 
 	return (
 		<>
-			{userData && userData?.email ? (
+			{userData?.email ? (
 				<>
 					<NavItem link={{ title: 'My Profile', href: '/my-profile' }} setOpen={setOpen} />
 					<NavItem link={{ title: 'Dashboard', href: '/dashboard' }} setOpen={setOpen} />
@@ -35,7 +33,7 @@ const AuthButton = ({ setOpen }: TAuthButtonProps) => {
 					</Button>
 				</>
 			) : (
-				<Button onClick={() => setOpen && setOpen(false)} component={Link} href='/login'>
+				<Button onClick={() => setOpen(false)} component={Link} href='/login'>
 					Login
 				</Button>
 			)}

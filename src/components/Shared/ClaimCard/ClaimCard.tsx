@@ -1,5 +1,4 @@
 import TClaim from '@/types/claim';
-import BlockIcon from '@mui/icons-material/Block';
 import EmailIcon from '@mui/icons-material/Email';
 import PersonIcon from '@mui/icons-material/Person';
 import { Box, Card, CardActions, CardContent, Typography } from '@mui/material';

@@ -6,7 +6,7 @@ interface TNavItemProps {
 		href: string;
 		title?: string;
 	};
-	setOpen?: (open: boolean) => void;
+	setOpen: (open: boolean) => void;
 }
 
 const NavItem = ({ link, setOpen }: TNavItemProps) => {
@@ -15,7 +15,7 @@ const NavItem = ({ link, setOpen }: TNavItemProps) => {
 			color='#000'
 			component={Link}
 			href={link.href}
-			onClick={() => setOpen && setOpen(false)}
+			onClick={() => setOpen(false)}
 			sx={{
 				display: 'flex',
 				flexDirection: 'column',
@@ -32,7 +32,7 @@ const NavItem = ({ link, setOpen }: TNavItemProps) => {
 				}
 			}}
 		>
-			{link?.title || 'Explore More'}
+			{link?.title ?? 'Explore More'}
 			<span></span>
 		</Typography>
 	);

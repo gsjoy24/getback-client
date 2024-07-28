@@ -1,12 +1,11 @@
 'use client';
-import subscribeSchema from '@/schemas/subscribeScema';
+import subscribeSchema from '@/schemas/subscribeSchema';
 import subscribeToNewsLetter from '@/services/actions/subscribeToNewsLetter';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Button, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, Stack, Typography } from '@mui/material';
 import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 import { toast } from 'sonner';
-import { z } from 'zod';
 import LFForm from '../Form/LFForm';
 import LFInput from '../Form/lFInput';
 

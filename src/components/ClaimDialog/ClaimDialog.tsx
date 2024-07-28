@@ -6,14 +6,14 @@ import { isLoggedIn } from '@/services/auth.services';
 import TClaim from '@/types/claim';
 import { TFoundItem } from '@/types/foundItem';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Button, Container, Divider, IconButton, Slide, Stack } from '@mui/material';
+import { Box, Button, Container, IconButton, Slide, Stack } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import { TransitionProps } from '@mui/material/transitions';
 import { Dayjs } from 'dayjs';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React, { Key, use, useState } from 'react';
+import React, { useState } from 'react';
 import { MdOutlineClose } from 'react-icons/md';
 import { toast } from 'sonner';
 import LFDatePicker from '../Form/LFDatePicker';
@@ -100,7 +100,7 @@ const ClaimDialog = ({ item }: { item: TFoundItem }) => {
 					<MdOutlineClose size={25} />
 				</IconButton>
 
-				{item && item?.id ? (
+				{item?.id ? (
 					<Container sx={{ py: 3 }}>
 						<PageTitle
 							title={`Claim ${item?.itemName}`}
