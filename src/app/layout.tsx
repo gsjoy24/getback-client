@@ -34,7 +34,7 @@ export const metadata: Metadata = {
 	}
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { readonly children: React.ReactNode }) {
 	return (
 		<Providers>
 			<html lang='en'>

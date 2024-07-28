@@ -40,13 +40,20 @@ const ClaimDetails = () => {
 		return <EmptyCard />;
 	}
 
-	const { description, pictures, driveUrl, lostDate, user, location } = data?.data;
+	const {
+		description = 'No description provided',
+		pictures = [],
+		driveUrl = '',
+		lostDate = 'Unknown date',
+		user = {},
+		location = 'Unknown location'
+	} = data?.data || {};
+
 	const images =
-		pictures &&
-		pictures.map((image: string) => ({
+		pictures?.map((image: string) => ({
 			original: image,
 			thumbnail: image
-		}));
+		})) || [];
 
 	return (
 		<PrivateRoute>

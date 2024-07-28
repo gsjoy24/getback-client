@@ -15,7 +15,7 @@ import { Box, Button, Container, Stack, ToggleButton, Typography } from '@mui/ma
 import { Dayjs } from 'dayjs';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
-import { Key, useState } from 'react';
+import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 import { toast } from 'sonner';
 
@@ -51,7 +51,7 @@ const EditClaim = () => {
 		return <LoadingCompo />;
 	}
 
-	const { pictures, lostDate } = data?.data;
+	const { pictures = [], lostDate = '' } = data?.data;
 
 	const handleEdit = async (data: FieldValues) => {
 		const modifiedData = {
@@ -137,7 +137,7 @@ const EditClaim = () => {
 								}}
 							>
 								{pictures?.map((link: string, index: number) => (
-									<div key={index + link} className='relative'>
+									<div key={link} className='relative'>
 										<ToggleButton
 											value='check'
 											selected={isImageSelected(index)}
@@ -189,9 +189,9 @@ const EditClaim = () => {
 									m: 3
 								}}
 							>
-								{imageLinks?.map((link: string, index: number) => (
+								{imageLinks?.map((link: string) => (
 									<Image
-										key={link + index}
+										key={link}
 										src={link}
 										width={150}
 										height={150}

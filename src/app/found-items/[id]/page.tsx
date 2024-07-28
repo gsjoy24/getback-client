@@ -23,14 +23,22 @@ const FoundItemDetails = () => {
 		return <EmptyCard />;
 	}
 
-	const { userId, itemName, pictures, description, location, foundDate, user, category } = data?.data;
+	const {
+		userId = '',
+		itemName = '',
+		pictures = [],
+		description = '',
+		location = '',
+		foundDate = '',
+		user = { name: '', email: '', phone: '', username: '' },
+		category = ''
+	} = data?.data || {};
 
 	const images =
-		pictures &&
-		pictures.map((image: string) => ({
+		pictures?.map((image: string) => ({
 			original: image,
 			thumbnail: image
-		}));
+		})) || [];
 
 	return (
 		<Stack

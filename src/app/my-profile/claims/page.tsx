@@ -7,7 +7,6 @@ import LFBackdrop from '@/components/Shared/Backdrop/Backdrop';
 import MyClaimCard from '@/components/Shared/ClaimCard/MyClaimCard';
 import EmptyCard from '@/components/Shared/EmptyCard/EmptyCard';
 import PageTitle from '@/components/Shared/PageTitle';
-import { useGetCategoriesQuery } from '@/redux/api/features/categoryApi';
 import { useGetMyClaimsQuery } from '@/redux/api/features/claimApi';
 import { TQueryParams } from '@/types';
 import { Box, IconButton, Pagination, Stack } from '@mui/material';

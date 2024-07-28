@@ -155,9 +155,9 @@ const ClaimDialog = ({ item }: { item: TFoundItem }) => {
 										mb: 3
 									}}
 								>
-									{imageLinks.map((link: string, index: number) => (
+									{imageLinks.map((link: string) => (
 										<Image
-											key={link + index}
+											key={link}
 											src={link}
 											width={100}
 											height={100}

@@ -3,7 +3,7 @@ import { useDeleteAccountMutation } from '@/redux/api/features/profileApi';
 import DeleteAccountSchema from '@/schemas/deleteAccountSchema';
 import { logout } from '@/services/auth.services';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Slide, Typography } from '@mui/material';
+import { IconButton, Slide, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -68,9 +68,18 @@ const DeleteAccountModal = ({ open, setOpen }: TProps) => {
 
 					<div className='w-full relative'>
 						<LFInput label='Password' name='password' type={showPass ? 'text' : 'password'} />
-						<div className='absolute right-3 top-3 cursor-pointer' onClick={() => setShowPass((prev) => !prev)}>
+						<IconButton
+							sx={{
+								position: 'absolute',
+								right: 3,
+								top: 10
+							}}
+							onClick={() => setShowPass((prev) => !prev)}
+							aria-label='toggle password visibility'
+							size='small'
+						>
 							{showPass ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
-						</div>
+						</IconButton>
 					</div>
 
 					<Typography variant='body2' color='textSecondary'>

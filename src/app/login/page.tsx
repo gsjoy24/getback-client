@@ -7,7 +7,7 @@ import LoginValidationSchema from '@/schemas/loginSchema';
 import userLogin from '@/services/actions/userLogin';
 import { isLoggedIn, storeUserInfo } from '@/services/auth.services';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Button, Grid, Typography } from '@mui/material';
+import { Box, Button, Grid, IconButton, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -40,7 +40,7 @@ const LoginPage = () => {
 			if (res.success) {
 				setResetForm(true);
 				toast.success(res.message);
-				await storeUserInfo(res?.data?.accessToken);
+				storeUserInfo(res?.data?.accessToken);
 				router.push(redirectTo || '/');
 			} else {
 				toast.error(res.message);
@@ -100,9 +100,18 @@ const LoginPage = () => {
 						<LFInput name='email' label='Email' sx={{ mb: 2 }} />
 						<div className='w-full relative'>
 							<LFInput label='Password' name='password' type={showPass ? 'text' : 'password'} />
-							<div className='absolute right-3 top-3 cursor-pointer' onClick={() => setShowPass((prev) => !prev)}>
+							<IconButton
+								sx={{
+									position: 'absolute',
+									right: 3,
+									top: 10
+								}}
+								onClick={() => setShowPass((prev) => !prev)}
+								aria-label='toggle password visibility'
+								size='small'
+							>
 								{showPass ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
-							</div>
+							</IconButton>
 						</div>
 						<Button type='submit' fullWidth sx={{ mt: 2 }} disabled={loading}>
 							{loading ? (

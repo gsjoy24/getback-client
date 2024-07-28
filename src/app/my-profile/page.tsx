@@ -32,8 +32,19 @@ const MyProfile = () => {
 		return <EmptyCard />;
 	}
 
-	const { user, bio, image, age, createdAt, lostItems, foundItems, claimedItems, counts } = data?.data;
-	const { name, email, phone, username } = user;
+	const {
+		user = {},
+		bio = '',
+		image = '',
+		age = 0,
+		createdAt = '',
+		lostItems = [],
+		foundItems = [],
+		claimedItems = [],
+		counts = { lostItems: 0, foundItems: 0, claimedItems: 0 }
+	} = data?.data || {};
+
+	const { name = '', email = '', phone = '', username = '' } = user;
 	return (
 		<PrivateRoute>
 			<Container>

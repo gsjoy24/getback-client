@@ -9,7 +9,7 @@ import signupUser from '@/services/actions/signup';
 import userLogin from '@/services/actions/userLogin';
 import { storeUserInfo } from '@/services/auth.services';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Button, Grid, Stack, Typography } from '@mui/material';
+import { Box, Button, Grid, IconButton, Stack, Typography } from '@mui/material';
 import { CldUploadWidget } from 'next-cloudinary';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -151,18 +151,33 @@ const SignPage = () => {
 							>
 								<div className='w-full relative'>
 									<LFInput label='Password' name='password' type={showPass ? 'text' : 'password'} />
-									<div className='absolute right-3 top-3 cursor-pointer' onClick={() => setShowPass((prev) => !prev)}>
+									<IconButton
+										sx={{
+											position: 'absolute',
+											right: 3,
+											top: 10
+										}}
+										onClick={() => setShowPass((prev) => !prev)}
+										aria-label='toggle password visibility'
+										size='small'
+									>
 										{showPass ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
-									</div>
+									</IconButton>
 								</div>
 								<div className='w-full relative'>
 									<LFInput label='Confirm Password' name='confirm_password' type={showConPass ? 'text' : 'password'} />
-									<div
-										className='absolute right-3 top-3 cursor-pointer'
+									<IconButton
+										sx={{
+											position: 'absolute',
+											right: 3,
+											top: 10
+										}}
 										onClick={() => setShowConPass((prev) => !prev)}
+										aria-label='toggle password visibility'
+										size='small'
 									>
 										{showConPass ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
-									</div>
+									</IconButton>
 								</div>
 							</Stack>
 

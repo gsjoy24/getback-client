@@ -45,9 +45,9 @@ const UserDrawer = ({ open, setOpen }: TUserDrawerProps) => {
 
 			<Stack spacing={3} p={4}>
 				{navLinks &&
-					navLinks?.map((link, index) => (
+					navLinks?.map((link) => (
 						<Typography
-							key={link?.href + index}
+							key={link?.href}
 							color='#000'
 							component={Link}
 							href={link.href}

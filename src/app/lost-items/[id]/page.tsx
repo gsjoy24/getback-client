@@ -19,14 +19,21 @@ const LostItemDetails = () => {
 		return <EmptyCard />;
 	}
 
-	const { itemName, pictures, description, location, lostDate, user, category } = data?.data;
+	const {
+		itemName = '',
+		pictures = [],
+		description = '',
+		location = '',
+		lostDate = '',
+		user = {},
+		category = ''
+	} = data?.data || {};
 
 	const images =
-		pictures &&
-		pictures.map((image: string) => ({
+		pictures?.map((image: string) => ({
 			original: image,
 			thumbnail: image
-		}));
+		})) || [];
 
 	return (
 		<Stack

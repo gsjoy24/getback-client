@@ -59,7 +59,7 @@ const EditFoundItem = () => {
 	if (isFetching || !data?.data) {
 		return <LoadingCompo />;
 	}
-	const { pictures, foundDate } = data?.data;
+	const { pictures = [], foundDate = '' } = data?.data;
 	const handleSubmit = async (formData: FieldValues) => {
 		const modifiedData = {
 			...formData,
@@ -172,7 +172,7 @@ const EditFoundItem = () => {
 									}}
 								>
 									{pictures?.map((link: string, index: number) => (
-										<div key={link + index} className='relative'>
+										<div key={link} className='relative'>
 											<ToggleButton
 												value='check'
 												selected={isImageSelected(index)}
@@ -224,9 +224,9 @@ const EditFoundItem = () => {
 										m: 3
 									}}
 								>
-									{imageLinks?.map((link: string, index: number) => (
+									{imageLinks?.map((link: string) => (
 										<Image
-											key={link + index}
+											key={link}
 											src={link}
 											width={150}
 											height={150}

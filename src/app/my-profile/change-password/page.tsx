@@ -6,7 +6,7 @@ import PageTitle from '@/components/Shared/PageTitle';
 import { useChangePasswordMutation } from '@/redux/api/features/authApi';
 import ChangePasswordValidationSchema from '@/schemas/changePasswordSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Container } from '@mui/material';
+import { Button, Container, IconButton } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
@@ -59,18 +59,33 @@ const ChangePassword = () => {
 					<LFForm onSubmit={handleSubmit} resolver={zodResolver(ChangePasswordValidationSchema)} resetForm={resetForm}>
 						<div className='w-full relative'>
 							<LFInput label='Current Password' name='oldPassword' type={showCurrentPass ? 'text' : 'password'} />
-							<div
-								className='absolute right-3 top-3 cursor-pointer'
+							<IconButton
+								sx={{
+									position: 'absolute',
+									right: 3,
+									top: 10
+								}}
 								onClick={() => setShowCurrentPass((prev) => !prev)}
+								aria-label='toggle current password visibility'
+								size='small'
 							>
 								{showCurrentPass ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
-							</div>
+							</IconButton>
 						</div>
 						<div className='w-full relative'>
 							<LFInput label='New Password' name='newPassword' type={showNewPass ? 'text' : 'password'} />
-							<div className='absolute right-3 top-3 cursor-pointer' onClick={() => setShowNewPass((prev) => !prev)}>
+							<IconButton
+								sx={{
+									position: 'absolute',
+									right: 3,
+									top: 10
+								}}
+								onClick={() => setShowNewPass((prev) => !prev)}
+								aria-label='toggle new password visibility'
+								size='small'
+							>
 								{showNewPass ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
-							</div>
+							</IconButton>
 						</div>
 						<div className='w-full relative'>
 							<LFInput label='Confirm Password' name='confirm_password' type={showConfirmPass ? 'text' : 'password'} />

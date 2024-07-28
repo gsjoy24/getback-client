@@ -1,6 +1,5 @@
 import FaqItem from '@/components/FaqItem/FaqItem';
 import PageTitle from '@/components/Shared/PageTitle';
-import { TCategory } from '@/types/category';
 import TagIcon from '@mui/icons-material/Tag';
 import { Container, Divider, Stack, Typography } from '@mui/material';
 import { Metadata } from 'next';
@@ -251,7 +250,7 @@ const FaqsPage = () => {
 					>
 						<TagIcon sx={{ fontSize: '30px' }} /> {category.category}
 					</Typography>
-					{category?.questions.map((faq, index) => (
+					{category?.questions.map((faq) => (
 						<FaqItem key={faq?.question} question={faq?.question} answer={faq?.answer} />
 					))}
 				</Stack>
