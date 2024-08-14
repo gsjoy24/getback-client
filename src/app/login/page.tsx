@@ -3,9 +3,12 @@ import loginXsImage from '@/assets/login-xs.jpg';
 import loginImage from '@/assets/login.jpg';
 import LFForm from '@/components/Form/LFForm';
 import LFInput from '@/components/Form/lFInput';
+import { setUser } from '@/redux/api/authSlice';
+import { useAppDispatch } from '@/redux/hooks';
 import LoginValidationSchema from '@/schemas/loginSchema';
 import userLogin from '@/services/actions/userLogin';
 import { isLoggedIn, storeUserInfo } from '@/services/auth.services';
+import verifyToken from '@/utils/verifyToken';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Grid, IconButton, Typography } from '@mui/material';
 import Image from 'next/image';
@@ -22,6 +25,7 @@ const LoginPage = () => {
 	const [showPass, setShowPass] = useState<boolean>(false);
 	const [resetForm, setResetForm] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(false);
+	const dispatch = useAppDispatch();
 	const isLogin = isLoggedIn();
 
 	useEffect(() => {
@@ -40,6 +44,8 @@ const LoginPage = () => {
 			if (res.success) {
 				setResetForm(true);
 				toast.success(res.message);
+				const userInfo = verifyToken(res?.data?.accessToken);
+				dispatch(setUser({ user: userInfo, token: res?.data?.accessToken }));
 				storeUserInfo(res?.data?.accessToken);
 				router.push(redirectTo || '/');
 			} else {

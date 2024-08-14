@@ -9,3 +9,8 @@ export type TUser = {
 	createdAt: string;
 	updatedAt: string;
 };
+
+export type TAuthState = {
+	user: null | TUser;
+	token: null | string;
+};
