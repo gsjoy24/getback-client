@@ -14,46 +14,48 @@ const RecentLostItems = async () => {
 	const { data: items } = await fetchItems.json();
 	return (
 		items?.length && (
-			<Container
-				sx={{
-					mb: 5
-				}}
-			>
-				<SectionTitle
-					title='Recent Lost Items'
-					desc='Dive into a collection of recently lost items awaiting reconnection with their owners.'
-				/>
-				<Stack
-					justifyContent='center'
-					alignItems='center'
-					gap={5}
-					flexWrap='wrap'
-					pb={5}
+			<div className='bg-white'>
+				<Container
 					sx={{
-						flexDirection: {
-							xs: 'column',
-							sm: 'row'
-						}
+						py: 5
 					}}
 				>
-					{items
-						? items.map((item: TLostItem) => <LostItemCard key={item?.id} item={item} />)
-						: Array.from({ length: 3 }).map((_, index) => (
-								<Box key={index * 1.2}>
-									<Skeleton animation='wave' variant='rectangular' width={330} height={118} />
-									<Skeleton animation='wave' width={230} height={40} />
-									<Skeleton animation='wave' width={230} height={20} />
-									<Skeleton animation='wave' width={200} height={20} />
-									<Skeleton animation='wave' width={230} height={40} />
-								</Box>
-						  ))}
-				</Stack>
-				<div className='grid w-full place-items-center'>
-					<Button variant='outlined' component={Link} href='/lost-items' size='large'>
-						View More
-					</Button>
-				</div>
-			</Container>
+					<SectionTitle
+						title='Recent Lost Items'
+						desc='Dive into a collection of recently lost items awaiting reconnection with their owners.'
+					/>
+					<Stack
+						justifyContent='center'
+						alignItems='center'
+						gap={5}
+						flexWrap='wrap'
+						pb={5}
+						sx={{
+							flexDirection: {
+								xs: 'column',
+								sm: 'row'
+							}
+						}}
+					>
+						{items
+							? items.map((item: TLostItem) => <LostItemCard key={item?.id} item={item} />)
+							: Array.from({ length: 3 }).map((_, index) => (
+									<Box key={index * 1.2}>
+										<Skeleton animation='wave' variant='rectangular' width={330} height={118} />
+										<Skeleton animation='wave' width={230} height={40} />
+										<Skeleton animation='wave' width={230} height={20} />
+										<Skeleton animation='wave' width={200} height={20} />
+										<Skeleton animation='wave' width={230} height={40} />
+									</Box>
+							  ))}
+					</Stack>
+					<div className='grid w-full place-items-center'>
+						<Button variant='outlined' component={Link} href='/lost-items' size='large'>
+							View More
+						</Button>
+					</div>
+				</Container>
+			</div>
 		)
 	);
 };

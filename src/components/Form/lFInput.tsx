@@ -35,7 +35,7 @@ const LFInput = ({ label, type = 'text', name, sx, multiline = false, rows }: LF
 					error={!!error?.message}
 					helperText={
 						error?.message && (
-							<span className='flex items-center gap-1 relative right-3'>
+							<span className='flex items-center gap-1 relative right-0'>
 								<CiWarning size={16} /> {error?.message}
 							</span>
 						)
