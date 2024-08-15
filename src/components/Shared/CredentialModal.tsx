@@ -46,7 +46,7 @@ const CredentialModal = () => {
 						<Typography id='transition-modal-title' variant='h6' component='h2'>
 							Testing Credentials
 						</Typography>
-						<Typography id='transition-modal-description' sx={{ mt: 2 }}>
+						<Box id='transition-modal-description' sx={{ mt: 2 }}>
 							<pre>
 								User -- <br />
 								Email: tester@gmail.com <br />
@@ -56,7 +56,7 @@ const CredentialModal = () => {
 								Email: gour@gmail.com <br />
 								Password: password <br />
 							</pre>
-						</Typography>
+						</Box>
 					</Box>
 				</Fade>
 			</Modal>

@@ -20,7 +20,7 @@ import { Box, Button, Container, Divider, Grid, Stack, Typography } from '@mui/m
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import LoadingCompo from '../loading';
+import LoadingCompo from '../../loading';
 
 const MyProfile = () => {
 	const [openDeleteAccountModal, setOpenDeleteAccountModal] = useState<boolean>(false);

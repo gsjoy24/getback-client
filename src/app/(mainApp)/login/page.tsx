@@ -156,6 +156,7 @@ const LoginPage = () => {
 							Sign up
 						</Typography>
 					</Stack>
+					<CredentialModal />
 				</Box>
 			</Grid>
 		</Grid>

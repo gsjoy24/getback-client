@@ -1,10 +1,7 @@
 import GoogleAnalytics from '@/components/GoogleAnalytics/GoogleAnalytics';
-import Footer from '@/components/Shared/Footer/Footer';
-import Navbar from '@/components/Shared/Navbar/Navbar';
 import Providers from '@/lib/Providers/Providers';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import type { Metadata } from 'next';
-import dynamic from 'next/dynamic';
 import { Roboto } from 'next/font/google';
 import { Toaster } from 'sonner';
 import './globals.css';
@@ -41,11 +38,7 @@ export default function RootLayout({ children }: { readonly children: React.Reac
 			<html lang='en'>
 				<GoogleAnalytics />
 				<body className={roboto.className}>
-					<AppRouterCacheProvider>
-						<Navbar />
-						{children}
-						<Footer />
-					</AppRouterCacheProvider>
+					<AppRouterCacheProvider>{children}</AppRouterCacheProvider>
 					<Toaster position='top-center' expand={true} closeButton={true} duration={2000} />
 				</body>
 			</html>
