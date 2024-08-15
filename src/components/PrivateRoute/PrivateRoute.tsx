@@ -1,6 +1,6 @@
 'use client';
 import LoadingCompo from '@/app/loading';
-import { isLoggedIn } from '@/services/auth.services';
+import { useAppSelector } from '@/redux/hooks';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -12,14 +12,15 @@ const PrivateRoute = ({ children }: PrivateRouteProps) => {
 	const [loading, setLoading] = useState(true);
 	const router = useRouter();
 	const pathname = usePathname();
+	const user = useAppSelector((state) => state.auth.user);
 
 	useEffect(() => {
-		if (!isLoggedIn()) {
+		if (!user) {
 			router.push(`/login?redirect=${pathname}`);
 		} else {
 			setLoading(false);
 		}
-	}, [pathname, router]);
+	}, [pathname, user, router]);
 
 	if (loading) return <LoadingCompo />;
 
