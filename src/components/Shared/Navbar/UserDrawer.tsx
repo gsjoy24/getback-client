@@ -1,18 +1,20 @@
+'use client';
 import BlackLogo from '@/assets/logo/logo-b.png';
 import navLinks from '@/constants/navLinks';
 import { Divider, Drawer, IconButton, Stack, Typography } from '@mui/material';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { RiCloseLargeFill } from 'react-icons/ri';
 
 type TUserDrawerProps = {
 	open: boolean;
 	setOpen: (open: boolean) => void;
 };
+const AuthButton = dynamic(() => import('./AuthButton'), { ssr: false });
 
 const UserDrawer = ({ open, setOpen }: TUserDrawerProps) => {
-	const AuthButton = dynamic(() => import('./AuthButton'), { ssr: false });
 	return (
 		<Drawer
 			open={open}
@@ -72,7 +74,9 @@ const UserDrawer = ({ open, setOpen }: TUserDrawerProps) => {
 						<span></span>
 					</Typography>
 				))}
-				<AuthButton setOpen={setOpen} />
+				<Suspense fallback={<p>Loading</p>}>
+					<AuthButton setOpen={setOpen} />
+				</Suspense>
 			</Stack>
 		</Drawer>
 	);

@@ -75,7 +75,8 @@ const EditLostItem = () => {
 				router.push(`/lost-items/${id}?updated=${new Date().getTime()}`);
 			}
 		} catch (error) {
-			console.log(error);
+			// console.log(error);
+			toast.error(error?.message ?? 'An error occurred');
 		}
 	};
 	return (

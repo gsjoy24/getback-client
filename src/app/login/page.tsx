@@ -4,7 +4,7 @@ import loginImage from '@/assets/login.jpg';
 import LFForm from '@/components/Form/LFForm';
 import LFInput from '@/components/Form/lFInput';
 import { setUser } from '@/redux/api/authSlice';
-import { useAppDispatch } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import LoginValidationSchema from '@/schemas/loginSchema';
 import userLogin from '@/services/actions/userLogin';
 import { isLoggedIn, storeUserInfo } from '@/services/auth.services';
@@ -26,16 +26,16 @@ const LoginPage = () => {
 	const [resetForm, setResetForm] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(false);
 	const dispatch = useAppDispatch();
-	const isLogin = isLoggedIn();
+	const user = useAppSelector((state) => state.auth.user);
 
 	useEffect(() => {
-		if (isLogin) {
+		if (user) {
 			router.push('/');
 		}
 		const searchParams = new URLSearchParams(window?.location.search);
 		const redirect = searchParams.get('redirect');
 		setRedirectTo(redirect);
-	}, [router, isLogin]);
+	}, [router, user]);
 
 	const handleSubmit = async (data: FieldValues) => {
 		try {

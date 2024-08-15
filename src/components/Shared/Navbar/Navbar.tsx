@@ -5,14 +5,14 @@ import { Box, Container, IconButton, Stack } from '@mui/material';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { HiMiniBars3CenterLeft } from 'react-icons/hi2';
 import NavItem from './NavItem';
 import UserDrawer from './UserDrawer';
+const NavMenu = dynamic(() => import('./NavMenu'), { ssr: false });
 
 const Navbar = () => {
 	const [open, setOpen] = useState<boolean>(false);
-	const NavMenu = dynamic(() => import('./NavMenu'), { ssr: false });
 
 	return (
 		<Box
@@ -46,7 +46,9 @@ const Navbar = () => {
 							<NavItem key={link?.href} link={link} setOpen={setOpen} />
 						))}
 
-						<NavMenu />
+						<Suspense fallback={<div>Loading...</div>}>
+							<NavMenu />
+						</Suspense>
 					</Box>
 
 					{/* nav links for small screen */}

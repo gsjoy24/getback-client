@@ -1,9 +1,9 @@
 'use client';
-import { getUserInfo, logout } from '@/services/auth.services';
-import { TUser } from '@/types/user';
+import { setUser } from '@/redux/api/authSlice';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { logout } from '@/services/auth.services';
 import { Button } from '@mui/material';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import NavItem from './NavItem';
 
 type TAuthButtonProps = {
@@ -11,20 +11,17 @@ type TAuthButtonProps = {
 };
 
 const AuthButton = ({ setOpen }: TAuthButtonProps) => {
-	const [userData, setUserData] = useState<TUser | null>(null);
-
-	useEffect(() => {
-		setUserData(getUserInfo());
-	}, []);
+	const dispatch = useAppDispatch();
+	const user = useAppSelector((state) => state.auth.user);
 
 	const handleLogout = async () => {
 		logout();
-		window.location.reload();
+		dispatch(setUser({ user: null, token: null }));
 	};
 
 	return (
 		<>
-			{userData?.email ? (
+			{user ? (
 				<>
 					<NavItem link={{ title: 'My Profile', href: '/my-profile' }} setOpen={setOpen} />
 					<NavItem link={{ title: 'Dashboard', href: '/dashboard' }} setOpen={setOpen} />

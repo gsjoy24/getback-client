@@ -6,9 +6,10 @@ import { useEffect, useState } from 'react';
 
 type PrivateRouteProps = {
 	children: React.ReactNode;
+	role?: string;
 };
 
-const PrivateRoute = ({ children }: PrivateRouteProps) => {
+const PrivateRoute = ({ children, role }: PrivateRouteProps) => {
 	const [loading, setLoading] = useState(true);
 	const router = useRouter();
 	const pathname = usePathname();
@@ -16,11 +17,13 @@ const PrivateRoute = ({ children }: PrivateRouteProps) => {
 
 	useEffect(() => {
 		if (!user) {
-			router.push(`/login?redirect=${pathname}`);
+			router.push('/login');
+		} else if (role && user.role !== role) {
+			router.push('/');
 		} else {
 			setLoading(false);
 		}
-	}, [pathname, user, router]);
+	}, [pathname, user, router, role]);
 
 	if (loading) return <LoadingCompo />;
 

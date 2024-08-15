@@ -74,8 +74,8 @@ const EditFoundItem = () => {
 				toast.success(res?.data?.message);
 				router.push(`/found-items/${id}?updated=${new Date().getTime()}`);
 			}
-		} catch (error) {
-			console.log(error);
+		} catch (error: any) {
+			toast.error(error?.data?.message ?? 'Something went wrong. Please try again later.');
 		}
 	};
 	return (
