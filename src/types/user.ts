@@ -5,7 +5,7 @@ export type TUser = {
 	phone: string;
 	password: string;
 	status: 'ACTIVE' | 'BLOCKED';
-	role: 'user' | 'admin';
+	role: 'USER' | 'ADMIN';
 	createdAt: string;
 	updatedAt: string;
 };

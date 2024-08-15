@@ -48,7 +48,7 @@ const NavMenu = () => {
 					'aria-labelledby': 'basic-button'
 				}}
 			>
-				{user?.role === 'admin' && (
+				{user?.role === 'ADMIN' && (
 					<Link href='/dashboard'>
 						<MenuItem onClick={handleClose}>Dashboard</MenuItem>
 					</Link>

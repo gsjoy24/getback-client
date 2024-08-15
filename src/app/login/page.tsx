@@ -3,6 +3,7 @@ import loginXsImage from '@/assets/login-xs.jpg';
 import loginImage from '@/assets/login.jpg';
 import LFForm from '@/components/Form/LFForm';
 import LFInput from '@/components/Form/lFInput';
+import CredentialModal from '@/components/Shared/CredentialModal';
 import { setUser } from '@/redux/api/authSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import LoginValidationSchema from '@/schemas/loginSchema';
@@ -10,7 +11,7 @@ import userLogin from '@/services/actions/userLogin';
 import { isLoggedIn, storeUserInfo } from '@/services/auth.services';
 import verifyToken from '@/utils/verifyToken';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Button, Grid, IconButton, Typography } from '@mui/material';
+import { Box, Button, Grid, IconButton, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -149,12 +150,12 @@ const LoginPage = () => {
 							)}
 						</Button>
 					</LFForm>
-					<Typography sx={{ mt: 2 }}>
-						Don&#39;t have an account?{' '}
+					<Stack direction='row' gap={1} mt={2} justifyContent='center'>
+						<Typography> Don&#39;t have an account?</Typography>
 						<Typography sx={{ color: 'primary.main', cursor: 'pointer' }} component={Link} href='/signup'>
 							Sign up
 						</Typography>
-					</Typography>
+					</Stack>
 				</Box>
 			</Grid>
 		</Grid>

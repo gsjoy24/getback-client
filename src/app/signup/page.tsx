@@ -4,17 +4,20 @@ import LFForm from '@/components/Form/LFForm';
 import LFInput from '@/components/Form/lFInput';
 import PageTitle from '@/components/Shared/PageTitle';
 import SignupImageUploaderUI from '@/components/SignupImageUploaderUI/SignupImageUploaderUI';
+import { setUser } from '@/redux/api/authSlice';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import signupSchema from '@/schemas/signupSchema';
 import signupUser from '@/services/actions/signup';
 import userLogin from '@/services/actions/userLogin';
 import { storeUserInfo } from '@/services/auth.services';
+import verifyToken from '@/utils/verifyToken';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Grid, IconButton, Stack, Typography } from '@mui/material';
 import { CldUploadWidget } from 'next-cloudinary';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { toast } from 'sonner';
@@ -27,6 +30,13 @@ const SignPage = () => {
 	const [profileImage, setProfileImage] = useState<any>(null);
 	const [imageError, setImageError] = useState<string>('');
 	const router = useRouter();
+	const dispatch = useAppDispatch();
+	const user = useAppSelector((state) => state.auth.user);
+	useEffect(() => {
+		if (user) {
+			router.push('/');
+		}
+	}, [router, user]);
 
 	const handleSubmit = async (data: FieldValues) => {
 		setImageError('');
@@ -57,7 +67,9 @@ const SignPage = () => {
 				toast.success(res.message);
 				const loginRes = await userLogin({ email: data.email, password: data.password });
 				if (loginRes.success) {
-					storeUserInfo(loginRes?.data?.token);
+					const userInfo = verifyToken(res?.data?.accessToken);
+					dispatch(setUser({ user: userInfo, token: res?.data?.accessToken }));
+					storeUserInfo(res?.data?.accessToken);
 					router.push('/');
 				} else {
 					toast.error(loginRes.message);
@@ -265,12 +277,12 @@ const SignPage = () => {
 							)}
 						</Button>
 					</LFForm>
-					<Typography sx={{ mt: 2 }}>
-						Already have an account?{' '}
+					<Stack direction='row' gap={1} mt={2} justifyContent='center'>
+						<Typography>Already have an account?</Typography>
 						<Typography sx={{ color: 'primary.main', cursor: 'pointer' }} component={Link} href='/login'>
 							Login
 						</Typography>
-					</Typography>
+					</Stack>
 				</Box>
 			</Grid>
 		</Grid>
