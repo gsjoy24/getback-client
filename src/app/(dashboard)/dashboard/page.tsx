@@ -1,7 +1,10 @@
+import Loading from '@/components/Loading/Loading';
+
 const DashboardPage = () => {
 	return (
 		<div>
-			<h1>This is DashboardPage component</h1>
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto excepturi nam unde. Porro commodi adipisci odit,
+			temporibus obcaecati repellat. Tenetur!
 		</div>
 	);
 };

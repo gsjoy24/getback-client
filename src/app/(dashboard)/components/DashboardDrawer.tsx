@@ -1,24 +1,60 @@
 'use client';
 import BlackLogo from '@/assets/logo/logo-b.png';
-import MailIcon from '@mui/icons-material/Mail';
+import { useAppSelector } from '@/redux/hooks';
 import MenuIcon from '@mui/icons-material/Menu';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import {
+	AppBar,
+	Box,
+	CssBaseline,
+	Divider,
+	Drawer,
+	IconButton,
+	List,
+	ListItem,
+	ListItemButton,
+	ListItemIcon,
+	ListItemText,
+	Stack,
+	Toolbar
+} from '@mui/material';
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { CiMail } from 'react-icons/ci';
+import { FaRegUser, FaUsers } from 'react-icons/fa';
+import { FaSquarePollVertical, FaTableCells } from 'react-icons/fa6';
+import { IoChevronBackCircle } from 'react-icons/io5';
+import { MdReportProblem } from 'react-icons/md';
 const drawerWidth = 240;
+
+const drawerLinks = [
+	{
+		title: 'Overview',
+		icon: <FaSquarePollVertical />,
+		link: '/dashboard'
+	},
+	{
+		title: 'Users',
+		icon: <FaUsers />,
+		link: '/dashboard/users'
+	},
+	{
+		title: 'Category',
+		icon: <FaTableCells />,
+		link: '/dashboard/category'
+	},
+	{
+		title: 'Reports',
+		icon: <MdReportProblem />,
+		link: '/dashboard/reports'
+	},
+	{
+		title: 'Back to Home',
+		icon: <IoChevronBackCircle />,
+		link: '/'
+	}
+];
 
 interface Props {
 	children: React.ReactNode;
@@ -27,6 +63,10 @@ interface Props {
 const DashboardDrawer = ({ children }: Props) => {
 	const [mobileOpen, setMobileOpen] = useState(false);
 	const [isClosing, setIsClosing] = useState(false);
+	const user = useAppSelector((state: { auth: { user: any } }) => state.auth.user);
+
+	const currentPath = usePathname();
+	console.log({ currentPath });
 
 	const handleDrawerClose = () => {
 		setIsClosing(true);
@@ -57,23 +97,33 @@ const DashboardDrawer = ({ children }: Props) => {
 			</Toolbar>
 			<Divider />
 			<List>
-				{['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-					<ListItem key={text} disablePadding>
-						<ListItemButton>
-							<ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-							<ListItemText primary={text} />
-						</ListItemButton>
-					</ListItem>
-				))}
-			</List>
-			<Divider />
-			<List>
-				{['All mail', 'Trash', 'Spam'].map((text, index) => (
-					<ListItem key={text} disablePadding>
-						<ListItemButton>
-							<ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-							<ListItemText primary={text} />
-						</ListItemButton>
+				{drawerLinks.map((link) => (
+					<ListItem
+						disablePadding
+						key={link.link}
+						component={Link}
+						href={link.link}
+						sx={{
+							backgroundColor: currentPath === link.link ? '#1586FD' : '#fff',
+							color: currentPath === link.link ? '#fff' : 'black',
+							transition: 'all 0.2s',
+							'&:hover': {
+								backgroundColor: '#f5f5f5',
+								color: 'black'
+							}
+						}}
+					>
+						<Stack
+							direction='row'
+							gap={1}
+							alignItems='center'
+							sx={{
+								padding: '10px'
+							}}
+						>
+							{link.icon}
+							{link.title}
+						</Stack>
 					</ListItem>
 				))}
 			</List>
@@ -87,22 +137,34 @@ const DashboardDrawer = ({ children }: Props) => {
 				position='fixed'
 				sx={{
 					width: { sm: `calc(100% - ${drawerWidth}px)` },
-					ml: { sm: `${drawerWidth}px` }
+					ml: { sm: `${drawerWidth}px` },
+					boxShadow: 'none',
+					borderBottom: '1px solid #F1F1F1'
 				}}
 			>
-				<Toolbar>
+				<Toolbar
+					sx={{
+						backgroundColor: '#fff',
+						color: 'black'
+					}}
+				>
 					<IconButton
 						color='inherit'
 						aria-label='open drawer'
 						edge='start'
 						onClick={handleDrawerToggle}
-						sx={{ mr: 2, display: { sm: 'none' } }}
+						sx={{ display: { sm: 'none' } }}
 					>
 						<MenuIcon />
 					</IconButton>
-					<Typography variant='h6' noWrap component='div'>
-						Responsive drawer
-					</Typography>
+					<Stack direction='column'>
+						<Stack direction='row' gap={1} alignItems='center'>
+							<FaRegUser /> {user?.username}
+						</Stack>
+						<Stack direction='row' gap={1} alignItems='center'>
+							<CiMail /> {user?.email}
+						</Stack>
+					</Stack>
 				</Toolbar>
 			</AppBar>
 			<Box component='nav' sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label='mailbox folders'>
