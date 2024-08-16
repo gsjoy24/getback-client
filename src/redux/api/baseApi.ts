@@ -7,5 +7,15 @@ export const baseApi = createApi({
 	reducerPath: 'api',
 	baseQuery: axiosBaseQuery({ baseUrl: config.serverURL }),
 	endpoints: () => ({}),
-	tagTypes: ['Categories', 'LostItems', 'FoundItems', 'Claims', 'Users', 'My-lost-items', 'My-found-items', 'My-claims']
+	tagTypes: [
+		'Categories',
+		'LostItems',
+		'FoundItems',
+		'Claims',
+		'Users',
+		'My-lost-items',
+		'My-found-items',
+		'My-claims',
+		'users'
+	]
 });

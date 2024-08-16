@@ -66,7 +66,6 @@ const DashboardDrawer = ({ children }: Props) => {
 	const user = useAppSelector((state: { auth: { user: any } }) => state.auth.user);
 
 	const currentPath = usePathname();
-	console.log({ currentPath });
 
 	const handleDrawerClose = () => {
 		setIsClosing(true);
