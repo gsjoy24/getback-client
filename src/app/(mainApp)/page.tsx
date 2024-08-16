@@ -5,10 +5,13 @@ import StayUpdated from '@/components/Home/StayUpdated';
 import Loading from '@/components/Loading/Loading';
 import { Metadata } from 'next';
 import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
-const RecentFoundItems = dynamic(() => import('@/components/Home/RecentFoundItems'), { ssr: false });
+const RecentFoundItems = dynamic(() => import('@/components/Home/RecentFoundItems'), {
+	ssr: false,
+	loading: () => <Loading />
+});
 const RecentLostItems = dynamic(() => import('@/components/Home/RecentLostItems'), {
-	ssr: false
+	ssr: false,
+	loading: () => <Loading />
 });
 
 export const metadata: Metadata = {
@@ -22,12 +25,8 @@ const HomePage = () => {
 		<>
 			<HeroSection />
 			<AboutSection />
-			<Suspense fallback={<Loading />}>
-				<RecentLostItems />
-			</Suspense>
-			<Suspense fallback={<Loading />}>
-				<RecentFoundItems />
-			</Suspense>
+			<RecentLostItems />
+			<RecentFoundItems />
 			<Reunion />
 			<StayUpdated />
 		</>

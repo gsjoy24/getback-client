@@ -1,15 +1,18 @@
 'use client';
 import BlackLogo from '@/assets/logo/logo-b.png';
 import navLinks from '@/constants/navLinks';
-import { Box, Container, IconButton, Stack } from '@mui/material';
+import { Box, Container, IconButton, Skeleton, Stack } from '@mui/material';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Suspense, useState } from 'react';
+import { useState } from 'react';
 import { HiMiniBars3CenterLeft } from 'react-icons/hi2';
 import NavItem from './NavItem';
 import UserDrawer from './UserDrawer';
-const NavMenu = dynamic(() => import('./NavMenu'), { ssr: false });
+const NavMenu = dynamic(() => import('./NavMenu'), {
+	ssr: false,
+	loading: () => <Skeleton variant='rectangular' width={80} height={40} />
+});
 
 const Navbar = () => {
 	const [open, setOpen] = useState<boolean>(false);
@@ -21,7 +24,7 @@ const Navbar = () => {
 				backdropFilter: 'blur(5px)',
 				position: 'sticky',
 				top: 0,
-				zIndex: 1000,
+				zIndex: 9999,
 				boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
 				transition: '0.3s all ease-in-out'
 			}}
@@ -46,9 +49,7 @@ const Navbar = () => {
 							<NavItem key={link?.href} link={link} setOpen={setOpen} />
 						))}
 
-						<Suspense fallback={<div>Loading...</div>}>
-							<NavMenu />
-						</Suspense>
+						<NavMenu />
 					</Box>
 
 					{/* nav links for small screen */}
