@@ -1,4 +1,6 @@
 'use client';
+import LoadingCompo from '@/app/loading';
+import Loading from '@/components/Loading/Loading';
 import { UserStatus } from '@/constants';
 import {
 	useGetUsersQuery,
@@ -59,7 +61,9 @@ const Users = () => {
 		}
 	};
 
-	return (
+	return isLoading ? (
+		<LoadingCompo />
+	) : (
 		<div className='w-[100vw] md:w-[100%]'>
 			<h1 className='text-2xl font-bold mb-2'>All Users</h1>
 			<TableContainer component={Paper}>
