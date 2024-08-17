@@ -156,7 +156,7 @@ const DashboardDrawer = ({ children }: Props) => {
 					>
 						<MenuIcon />
 					</IconButton>
-					<Stack direction='column'>
+					<Stack direction='row' gap={1}>
 						<Stack direction='row' gap={1} alignItems='center'>
 							<FaRegUser /> {user?.username}
 						</Stack>

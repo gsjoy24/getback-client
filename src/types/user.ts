@@ -15,3 +15,5 @@ export type TAuthState = {
 	user: null | TUser;
 	token: null | string;
 };
+
+export type TUserStatus = 'ACTIVE' | 'BLOCKED';

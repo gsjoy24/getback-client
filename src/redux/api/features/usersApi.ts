@@ -17,8 +17,22 @@ const usersApi = baseApi.injectEndpoints({
 				};
 			},
 			providesTags: ['users']
+		}),
+		toggleUserStatus: build.mutation({
+			query: ({ id }) => ({
+				url: `/auth/toggle-user-status/${id}/`,
+				method: 'PUT'
+			}),
+			invalidatesTags: ['users']
+		}),
+		toggleUserRole: build.mutation({
+			query: ({ id }) => ({
+				url: `/auth/toggle-user-role/${id}/`,
+				method: 'PUT'
+			}),
+			invalidatesTags: ['users']
 		})
 	})
 });
 
-export const { useGetUsersQuery } = usersApi;
+export const { useGetUsersQuery, useToggleUserStatusMutation, useToggleUserRoleMutation } = usersApi;
