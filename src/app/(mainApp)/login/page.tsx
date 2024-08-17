@@ -8,7 +8,7 @@ import { setUser } from '@/redux/api/authSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import LoginValidationSchema from '@/schemas/loginSchema';
 import userLogin from '@/services/actions/userLogin';
-import { isLoggedIn, storeUserInfo } from '@/services/auth.services';
+import { storeUserInfo } from '@/services/auth.services';
 import verifyToken from '@/utils/verifyToken';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Grid, IconButton, Stack, Typography } from '@mui/material';

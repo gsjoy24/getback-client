@@ -1,5 +1,4 @@
 import heroBg from '@/assets/hero-bg.png';
-import { useAppSelector } from '@/redux/hooks';
 import { Box, Button, Container, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';

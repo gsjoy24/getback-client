@@ -59,7 +59,7 @@ const EditLostItem = () => {
 	if (isFetching || !data?.data) {
 		return <LoadingCompo />;
 	}
-	const { pictures = '', lostDate = '' } = data?.data;
+	const { pictures = '', lostDate = '' } = data?.data || {};
 	const handleSubmit = async (formData: FieldValues) => {
 		const modifiedData = {
 			...formData,

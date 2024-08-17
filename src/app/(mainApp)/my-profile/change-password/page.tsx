@@ -89,12 +89,18 @@ const ChangePassword = () => {
 						</div>
 						<div className='w-full relative'>
 							<LFInput label='Confirm Password' name='confirm_password' type={showConfirmPass ? 'text' : 'password'} />
-							<div
-								className='absolute right-3 top-3 cursor-pointer'
+							<IconButton
+								sx={{
+									position: 'absolute',
+									right: 3,
+									top: 10
+								}}
 								onClick={() => setShowConfirmPass((prev) => !prev)}
+								aria-label='toggle confirm password visibility'
+								size='small'
 							>
 								{showConfirmPass ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
-							</div>
+							</IconButton>
 						</div>
 						<Button type='submit' disabled={isLoading} sx={{ mt: 2 }} fullWidth>
 							{isLoading ? 'Have Patience...' : 'Change Password'}

@@ -1,6 +1,5 @@
 'use client';
 import LoadingCompo from '@/app/loading';
-import Loading from '@/components/Loading/Loading';
 import { UserStatus } from '@/constants';
 import {
 	useGetUsersQuery,

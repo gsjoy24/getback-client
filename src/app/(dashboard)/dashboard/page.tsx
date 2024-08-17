@@ -1,11 +1,28 @@
-import Loading from '@/components/Loading/Loading';
+import { Stack, Typography } from '@mui/material';
 
 const DashboardPage = () => {
 	return (
-		<div>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto excepturi nam unde. Porro commodi adipisci odit,
-			temporibus obcaecati repellat. Tenetur!
-		</div>
+		<Stack
+			justifyContent='center'
+			alignItems='center'
+			sx={{
+				height: '100%',
+				width: '100%'
+			}}
+		>
+			<Typography
+				variant='h1'
+				sx={{
+					fontSize: {
+						xs: '2rem',
+						md: '3rem'
+					}
+				}}
+			>
+				OVERVIEW PAGE COMING SOON! <br />
+				IN THE MEANTIME, CHECK OUT THE OTHER PAGES
+			</Typography>
+		</Stack>
 	);
 };
 

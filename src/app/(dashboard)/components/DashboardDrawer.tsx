@@ -2,21 +2,7 @@
 import BlackLogo from '@/assets/logo/logo-b.png';
 import { useAppSelector } from '@/redux/hooks';
 import MenuIcon from '@mui/icons-material/Menu';
-import {
-	AppBar,
-	Box,
-	CssBaseline,
-	Divider,
-	Drawer,
-	IconButton,
-	List,
-	ListItem,
-	ListItemButton,
-	ListItemIcon,
-	ListItemText,
-	Stack,
-	Toolbar
-} from '@mui/material';
+import { AppBar, Box, CssBaseline, Divider, Drawer, IconButton, List, ListItem, Stack, Toolbar } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -98,6 +84,7 @@ const DashboardDrawer = ({ children }: Props) => {
 			<List>
 				{drawerLinks.map((link) => (
 					<ListItem
+						onClick={handleDrawerClose}
 						disablePadding
 						key={link.link}
 						component={Link}

@@ -51,7 +51,7 @@ const EditClaim = () => {
 		return <LoadingCompo />;
 	}
 
-	const { pictures = [], lostDate = '' } = data?.data;
+	const { pictures = [], lostDate = '' } = data?.data || {};
 
 	const handleEdit = async (data: FieldValues) => {
 		const modifiedData = {
