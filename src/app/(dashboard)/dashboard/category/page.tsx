@@ -7,6 +7,7 @@ import { Button, Paper, Stack, Table, TableBody, TableCell, TableContainer, Tabl
 import { GoPencil } from 'react-icons/go';
 import AddCategoryModal from './components/AddCategoryModal';
 import DeleteCategoryButton from './components/DeleteCategoryButton';
+import UpdateCategory from './components/UpdateCategory';
 
 const CategoryPage = () => {
 	const { data, isLoading } = useGetCategoriesQuery({});
@@ -69,9 +70,7 @@ const CategoryPage = () => {
 									}}
 								>
 									<DeleteCategoryButton id={row.id} />
-									<Button variant='text'>
-										<GoPencil size={20} />
-									</Button>
+									<UpdateCategory id={row.id} name={row.name} />
 								</TableCell>
 							</TableRow>
 						))}

@@ -1,16 +1,21 @@
 'use client';
 import LFForm from '@/components/Form/LFForm';
 import LFInput from '@/components/Form/lFInput';
-import { useCreateCategoryMutation } from '@/redux/api/features/categoryApi';
+import { useUpdateCategoryMutation } from '@/redux/api/features/categoryApi';
 import addCategorySchema from '@/schemas/addCategorySchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
+import { GoPencil } from 'react-icons/go';
 import { toast } from 'sonner';
+type TProps = {
+	id: string;
+	name: string;
+};
 
-const UpdateCategory = () => {
+const UpdateCategory = ({ id, name }: TProps) => {
 	const [open, setOpen] = useState<boolean>(false);
 
 	const handleClickOpen = () => {
@@ -20,11 +25,14 @@ const UpdateCategory = () => {
 	const handleClose = () => {
 		setOpen(false);
 	};
-	const [createCategory, { isLoading }] = useCreateCategoryMutation();
+	const [updateCategory, { isLoading }] = useUpdateCategoryMutation();
 
-	const handleAddCategory = async (data: FieldValues) => {
+	const handleUpdateCategory = async (data: FieldValues) => {
 		try {
-			const res = await createCategory(data).unwrap();
+			const res = await updateCategory({
+				id,
+				...data
+			}).unwrap();
 			if (res.success) {
 				handleClose();
 				toast.success(res.message);
@@ -39,13 +47,12 @@ const UpdateCategory = () => {
 	return (
 		<>
 			<Button onClick={handleClickOpen} variant='text'>
-				Add Category
+				<GoPencil size={20} />
 			</Button>
 			<Dialog
 				open={open}
 				onClose={handleClose}
-				aria-labelledby='alert-dialog-title'
-				aria-describedby='alert-dialog-description'
+				aria-labelledby='update_category_title'
 				sx={{
 					width: '100%',
 					'.MuiDialog-paper': {
@@ -54,16 +61,16 @@ const UpdateCategory = () => {
 					}
 				}}
 			>
-				<DialogTitle id='alert-dialog-title'>Add New Category</DialogTitle>
+				<DialogTitle id='update_category_title'>Update Category: {name}</DialogTitle>
 				<DialogContent>
-					<LFForm onSubmit={handleAddCategory} resolver={zodResolver(addCategorySchema)}>
+					<LFForm onSubmit={handleUpdateCategory} resolver={zodResolver(addCategorySchema)} defaultValues={{ name }}>
 						<LFInput label='Category Name' name='name' />
 						<DialogActions>
 							<Button onClick={handleClose} type='button' size='small' variant='outlined'>
 								Cancel
 							</Button>
 							<LoadingButton type='submit' variant='contained' loading={isLoading} size='small' autoFocus>
-								Add
+								Update
 							</LoadingButton>
 						</DialogActions>
 					</LFForm>
