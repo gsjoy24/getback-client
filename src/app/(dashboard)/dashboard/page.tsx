@@ -14,12 +14,13 @@ const DashboardPage = () => {
 				variant='h1'
 				sx={{
 					fontSize: {
-						xs: '2rem',
-						md: '3rem'
-					}
+						xs: '1.6rem',
+						md: '2.5rem'
+					},
+					textAlign: 'center'
 				}}
 			>
-				OVERVIEW PAGE COMING SOON! <br />
+				OVERVIEW PAGE COMING SOON! <br /> <br />
 				IN THE MEANTIME, CHECK OUT THE OTHER PAGES
 			</Typography>
 		</Stack>

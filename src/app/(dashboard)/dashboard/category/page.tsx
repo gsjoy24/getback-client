@@ -5,6 +5,7 @@ import { TCategory } from '@/types/category';
 import DateToString from '@/utils/DateToString';
 import { Button, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { GoPencil } from 'react-icons/go';
+import AddCategoryModal from './components/AddCategoryModal';
 import DeleteCategoryButton from './components/DeleteCategoryButton';
 
 const CategoryPage = () => {
@@ -25,9 +26,7 @@ const CategoryPage = () => {
 		<div className='w-[100vw] md:w-[100%]'>
 			<Stack direction='row' justifyContent='space-between' alignItems='center' className='mb-4'>
 				<h1 className='text-2xl font-bold mb-2'>All Categories</h1>
-				<Button variant='contained' onClick={() => {}}>
-					Add Category
-				</Button>
+				<AddCategoryModal />
 			</Stack>
 			<TableContainer component={Paper}>
 				<Table sx={{ minWidth: '100%' }} aria-label='simple table'>
