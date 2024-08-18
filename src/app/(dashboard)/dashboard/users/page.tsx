@@ -1,5 +1,7 @@
 'use client';
 import LoadingCompo from '@/app/loading';
+import LFForm from '@/components/Form/LFForm';
+import LFInput from '@/components/Form/lFInput';
 import { UserStatus } from '@/constants';
 import {
 	useGetUsersQuery,
@@ -8,8 +10,22 @@ import {
 } from '@/redux/api/features/usersApi';
 import { TUser } from '@/types/user';
 import DateToString from '@/utils/DateToString';
-import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import {
+	Box,
+	Button,
+	IconButton,
+	Paper,
+	Stack,
+	Table,
+	TableBody,
+	TableCell,
+	TableContainer,
+	TableHead,
+	TableRow
+} from '@mui/material';
 import { useState } from 'react';
+import { FieldValues } from 'react-hook-form';
+import { HiMagnifyingGlass } from 'react-icons/hi2';
 import { toast } from 'sonner';
 
 const Users = () => {
@@ -59,12 +75,41 @@ const Users = () => {
 			console.log(error);
 		}
 	};
+	const handleSubmit = (data: FieldValues) => {
+		setPage(1);
+		setSearchTerm(data.searchTerm);
+	};
 
 	return isLoading ? (
 		<LoadingCompo />
 	) : (
 		<div className='w-[100vw] md:w-[100%]'>
 			<h1 className='text-2xl font-bold mb-2'>All Users</h1>
+			<Box
+				sx={{
+					maxWidth: 600,
+					margin: 'auto',
+					padding: 2
+				}}
+			>
+				<LFForm onSubmit={handleSubmit}>
+					<Stack direction={{ xs: 'column', sm: 'row' }} gap={2}>
+						<div className='relative w-full'>
+							<LFInput name='searchTerm' label='Search' />
+							<IconButton
+								type='submit'
+								sx={{
+									position: 'absolute',
+									right: 0,
+									top: 0
+								}}
+							>
+								<HiMagnifyingGlass />
+							</IconButton>
+						</div>
+					</Stack>
+				</LFForm>
+			</Box>
 			<TableContainer component={Paper}>
 				<Table sx={{ minWidth: '100%' }} aria-label='simple table'>
 					<TableHead>
