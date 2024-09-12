@@ -55,20 +55,23 @@ const HeroSection = () => {
 							<Button
 								component={Link}
 								href='/report-lost-item'
-								variant='contained'
-								color='primary'
-								size='large'
-								sx={{ px: 4, py: 1.5 }}
+								size='small'
+								sx={{
+									fontSize: { xs: '0.7rem', sm: '1rem' },
+									padding: { xs: '6px 10px', sm: '12px 24px' }
+								}}
 							>
 								Report Lost Item
 							</Button>
 							<Button
+								sx={{
+									fontSize: { xs: '0.7rem', sm: '1rem' },
+									padding: { xs: '6px 10px', sm: '12px 24px' }
+								}}
 								component={Link}
 								href='/report-found-item'
 								variant='outlined'
-								color='primary'
-								size='large'
-								sx={{ px: 4, py: 1.5 }}
+								size='small'
 							>
 								Report Found Item
 							</Button>

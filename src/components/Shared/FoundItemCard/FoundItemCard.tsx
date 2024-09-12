@@ -18,7 +18,7 @@ const FoundItemCard = ({ item }: any) => {
 	return (
 		<Card
 			sx={{
-				maxWidth: 345,
+				maxWidth: 330,
 				height: '100%',
 				display: 'flex',
 				flexDirection: 'column',

@@ -23,7 +23,8 @@ const UserDrawer = ({ open, setOpen }: TUserDrawerProps) => {
 				'& .MuiDrawer-paper': {
 					width: '80%'
 				},
-				position: 'relative'
+				position: 'relative',
+				zIndex: 9999
 			}}
 		>
 			{/* logo */}
