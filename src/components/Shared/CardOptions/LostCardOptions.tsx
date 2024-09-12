@@ -52,6 +52,14 @@ const LostCardOptions = ({ item }: { item: TLostItem }) => {
 				aria-haspopup='true'
 				aria-expanded={open ? 'true' : undefined}
 				onClick={handleClick}
+				sx={{
+					backgroundColor: 'rgba(255, 255, 255, 0.8)',
+					borderRadius: '50%',
+					padding: 0.5,
+					'&:hover': {
+						backgroundColor: 'rgba(255, 255, 255, 0.9)'
+					}
+				}}
 			>
 				<MoreVertIcon />
 			</IconButton>
