@@ -1,11 +1,7 @@
 'use client';
 import formatDateToString from '@/helpers/formatDateToString';
 import { getUserInfo } from '@/services/auth.services';
-import { Box } from '@mui/material';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
 import Link from 'next/link';
 import { FaCalendarAlt } from 'react-icons/fa';
 import { IoIosArrowRoundForward } from 'react-icons/io';
@@ -19,78 +15,90 @@ const LostItemCard = ({ item }: any) => {
 
 	const date = formatDateToString(lostDate);
 	const images = pictures.map((picture: any) => ({ url: picture }));
+
 	return (
 		<Card
 			sx={{
-				maxWidth: 330,
-				height: 400,
+				maxWidth: 345,
+				height: '100%',
+				display: 'flex',
+				flexDirection: 'column',
+				justifyContent: 'space-between',
+				boxShadow: 3,
+				borderRadius: 2,
+				overflow: 'hidden',
 				position: 'relative',
-				'& image': {
-					overflow: 'hidden'
+				transition: 'transform 0.3s ease',
+				'&:hover': {
+					transform: 'translateY(-5px)'
 				}
 			}}
 		>
-			<SimpleImageSlider
-				width={330}
-				autoPlay={true}
-				height={200}
-				images={images}
-				showNavs={true}
-				navSize={25}
-				showBullets={false}
-			/>
-			<CardContent
-				sx={{
-					position: 'relative'
-				}}
-			>
+			{/* Image Slider */}
+			<CardMedia component='div'>
+				<SimpleImageSlider
+					width={345}
+					height={200}
+					images={images}
+					showNavs={true}
+					autoPlay={true}
+					navSize={20}
+					showBullets={false}
+					style={{ borderRadius: '8px' }}
+				/>
+			</CardMedia>
+
+			{/* Card Content */}
+			<CardContent sx={{ p: 3, flexGrow: 1 }}>
 				{userInfo?.id === userId && <LostCardOptions item={item} />}
-				<Typography gutterBottom variant='h5'>
+
+				<Typography variant='h6' sx={{ fontWeight: 'bold', mb: 1.5 }}>
 					{itemName}
 				</Typography>
-				<Typography variant='body2' className='line-clamp-2'>
-					{description}
+
+				<Typography variant='body2' color='text.secondary' sx={{ mb: 2 }}>
+					{description.length > 100 ? `${description.substring(0, 100)}...` : description}
 				</Typography>
-				<Box className='flex gap-2 items-center mt-2'>
-					<Box sx={{ minWidth: 20 }}>
-						<IoLocationSharp size={18} />
-					</Box>
+
+				{/* Location and Date */}
+				<Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+					<IoLocationSharp size={18} style={{ marginRight: '8px' }} />
 					<Typography variant='body2'>{location}</Typography>
 				</Box>
-				<Box className='flex gap-2 items-center mt-2'>
-					<Box sx={{ minWidth: 20 }}>
-						<FaCalendarAlt size={14} />
-					</Box>
+				<Box sx={{ display: 'flex', alignItems: 'center' }}>
+					<FaCalendarAlt size={14} style={{ marginRight: '8px' }} />
 					<Typography variant='body2'>{date}</Typography>
 				</Box>
 			</CardContent>
+
 			<CardActions
 				sx={{
-					position: 'absolute',
-					bottom: 0,
-					left: 0,
-					width: '100%',
 					backgroundColor: 'primary.main',
-					transition: 'all 0.3s',
+					p: 0,
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					transition: 'background-color 0.3s',
 					'&:hover': {
 						backgroundColor: 'primary.dark'
 					}
 				}}
 			>
-				<Typography
+				<Button
 					component={Link}
 					href={`/lost-items/${item.id}`}
+					fullWidth
 					sx={{
-						width: '100%',
+						color: 'white',
 						display: 'flex',
-						alignItems: 'center',
 						justifyContent: 'center',
+						alignItems: 'center',
 						gap: 1,
-						color: 'white'
+						textTransform: 'none'
 					}}
 				>
-					<span>See details</span> <IoIosArrowRoundForward size={20} />
-				</Typography>
+					See Details <IoIosArrowRoundForward size={20} />
+				</Button>
 			</CardActions>
 		</Card>
 	);

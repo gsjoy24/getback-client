@@ -54,7 +54,7 @@ const CredentialModal = () => {
 								<br />
 								Admin -- <br />
 								Email: gour@gmail.com <br />
-								Password: password <br />
+								Password: password
 							</pre>
 						</Box>
 					</Box>
